@@ -52,4 +52,10 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0-rc.2.22430.11" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="OrderFilling.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
