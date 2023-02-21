@@ -4,9 +4,16 @@ public partial class MainPage : ContentPage
 {
 	int count = 0;
 
-	public MainPage()
+    private async void NavigateTo(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new OrderFilling());
+    }
+
+    public MainPage()
 	{
 		InitializeComponent();
 	}
 }
+
+
 
