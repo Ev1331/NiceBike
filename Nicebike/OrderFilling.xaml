@@ -3,10 +3,153 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.OrderFilling"
              Title="OrderFilling">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    
+<!--vertical/horizontal stack layout-->
+    <StackLayout Orientation="Vertical">
+        
+        <StackLayout Orientation="Horizontal">
+            
+            <StackLayout Orientation="Vertical" Margin="40">
+                <TableView BackgroundColor="CadetBlue">
+                    <TableRoot>
+                        <!-- Client Name as Title -->
+                        <TableSection Title="Client Name">
+                            <!-- Find Button on the right -->
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Find" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                        <!-- Name, Email and Phone Number Details -->
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Name" WidthRequest="80" />
+                                    <Label Text="Van Pimperzeel Jan" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Email" WidthRequest="80" />
+                                    <Label Text="JanVpz@gmail.com" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Phone" WidthRequest="80" />
+                                    <Label Text="0477225826" />
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Margin="40">
+                <TableView BackgroundColor="Aquamarine">
+                    <TableRoot>
+                       
+                        <TableSection Title="Address">
+                           
+                        </TableSection>
+                        
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Street" WidthRequest="80" />
+                                    <Label Text="Prom Alma" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Number" WidthRequest="80" />
+                                    <Label Text="50" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Town" WidthRequest="80" />
+                                    <Label Text="1200 Woluwe" />
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Margin="40">
+                <TableView BackgroundColor="Aqua" >
+                    <TableRoot>
+
+                        <TableSection Title="Order Number">
+
+                        </TableSection>
+
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="0129374872"/>
+                                </StackLayout>
+                            </ViewCell>
+                           
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            </StackLayout>
+            
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <TableView BackgroundColor="LightBlue">
+                <TableRoot>
+                    <TableSection Title="Order summary">
+                        
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Type" WidthRequest="80"/>
+                                <Label Text="Frame Size" WidthRequest="80" />
+                                <Label Text="Color" WidthRequest="80"/>
+                                <Label Text="Number" WidthRequest="80" />
+                                
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Adventure" WidthRequest="80"/>
+                                <Label Text="28'" WidthRequest="80"/>
+                                <Label Text="Grey" WidthRequest="80"/>
+                                <Label Text="15" WidthRequest="80"/>
+                                <Button Text="+"/>
+                                <Button Text="-"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="City" WidthRequest="80"/>
+                                <Label Text="26'" WidthRequest="80"/>
+                                <Label Text="Red" WidthRequest="80"/>
+                                <Label Text="15" WidthRequest="80"/>
+                                <Button Text="+"/>
+                                <Button Text="-"/>   
+                            </StackLayout>
+                        
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Explorer" WidthRequest="80"/>
+                                <Label Text="26'" WidthRequest="80"/>
+                                <Label Text="Blue" WidthRequest="80"/>
+                                <Label Text="20" WidthRequest="80"/>
+                                <Button Text="+"/>
+                                <Button Text="-"/>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
