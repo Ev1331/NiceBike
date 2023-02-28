@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.ProductionManagerHome"
+             Title="ProductionManagerHome">
+    <VerticalStackLayout
+            Spacing="145"
+            Padding="30,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Button
+                Text="Suppliers Management"
+                HorizontalOptions="Center"
+                WidthRequest = "500"
+                HeightRequest="75"
+                FontSize="20"
+                />
+
+            <Button
+                Text="Stock Management"
+                HorizontalOptions="Center" 
+                WidthRequest = "500"
+                HeightRequest="75"
+                FontSize="20"
+                />
+
+            
+
+        </VerticalStackLayout>
+</ContentPage>
