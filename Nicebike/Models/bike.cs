@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Nicebike.Models
 {
-    class orderFilling
+    internal class Bike
     {
+        public string Type { get; set; }
+        public string Color { get; set; }
+
+        public double Size { get; set; }
     }
 }
