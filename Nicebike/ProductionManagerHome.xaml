@@ -23,6 +23,7 @@
                 WidthRequest = "500"
                 HeightRequest="75"
                 FontSize="20"
+                Clicked="NavigateToStock"
                 />
 
             

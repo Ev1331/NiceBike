@@ -6,7 +6,13 @@
     <VerticalStackLayout>
         <TableView>
             <TableRoot>
-                <TableSection Title="Stock Management">
+                <TableSection>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Stock Management" WidthRequest="300"/>
+                            <Button Text="Add a part"/>
+                        </StackLayout>
+                    </ViewCell>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Part" WidthRequest="200"/>
