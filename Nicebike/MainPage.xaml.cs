@@ -6,7 +6,7 @@ public partial class MainPage : ContentPage
 
     private async void NavigateToTechnician(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new TechnicianHome());
+        Navigation.PushAsync(new TechnicianConnection());
     }
     private async void NavigateToSaleRepresentative(object sender, EventArgs e)
     {
@@ -24,6 +24,8 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    
 }
 
 
