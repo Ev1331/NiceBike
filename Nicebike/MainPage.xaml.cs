@@ -8,6 +8,8 @@ public partial class MainPage : ContentPage
     {
         Navigation.PushAsync(new TechnicianHome());
     }
+
+   
     private async void NavigateToSaleRepresentative(object sender, EventArgs e)
     {
         Navigation.PushAsync(new SaleRepresentativeHome());

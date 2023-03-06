@@ -8,10 +8,10 @@
 <!--vertical/horizontal stack layout-->
     <StackLayout Orientation="Vertical">
         
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Horizontal" BackgroundColor="LightCyan">
             
             <StackLayout Orientation="Vertical" Margin="10">
-                <TableView BackgroundColor="CadetBlue">
+                <TableView>
                     <TableRoot>
                        
                         <TableSection Title="Client Name">
@@ -44,7 +44,7 @@
 
             </StackLayout>
             <StackLayout Orientation="Vertical" Margin="10" WidthRequest="200">
-                <TableView BackgroundColor="Aquamarine">
+                <TableView>
                     <TableRoot>
                        
                         
@@ -73,7 +73,7 @@
                 </TableView>
             </StackLayout>
             <StackLayout Orientation="Vertical" Margin="10">
-                <TableView BackgroundColor="Aqua" >
+                <TableView>
                     <TableRoot>
 
                 
@@ -92,10 +92,10 @@
             
         </StackLayout>
         <StackLayout Orientation="Vertical" HeightRequest="450">
-            <TableView BackgroundColor="LightBlue">
+            <TableView BackgroundColor="AntiqueWhite">
                 <TableRoot>
                     
-                    <TableSection Title="Order summary">
+                    <TableSection Title="Order summary" >
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Type" WidthRequest="80" FontAttributes="Bold"/>
