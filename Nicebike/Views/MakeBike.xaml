@@ -27,7 +27,7 @@
                     <model:Bike Color="Red"
                                 Type="City"
                                 Size="28"/>
-                    <model:Bike Color="Purple"
+                    <model:Bike Color="Red"
                                 Type="City"
                                 Size="28"/>
                     <model:Bike Color="Blue"
