@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Nicebike.MainPage">
-
-    <ScrollView>
-        <VerticalStackLayout
+             x:Class="Nicebike.TechnicianConnection"
+             Title="TechnicianConnection">
+    <VerticalStackLayout
             Spacing="145"
             Padding="30,0"
             HorizontalOptions="Center"
@@ -12,32 +11,24 @@
 
 
             <Button
-                Text="Sale Representative"
+                Text="Technician 1"
                 HorizontalOptions="Center" 
                 WidthRequest = "500"
                 HeightRequest="75"
                 FontSize="20"
-                Clicked="NavigateToSaleRepresentative"
+                Clicked="NavigateToTechnician"
                 />
 
             <Button
-                Text="Owner"
+                Text="Technician 2"
                 HorizontalOptions="Center"
                 WidthRequest = "500"
                 HeightRequest="75"
                 FontSize="20"
-                Clicked="NavigateToOwner"/>
+                Clicked="NavigateToTechnician"/>
 
             <Button
-                Text="Production Manager"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToProductionManager"/>
-
-            <Button
-                Text="Technician"
+                Text="Technician 3"
                 HorizontalOptions="Center"
                 WidthRequest = "500"
                 HeightRequest="75"
@@ -45,7 +36,4 @@
                 Clicked="NavigateToTechnician"/>
 
         </VerticalStackLayout>
-
-    </ScrollView>
-
 </ContentPage>

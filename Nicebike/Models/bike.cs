@@ -16,15 +16,18 @@ namespace Nicebike.Models
 
     public class Bike
     {
-        public string color;
-        public string Type;
-        public int Size;
+        public string Color { get; set; }
+        public string Type { get; set; }
+        public string Size { get; set; }
 
-        public Bike(string color, string Type, int Size)
+        public Bike() { }
+
+        public Bike(string Color, string Type, string Size)
         {
-            this.color = color;
+            this.Color = Color;
             this.Type = Type;
             this.Size = Size;
         }
+
     }
 }
