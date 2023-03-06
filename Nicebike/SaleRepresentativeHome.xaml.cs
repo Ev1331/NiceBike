@@ -11,4 +11,8 @@ public partial class SaleRepresentativeHome : ContentPage
     {
         Navigation.PushAsync(new OrderFilling());
     }
+    private async void NavigateToStock(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new StockManagement());
+    }
 }

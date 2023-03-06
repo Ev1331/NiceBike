@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.StockManagement"
+             Title="StockManagement">
+    <VerticalStackLayout>
+        <TableView>
+            <TableRoot>
+                <TableSection Title="Stock Management">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Part" WidthRequest="200"/>
+                            <Label Text="Quantity" WidthRequest="100" />
+                            <Label Text="Alert" WidthRequest="200"/>
+                            <Button Text="Modify datasheet"/>
+                            <Button Text="Add"/>
+                            <Button Text="Remove"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Part" WidthRequest="200"/>
+                            <Label Text="Quantity" WidthRequest="100" />
+                            <Label Text="Alert" WidthRequest="200"/>
+                            <Button Text="Modify datasheet"/>
+                            <Button Text="Add"/>
+                            <Button Text="Remove"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Part" WidthRequest="200"/>
+                            <Label Text="Quantity" WidthRequest="100" />
+                            <Label Text="Alert" WidthRequest="200"/>
+                            <Button Text="Modify datasheet"/>
+                            <Button Text="Add"/>
+                            <Button Text="Remove"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Part" WidthRequest="200"/>
+                            <Label Text="Quantity" WidthRequest="100" />
+                            <Label Text="Alert" WidthRequest="200"/>
+                            <Button Text="Modify datasheet"/>
+                            <Button Text="Add"/>
+                            <Button Text="Remove"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Part" WidthRequest="200"/>
+                            <Label Text="Quantity" WidthRequest="100" />
+                            <Label Text="Alert" WidthRequest="200"/>
+                            <Button Text="Modify datasheet"/>
+                            <Button Text="Add"/>
+                            <Button Text="Remove"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+                   
+    </VerticalStackLayout>
+</ContentPage>
