@@ -10,20 +10,16 @@
         
         <StackLayout Orientation="Horizontal">
             
-            <StackLayout Orientation="Vertical" Margin="40">
+            <StackLayout Orientation="Vertical" Margin="10">
                 <TableView BackgroundColor="CadetBlue">
                     <TableRoot>
-                        <!-- Client Name as Title -->
+                       
                         <TableSection Title="Client Name">
-                            <!-- Find Button on the right -->
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="Find" HorizontalOptions="EndAndExpand" />
+                                    <Button Text="Find" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </ViewCell>
-                        </TableSection>
-                        <!-- Name, Email and Phone Number Details -->
-                        <TableSection>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Name" WidthRequest="80" />
@@ -47,15 +43,13 @@
                 </TableView>
 
             </StackLayout>
-            <StackLayout Orientation="Vertical" Margin="40">
+            <StackLayout Orientation="Vertical" Margin="10" WidthRequest="200">
                 <TableView BackgroundColor="Aquamarine">
                     <TableRoot>
                        
-                        <TableSection Title="Address">
-                           
-                        </TableSection>
                         
-                        <TableSection>
+
+                        <TableSection Title="Address">
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Street" WidthRequest="80" />
@@ -78,15 +72,13 @@
                     </TableRoot>
                 </TableView>
             </StackLayout>
-            <StackLayout Orientation="Vertical" Margin="40">
+            <StackLayout Orientation="Vertical" Margin="10">
                 <TableView BackgroundColor="Aqua" >
                     <TableRoot>
 
+                
+
                         <TableSection Title="Order Number">
-
-                        </TableSection>
-
-                        <TableSection>
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="0129374872"/>
@@ -99,19 +91,17 @@
             </StackLayout>
             
         </StackLayout>
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Vertical" HeightRequest="450">
             <TableView BackgroundColor="LightBlue">
                 <TableRoot>
+                    
                     <TableSection Title="Order summary">
-                        
-                    </TableSection>
-                    <TableSection>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Type" WidthRequest="80"/>
-                                <Label Text="Frame Size" WidthRequest="80" />
-                                <Label Text="Color" WidthRequest="80"/>
-                                <Label Text="Number" WidthRequest="80" />
+                                <Label Text="Type" WidthRequest="80" FontAttributes="Bold"/>
+                                <Label Text="Frame Size" WidthRequest="80" FontAttributes="Bold" />
+                                <Label Text="Color" WidthRequest="80" FontAttributes="Bold"/>
+                                <Label Text="Number" WidthRequest="80" FontAttributes="Bold"/>
                                 
                             </StackLayout>
                         </ViewCell>
@@ -150,6 +140,63 @@
                     </TableSection>
                 </TableRoot>
             </TableView>
+            <TableView BackgroundColor="LightBlue">
+                <TableRoot>
+                    
+                    <TableSection Title="Add a bike">
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Picker x:Name="MonPicker2"
+                                Title="Type " 
+                                Grid.Column="3"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Adventure</x:String>
+                                            <x:String>City</x:String>
+                                            <x:String>Explorer</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                                <Picker x:Name="MonPicker3"
+                                Title="Size"
+                                Grid.Column="2"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>26"</x:String>
+                                            <x:String>28"</x:String>
+                                            
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                                
+                                <Picker x:Name="MonPicker1"
+                                Title="Color"
+                                Grid.Column="3"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Blue</x:String>
+                                            <x:String>Red</x:String>
+                                            <x:String>Grey</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                                <Button Text="+"/>
+                                <Button Text="-"/>
+                            </StackLayout>
+                        </ViewCell>
+                       
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            
+            
         </StackLayout>
         
     </StackLayout>
