@@ -59,6 +59,9 @@
 	  <MauiXaml Update="StockManagement.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SuppliersManagement.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\OrderFilling.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

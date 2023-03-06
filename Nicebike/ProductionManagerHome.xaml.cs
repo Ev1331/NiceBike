@@ -10,4 +10,8 @@ public partial class ProductionManagerHome : ContentPage
     {
         Navigation.PushAsync(new StockManagement());
     }
+    private async void NavigateToSuppliers(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new SuppliersManagement());
+    }
 }
