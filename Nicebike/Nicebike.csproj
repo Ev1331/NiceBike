@@ -70,4 +70,14 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\explorer.png" />
+	  <None Remove="Resources\Images\city.png" />
+	  <None Remove="Resources\Images\adventure.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\explorer.png" />
+	  <BundleResource Include="Resources\Images\city.png" />
+	  <BundleResource Include="Resources\Images\adventure.png" />
+	</ItemGroup>
 </Project>

@@ -16,5 +16,9 @@ public partial class OwnerHome : ContentPage
     {
         Navigation.PushAsync(new EmployeeMgmt());
     }
-    
+    private async void NavigateToCatalogue(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Views.Catalogue());
+    }
+
 }
