@@ -2,8 +2,6 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
-
     private async void NavigateToTechnician(object sender, EventArgs e)
     {
         Navigation.PushAsync(new TechnicianConnection());
