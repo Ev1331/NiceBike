@@ -6,4 +6,8 @@ public partial class StockManagement : ContentPage
 	{
 		InitializeComponent();
 	}
+    private async void NewPart(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new PartDatasheet());
+    }
 }

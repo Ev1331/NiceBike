@@ -4,68 +4,41 @@
              x:Class="Nicebike.StockManagement"
              Title="StockManagement">
     <VerticalStackLayout>
+        <Button Text="New piece"
+                Clicked="NewPart">
+        </Button>
+        <HorizontalStackLayout>
+            <Entry Placeholder="Reference n°"/>
+            <Entry Placeholder="Quantity"/>
+            <Button Text="Add"/>
+            <Button Text="Remove"/>
+        </HorizontalStackLayout>
         <TableView>
             <TableRoot>
                 <TableSection>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Stock Management" WidthRequest="300"/>
-                            <Button Text="Add a part"/>
-                        </StackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="ID" WidthRequest="100" BackgroundColor="LightGrey"/>
+                            <Label Text="Description" WidthRequest="400" BackgroundColor="LightGrey"/>
+                            <Label Text="Reference" WidthRequest="100" BackgroundColor="LightGrey"/>
+                            <Label Text="Quantity" WidthRequest="100" BackgroundColor="LightGrey"/>
+                            <Label Text="Threshold" WidthRequest="100" BackgroundColor="LightGrey"/>
+                        </HorizontalStackLayout>
                     </ViewCell>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Part" WidthRequest="200"/>
-                            <Label Text="Quantity" WidthRequest="100" />
-                            <Label Text="Alert" WidthRequest="200"/>
+                        <HorizontalStackLayout>
+                            <Label Text="000000" WidthRequest="100" VerticalTextAlignment="Center"/>
+                            <Label Text="M4x40 hex screw" WidthRequest="400" VerticalTextAlignment="Center"/>
+                            <Label Text="DT442Z" WidthRequest="100" VerticalTextAlignment="Center"/>
+                            <Label Text="432" WidthRequest="100" VerticalTextAlignment="Center"/>
+                            <Label Text="100" WidthRequest="100" VerticalTextAlignment="Center"/>
                             <Button Text="Modify datasheet"/>
-                            <Button Text="Add"/>
-                            <Button Text="Remove"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Part" WidthRequest="200"/>
-                            <Label Text="Quantity" WidthRequest="100" />
-                            <Label Text="Alert" WidthRequest="200"/>
-                            <Button Text="Modify datasheet"/>
-                            <Button Text="Add"/>
-                            <Button Text="Remove"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Part" WidthRequest="200"/>
-                            <Label Text="Quantity" WidthRequest="100" />
-                            <Label Text="Alert" WidthRequest="200"/>
-                            <Button Text="Modify datasheet"/>
-                            <Button Text="Add"/>
-                            <Button Text="Remove"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Part" WidthRequest="200"/>
-                            <Label Text="Quantity" WidthRequest="100" />
-                            <Label Text="Alert" WidthRequest="200"/>
-                            <Button Text="Modify datasheet"/>
-                            <Button Text="Add"/>
-                            <Button Text="Remove"/>
-                        </StackLayout>
-                    </ViewCell>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Part" WidthRequest="200"/>
-                            <Label Text="Quantity" WidthRequest="100" />
-                            <Label Text="Alert" WidthRequest="200"/>
-                            <Button Text="Modify datasheet"/>
-                            <Button Text="Add"/>
-                            <Button Text="Remove"/>
-                        </StackLayout>
+                            <Button Text="Restock"/>
+                            <Button Text="Remove one"/>
+                        </HorizontalStackLayout>
                     </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
-                   
     </VerticalStackLayout>
 </ContentPage>
