@@ -2,7 +2,7 @@
 
 
 
-This software solution was developed by Henri Baise, Sebastien Bokken, Everard d'Oultremont et Diego de Radigues for the fictive startup NiceBike. 
+This software solution was developed by Henri Baise, Sebastien Bokken, Everard d'Oultremont and Diego de Radigues for the fictive startup NiceBike. 
 The software helps NiceBike to manage their production, inventory, and orders more efficiently.
 
 ## Features
