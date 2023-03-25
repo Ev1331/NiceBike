@@ -1,5 +1,4 @@
-![logo3](https://user-images.githubusercontent.com/99732004/227721401-31c074f0-0985-40af-b82d-c2b902c8e629.png)
-
+![logo3](https://user-images.githubusercontent.com/99732004/227722329-d5bd016a-a519-4fdc-a151-0de9ee417bcc.png)
 
 
 This software solution was developed by Henri Baise, Sebastien Bokken, Everard d'Oultremont and Diego de Radigues for the fictive startup NiceBike. 
