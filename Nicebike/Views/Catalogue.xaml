@@ -12,13 +12,17 @@
 
         <ScrollView Grid.Row="0">
             <StackLayout Spacing="10" Margin="10">
-                <Label Text="Type of Bike" FontSize="Large" HorizontalOptions="Center" />
+                <Label Text="Models" FontSize="Large" HorizontalOptions="Center" />
 
                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="4" HorizontalOptions="Center">
                     <StackLayout HorizontalOptions="Center"
                                  VerticalOptions="CenterAndExpand"
                                  Spacing="5">
-                        <Image Source="city.png" />
+                        <Image Source="city.png" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnImageTapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                         <Label Text="City" FontSize="Small" HorizontalOptions="Center" />
                     </StackLayout>
 
@@ -26,7 +30,11 @@
                                  HorizontalOptions="Center"
                                  VerticalOptions="CenterAndExpand"
                                  Spacing="5">
-                        <Image Source="explorer.png" />
+                        <Image Source="explorer.png" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnExplorerImageTapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                         <Label Text="Explorer" FontSize="Small" HorizontalOptions="Center" />
                     </StackLayout>
 
@@ -34,25 +42,17 @@
                                  HorizontalOptions="Center"
                                  VerticalOptions="CenterAndExpand"
                                  Spacing="5">
-                        <Image Source="adventure.png" />
+                        <Image Source="adventure.png" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAdventureImageTapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
                         <Label Text="Adventure" FontSize="Small" HorizontalOptions="Center" />
                     </StackLayout>
                 </Grid>
 
-                <Label Text="Frame Size" FontSize="Large" Margin="0, 10, 0, 0" HorizontalOptions="Center" />
-
-                <StackLayout Orientation="Horizontal" Margin="0, 5, 0, 0" HorizontalOptions="Center">
-                    <Button Text="26"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#555555"/>
-                    <Button Text="28"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#555555"/>
-                </StackLayout>
-
-                <Label Text="Color" FontSize="Large" Margin="0, 10, 0, 0" HorizontalOptions="Center" />
-
-                <StackLayout Orientation="Horizontal" Margin="0, 5, 0, 0" HorizontalOptions="Center">
-                    <Button Text="Red"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#800000"/>
-                    <Button Text="Blue"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#000080"/>
-                    <Button Text="Grey"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="Gray"/>
-                </StackLayout>
+                
             </StackLayout>
         </ScrollView>
 

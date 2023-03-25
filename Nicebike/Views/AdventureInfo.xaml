@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.AdventureInfo"
+             Title="Adventure"
+             BackgroundColor="#f2f2f2">
+
+    <ScrollView>
+        <StackLayout>
+            <Image 
+                Source="adventure.png"
+                HeightRequest="250"
+                Margin="0, 20, 0, 10"/>
+
+            <StackLayout Padding="20">
+                <Label 
+                    Text="Description"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    TextColor="#333333"/>
+                <Label 
+                    Text="The Adventure Bike is designed for thrill-seekers and mountain trail enthusiasts. With its robust frame and sporty geometry, this mountain bike is ideal for cyclists looking to conquer the toughest trails with ease and confidence. Equipped with high-end components such as powerful hydraulic brakes, knobby tires for optimal traction, and precise gear shifting, the Adventure Mountain Bike is a reliable choice for cyclists looking to push their limits. Additionally, its bold and dynamic design is sure to turn heads and impress onlookers on the mountain trails. Choose the Adventure Mountain Bike for an intense and exciting riding experience in nature."
+                    TextColor="#666666"
+                    Margin="0, 10"/>
+            </StackLayout>
+
+            <Label Text="Frame Size" FontSize="Large" Margin="0, 10, 0, 0" HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" Margin="0, 5, 0, 0" HorizontalOptions="Center">
+                <Button Text="26"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#555555"/>
+                <Button Text="28"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#555555"/>
+            </StackLayout>
+
+            <Label Text="Color" FontSize="Large" Margin="0, 10, 0, 0" HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" Margin="0, 5, 0, 0" HorizontalOptions="Center">
+                <Button Text="Red"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#800000"/>
+                <Button Text="Blue"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#000080"/>
+                <Button Text="Grey"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="Gray"/>
+            </StackLayout>
+
+            <StackLayout BackgroundColor="White"
+                         Margin="0, 20"
+                         Padding="20">
+                <Label 
+                    Text="Price"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Margin="0, 0, 0, 10"/>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="Quantity" WidthRequest="80" FontAttributes="Bold"/>
+                    <Label Text="Price / pc" WidthRequest="80" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="5" WidthRequest="80"/>
+                    <Label Text="1347 €" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="10" WidthRequest="80"/>
+                    <Label Text="1287 €" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="50" WidthRequest="80"/>
+                    <Label Text="1227 €" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="100" WidthRequest="80"/>
+                    <Label Text="1167 €" WidthRequest="80"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 20"
+                         HorizontalOptions="Center"
+                         Spacing="10">
+                <Image Source="adventure1.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="adventure2.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="adventure3.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="adventure4.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="adventure5.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

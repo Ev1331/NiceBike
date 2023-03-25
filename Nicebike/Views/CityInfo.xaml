@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.Views.CityInfo"
+             Title="City"
+             BackgroundColor="#f2f2f2">
+
+    <ScrollView>
+        <StackLayout>
+            <Image 
+                Source="city.png"
+                HeightRequest="250"
+                Margin="0, 20, 0, 10"/>
+
+            <StackLayout Padding="20">
+                <Label 
+                    Text="Description"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    TextColor="#333333"/>
+                <Label 
+                    Text="The City Bike is the perfect companion for urban commuters, fitness enthusiasts, and leisure riders alike. With its lightweight frame and comfortable upright riding position, this bike is designed to help you easily navigate busy city streets and enjoy your ride in style. Equipped with reliable components, such as responsive brakes, smooth-shifting gears, and puncture-resistant tires, the City Bike is a dependable and low-maintenance choice for all your city cycling needs. Plus, its sleek and minimalist design is sure to turn heads and make a statement wherever you go. Choose the City Bike for a fun, efficient, and stress-free ride through the city."
+                    TextColor="#666666"
+                    Margin="0, 10"/>
+            </StackLayout>
+
+
+            <Label Text="Frame Size" FontSize="Large" Margin="0, 10, 0, 0" HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" Margin="0, 5, 0, 0" HorizontalOptions="Center">
+                <Button Text="26"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#555555"/>
+                <Button Text="28"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#555555"/>
+            </StackLayout>
+
+            <Label Text="Color" FontSize="Large" Margin="0, 10, 0, 0" HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" Margin="0, 5, 0, 0" HorizontalOptions="Center">
+                <Button Text="Red"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#800000"/>
+                <Button Text="Blue"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="#000080"/>
+                <Button Text="Grey"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="Gray"/>
+            </StackLayout>
+
+            <StackLayout BackgroundColor="White"
+                         Margin="0, 20"
+                         Padding="20">
+                <Label 
+                    Text="Price"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Margin="0, 0, 0, 10"/>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="Quantity" WidthRequest="80" FontAttributes="Bold"/>
+                    <Label Text="Price / pc" WidthRequest="80" FontAttributes="Bold"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="5" WidthRequest="80"/>
+                    <Label Text="349 €" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="10" WidthRequest="80"/>
+                    <Label Text="332 €" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="50" WidthRequest="80"/>
+                    <Label Text="315 €" WidthRequest="80"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+                    <Label Text="100" WidthRequest="80"/>
+                    <Label Text="299 €" WidthRequest="80"/>
+                </StackLayout>
+            </StackLayout>
+            
+            
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 20"
+                         HorizontalOptions="Center"
+                         Spacing="10">
+                <Image Source="city1.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="city2.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="city3.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="city4.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+                <Image Source="city5.png"
+                       HeightRequest="200"
+                       WidthRequest="200"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
