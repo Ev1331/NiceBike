@@ -1,41 +1,68 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.SaleRepresentativeHome"
-             Title="SaleRepresentativeHome">
-    <VerticalStackLayout
-            Spacing="145"
-            Padding="30,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+             Title="Sale Representative">
+
+        <ScrollView>
+        
+            <Grid BackgroundColor="#F6F6F6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Content Grid -->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Padding="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
 
-            <Button
-                Text="Catalogue"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToCatalogue"/>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="0"
+                                 Spacing="20"
+                                 VerticalOptions="CenterAndExpand">
 
-            <Button
-                Text="Order"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToOrder"/>
+                        <Image Source="saleman.png"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start"
+                               HeightRequest="200" />
 
-            <Button
-                Text="Stock Management"
-                HorizontalOptions="Center" 
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToStock"
-                />
-
-            
-
-        </VerticalStackLayout>
+                        <Button Text="Catalogue"
+                                WidthRequest="350"
+                                HeightRequest="100"
+                                FontSize="24"
+                                BackgroundColor="#E6E6E6"
+                                TextColor="#333333"
+                                CornerRadius="8"
+                                Clicked="NavigateToCatalogue" />
+                        <Button Text="Order"
+                                WidthRequest="350"
+                                HeightRequest="100"
+                                FontSize="24"
+                                BackgroundColor="#E6E6E6"
+                                TextColor="#333333"
+                                CornerRadius="8"
+                                Clicked="NavigateToOrder" />
+                        <Button Text="Stock Management"
+                                WidthRequest="350"
+                                HeightRequest="100"
+                                FontSize="24"
+                                BackgroundColor="#E6E6E6"
+                                TextColor="#333333"
+                                CornerRadius="8"
+                                Clicked="NavigateToStock" />
+                    </StackLayout>
+                </Grid>
+        </Grid>
+      </ScrollView>
 </ContentPage>

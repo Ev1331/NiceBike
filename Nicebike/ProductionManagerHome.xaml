@@ -2,32 +2,59 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.ProductionManagerHome"
-             Title="ProductionManagerHome">
-    <VerticalStackLayout
-            Spacing="145"
-            Padding="30,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+             Title="Production Manager">
+    <ScrollView>
+        <Grid BackgroundColor="#F6F6F6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <Button
-                Text="Suppliers Management"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToSuppliers"
-                />
+            <!-- Content Grid -->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Padding="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button
-                Text="Stock Management"
-                HorizontalOptions="Center" 
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToStock"
-                />
+                <StackLayout Grid.Row="1"
+                             Grid.Column="0"
+                             Spacing="20"
+                             VerticalOptions="CenterAndExpand">
 
-            
+                    <Image Source="manager.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           HeightRequest="200" />
 
-        </VerticalStackLayout>
+                    <Button Text="Suppliers Management"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToSuppliers" />
+
+                    <Button Text="Stock Management"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToStock" />
+
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>
+

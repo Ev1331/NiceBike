@@ -2,38 +2,70 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.TechnicianConnection"
-             Title="TechnicianConnection">
-    <VerticalStackLayout
-            Spacing="145"
-            Padding="30,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+             Title="Technician login">
+    <ScrollView>
+        <Grid BackgroundColor="#F6F6F6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <!-- Content Grid -->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Padding="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button
-                Text="Technician 1"
-                HorizontalOptions="Center" 
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToTechnician"
-                />
+                <StackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Spacing="10"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                    <Image Source="technician.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="200" />
+                </StackLayout>
 
-            <Button
-                Text="Technician 2"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToTechnician"/>
+                <StackLayout Grid.Row="1"
+                             Grid.Column="0"
+                             Spacing="20"
+                             VerticalOptions="CenterAndExpand">
 
-            <Button
-                Text="Technician 3"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToTechnician"/>
-
-        </VerticalStackLayout>
+                    <Button Text="Technician 1"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToTechnician" />
+                    <Button Text="Technician 2"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToTechnician" />
+                    <Button Text="Technician 3"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToTechnician" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>

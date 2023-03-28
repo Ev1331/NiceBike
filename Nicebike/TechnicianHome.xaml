@@ -3,29 +3,61 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.TechnicianHome"
              Title="TechnicianHome">
-    <VerticalStackLayout
-            Spacing="145"
-            Padding="30,0"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+    <ScrollView>
+        <Grid BackgroundColor="#F6F6F6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <!-- Content Grid -->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Padding="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button
-                Text="Stock Management"
-                HorizontalOptions="Center" 
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToStock"
-                />
+                <StackLayout Grid.Row="0"
+                             Grid.Column="0"
+                             Spacing="10"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                    <Image Source="technician.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="200" />
+                </StackLayout>
 
-            <Button
-                Text="Make a new bike"
-                HorizontalOptions="Center"
-                WidthRequest = "500"
-                HeightRequest="75"
-                FontSize="20"
-                Clicked="NavigateToMakeBike"/>
+                <StackLayout Grid.Row="1"
+                             Grid.Column="0"
+                             Spacing="20"
+                             VerticalOptions="CenterAndExpand">
 
-        </VerticalStackLayout>
+                    <Button Text="Stock Management"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToStock" />
+                    <Button Text="Make a new bike"
+                            WidthRequest="500"
+                            HeightRequest="75"
+                            FontSize="20"
+                            BackgroundColor="#E6E6E6"
+                            TextColor="#333333"
+                            CornerRadius="8"
+                            Clicked="NavigateToMakeBike" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>
