@@ -14,7 +14,5 @@ namespace Nicebike
             MySqlConnection connection = new(connectionString);
             connection.Open();
         }
-
     }
-
 }
