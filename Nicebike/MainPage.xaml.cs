@@ -1,4 +1,5 @@
-﻿namespace Nicebike;
+﻿
+namespace Nicebike;
 
 public partial class MainPage : ContentPage
 {
