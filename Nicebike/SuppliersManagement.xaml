@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+
              x:Class="Nicebike.SuppliersManagement"
              Title="SuppliersManagement">
     <VerticalStackLayout>
@@ -13,15 +15,19 @@
                             <Button Text="Add a supplier"/>
                         </StackLayout>
                     </ViewCell>
+                </TableSection>
+                <TableSection>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Name" WidthRequest="200"/>
-                            <Label Text="Adress" WidthRequest="100" />
-                            <Label Text="Person of contact" WidthRequest="200"/>
-                            <Label Text="Phone number" WidthRequest="200"/>
-                            <Button Text="Modify information"/>
-                        </StackLayout>
+                     <StackLayout>
+                         <StackLayout Orientation="Horizontal">
+                            <Label Text="Email" />
+                            <Entry WidthRequest="500" Placeholder="Enter registered email" />
+                            <Button Text="Confirm"/>
+                         </StackLayout>
+                        
+                     </StackLayout>
                     </ViewCell>
+
                 </TableSection>
             </TableRoot>
         </TableView>
