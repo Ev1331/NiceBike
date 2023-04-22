@@ -20,9 +20,15 @@
                     <ViewCell>
                      <StackLayout>
                          <StackLayout Orientation="Horizontal">
-                            <Label Text="Email" />
-                            <Entry WidthRequest="500" Placeholder="Enter registered email" />
-                            <Button Text="Confirm"/>
+                             
+                             <Entry x:Name="nameEntry" WidthRequest="200" Placeholder="name"  />
+                             <Entry x:Name="mailEntry" WidthRequest="200" Placeholder="mail"  />
+                             <Entry x:Name="phoneEntry" WidthRequest="200" Placeholder="phone"  />
+                             <Entry x:Name="streetEntry" WidthRequest="200" Placeholder="street"  />
+                             <Entry x:Name="numberEntry" WidthRequest="100" Placeholder="number"  />
+                             <Entry x:Name="townEntry" WidthRequest="100" Placeholder="town" />
+                             <Button Text="Add supplier" Clicked="OnConfirmClicked"/>
+
                          </StackLayout>
                         
                      </StackLayout>

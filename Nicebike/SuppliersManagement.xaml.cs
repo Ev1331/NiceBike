@@ -4,7 +4,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
 
-public partial class SuppliersManagement : ContentPage
+public partial class SuppliersManagement : ContentPage //sert à afficher les données
 {
     public SuppliersManagement()
     {
@@ -19,9 +19,25 @@ public partial class SuppliersManagement : ContentPage
         // Assigner la liste des fournisseurs à la source de données du ListView
         supplierListView.ItemsSource = suppliers;
     }
+    public void OnConfirmClicked(object sender, EventArgs e)
+    {
+        Entry name = this.FindByName<Entry>("nameEntry"); 
+        Entry mail = this.FindByName<Entry>("mailEntry"); 
+        Entry phone = this.FindByName<Entry>("phoneEntry");  
+        Entry street = this.FindByName<Entry>("streetEntry"); 
+        Entry number = this.FindByName<Entry>("numberEntry"); 
+        Entry town = this.FindByName<Entry>("townEntry"); 
+
+        SupplierManagement supplierManagement = new SupplierManagement();
+
+        supplierManagement.SendSupplier(name, mail, phone, street, town, number);
+
+    }
+
+
 }
 
-public class SupplierManagement
+public class SupplierManagement //sert à traiter les données
 {
     public List<Supplier> GetAllSuppliers()
     {
@@ -63,4 +79,30 @@ public class SupplierManagement
         
         return suppliers;
     }
+    public void SendSupplier(Entry name, Entry mail, Entry phone, Entry street, Entry town, Entry number)
+    {
+        
+
+        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+
+
+        using MySqlConnection connection = new MySqlConnection(connectionString);
+        connection.Open();
+
+        string sql = "INSERT INTO dbNicebike.suppliers (Name, Mail, Phone, Street, Town, Number) VALUES (@name, @mail, @phone, @street, @town, @number)";
+        MySqlCommand command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@name", name.Text);
+        command.Parameters.AddWithValue("@mail", mail.Text);
+        command.Parameters.AddWithValue("@phone", phone.Text);
+        command.Parameters.AddWithValue("@street", street.Text);
+        command.Parameters.AddWithValue("@town", town.Text);
+        command.Parameters.AddWithValue("@number", number.Text);
+
+        command.ExecuteNonQuery();
+
+
+    
+    } 
+    
+    
 }
