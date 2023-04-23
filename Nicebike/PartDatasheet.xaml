@@ -7,14 +7,19 @@
         <TableView>
             <TableRoot>
                 <TableSection>
-                    <EntryCell Label="Reference"
+                    <EntryCell x:Name="referenceEntry" Label="Reference:"
                        Placeholder="" />
-                    <EntryCell Label="Description"
+                    <EntryCell x:Name="descriptionEntry" Label="Description:"
                        Placeholder="" />
-                    <EntryCell Label="Alert threshold"
+                    <EntryCell x:Name="quantityEntry" Label="Quantity:"
+                       Placeholder="" />
+                    <EntryCell x:Name="thresholdEntry" Label="Alert threshold:"
+                       Placeholder="" />
+                    <EntryCell x:Name="supplierEntry" Label="Supplier:"
                        Placeholder="" />
                     <ViewCell>
-                        <Button Text="Save"/>
+                        <Button Text="Save"
+                                Clicked="SavePart"/>
                     </ViewCell>
                 </TableSection>
             </TableRoot>
