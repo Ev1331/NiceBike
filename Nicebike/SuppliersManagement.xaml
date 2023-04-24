@@ -5,6 +5,7 @@
 
              x:Class="Nicebike.SuppliersManagement"
              Title="SuppliersManagement">
+    <ScrollView>
     <VerticalStackLayout>
         <TableView>
             <TableRoot>
@@ -12,7 +13,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Suppliers Management" WidthRequest="300"/>
-                            <Button Text="Add a supplier"/>
+                            
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
@@ -27,7 +28,7 @@
                              <Entry x:Name="streetEntry" WidthRequest="200" Placeholder="street"  />
                              <Entry x:Name="numberEntry" WidthRequest="100" Placeholder="number"  />
                              <Entry x:Name="townEntry" WidthRequest="100" Placeholder="town" />
-                             <Button Text="Add supplier" Clicked="OnConfirmClicked"/>
+                             <Button Text="Add supplier" Clicked="OnConfirmClicked" Background="Green"/>
 
                          </StackLayout>
                         
@@ -37,22 +38,26 @@
                 </TableSection>
             </TableRoot>
         </TableView>
-        <ListView x:Name="supplierListView">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding name}" WidthRequest="200"/>
-                            <Label Text="{Binding mail}" WidthRequest="100" />
-                            <Label Text="{Binding phone}" WidthRequest="100" />
-                            <Label Text="{Binding street}" WidthRequest="100" />
-                            <Label Text="{Binding number}" WidthRequest="100" />
-                            <Label Text="{Binding town}" WidthRequest="100" />
-                            <Button Text="Modify information"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        
+            <ListView x:Name="supplierListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding name}" WidthRequest="200"/>
+                                <Label Text="{Binding mail}" WidthRequest="100" />
+                                <Label Text="{Binding phone}" WidthRequest="100" />
+                                <Label Text="{Binding street}" WidthRequest="100" />
+                                <Label Text="{Binding number}" WidthRequest="100" />
+                                <Label Text="{Binding town}" WidthRequest="100" />
+                                <Button Text="Modify information"/>
+                                <Button Text="Delete Supplier" Clicked="OnDeleteClicked" Background="Red" CommandParameter="{Binding idSupplier}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+        
         </ListView>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

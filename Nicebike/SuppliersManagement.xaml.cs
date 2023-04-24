@@ -4,6 +4,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
 
+
 public partial class SuppliersManagement : ContentPage //sert à afficher les données
 {
     public SuppliersManagement()
@@ -32,6 +33,17 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
 
         supplierManagement.SendSupplier(name, mail, phone, street, town, number);
 
+    }
+    public void OnDeleteClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var idSupplier = (int)button.CommandParameter;
+
+        SupplierManagement supplierManagement = new SupplierManagement();
+        supplierManagement.DeleteSupplier(idSupplier);
+
+
+        
     }
 
 
@@ -102,7 +114,24 @@ public class SupplierManagement //sert à traiter les données
 
 
     
-    } 
-    
-    
+    }
+    public void DeleteSupplier(int idSupplier)
+
+    {
+        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+        
+
+        using MySqlConnection connection = new MySqlConnection(connectionString);
+        connection.Open();
+        
+        string sql = "DELETE FROM dbNicebike.suppliers WHERE idSupplier = @id";
+
+        using MySqlCommand command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@id", idSupplier);
+
+        command.ExecuteNonQuery();
+
+    }
+
+
 }
