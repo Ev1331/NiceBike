@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.Views.EmployeeMgmt"
@@ -6,22 +6,27 @@
     <VerticalStackLayout>
         <Label Text="Search for an employee" FontAttributes="Bold" BackgroundColor="LightBlue" />
         <HorizontalStackLayout>
+
             <VerticalStackLayout WidthRequest="100">
                 <Label Text="Id" ></Label>
                 <Label Text="012910"></Label>
             </VerticalStackLayout>
+
             <VerticalStackLayout WidthRequest="100">
                 <Label Text="Name"></Label>
                 <Entry Placeholder="Type the name"/>
             </VerticalStackLayout>
+
             <VerticalStackLayout WidthRequest="100">
                 <Label Text="Surname"></Label>
                 <Entry Placeholder="Type the surname"/>
             </VerticalStackLayout>
+
             <VerticalStackLayout WidthRequest="100">
                 <Label Text="Mail"></Label>
                 <Entry Placeholder="Type the mail"/>
             </VerticalStackLayout >
+
             <VerticalStackLayout>
                 <Label Text="Function"></Label>
                 <Picker x:Name="MonPicker4"
@@ -38,27 +43,34 @@
                     </Picker.ItemsSource>
                 </Picker>
             </VerticalStackLayout>
+
+            <VerticalStackLayout WidthRequest="100">
+                <Label Text="Phone"></Label>
+                <Entry Placeholder="Type the Phone"/>
+            </VerticalStackLayout >
+
             <Button Text="Find"></Button>
             <Button Text="Add"></Button>
             <Button Text="Modify"></Button>
         </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Result(s) found" WidthRequest="150"></Label>
-            <VerticalStackLayout WidthRequest="80">
-                <Label Text="Name" FontAttributes="Bold" ></Label>
-                <Label Text="Jean"></Label>
-            </VerticalStackLayout>
-            <VerticalStackLayout WidthRequest="150">
-                <Label Text="Surname" FontAttributes="Bold"></Label>
-                <Label Text="Van Ip"></Label>
-            </VerticalStackLayout>
-            <VerticalStackLayout WidthRequest="100">
-                <Label Text="Mail" FontAttributes="Bold" WidthRequest="100"></Label>
-                <Label Text="Jean@gmail.com"></Label>
-            </VerticalStackLayout>
-           
-            
-        </HorizontalStackLayout>
+
+        <ListView x:Name="employeeListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding idEmployee}" WidthRequest="50" />
+                            <Label Text="{Binding name}" WidthRequest="200" />
+                            <Label Text="{Binding surname}" WidthRequest="200"/>
+                            <Label Text="{Binding mail}" WidthRequest="200" />
+                            <Label Text="{Binding function}" WidthRequest="200"/>
+                            <Label Text="{Binding phone}" WidthRequest="200" />
+                            <Button Text="Modify information"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
     
 </ContentPage>

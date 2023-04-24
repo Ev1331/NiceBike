@@ -9,10 +9,10 @@ namespace Nicebike
     {
         public readonly static string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
-        public static void Opebn()
+        public static void Open()
         {
             MySqlConnection connection = new(connectionString);
             connection.Open();
         }
     }
-}
+}   
