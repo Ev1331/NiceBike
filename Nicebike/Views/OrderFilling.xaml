@@ -7,13 +7,10 @@
     
 <!--vertical/horizontal stack layout test-->
     <StackLayout Orientation="Vertical">
-        
         <StackLayout Orientation="Horizontal" BackgroundColor="LightCyan">
-            
             <StackLayout Orientation="Vertical" Margin="10">
                 <TableView>
                     <TableRoot>
-                       
                         <TableSection Title="Client Name">
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
@@ -41,14 +38,10 @@
                         </TableSection>
                     </TableRoot>
                 </TableView>
-
             </StackLayout>
             <StackLayout Orientation="Vertical" Margin="10" WidthRequest="200">
                 <TableView>
                     <TableRoot>
-                       
-                        
-
                         <TableSection Title="Address">
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
@@ -75,26 +68,20 @@
             <StackLayout Orientation="Vertical" Margin="10">
                 <TableView>
                     <TableRoot>
-
-                
-
                         <TableSection Title="Order Number">
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="0129374872"/>
                                 </StackLayout>
                             </ViewCell>
-                           
                         </TableSection>
                     </TableRoot>
                 </TableView>
             </StackLayout>
-            
         </StackLayout>
         <StackLayout Orientation="Vertical" HeightRequest="450">
             <TableView BackgroundColor="AntiqueWhite">
                 <TableRoot>
-                    
                     <TableSection Title="Order summary" >
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
@@ -102,7 +89,6 @@
                                 <Label Text="Frame Size" WidthRequest="80" FontAttributes="Bold" />
                                 <Label Text="Color" WidthRequest="80" FontAttributes="Bold"/>
                                 <Label Text="Number" WidthRequest="80" FontAttributes="Bold"/>
-                                
                             </StackLayout>
                         </ViewCell>
                         <ViewCell>
@@ -122,9 +108,8 @@
                                 <Label Text="Red" WidthRequest="80"/>
                                 <Label Text="15" WidthRequest="80"/>
                                 <Button Text="+"/>
-                                <Button Text="-"/>   
+                                <Button Text="-"/>
                             </StackLayout>
-                        
                         </ViewCell>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
@@ -135,16 +120,13 @@
                                 <Button Text="+"/>
                                 <Button Text="-"/>
                             </StackLayout>
-
                         </ViewCell>
                     </TableSection>
                 </TableRoot>
             </TableView>
             <TableView BackgroundColor="LightBlue">
                 <TableRoot>
-                    
                     <TableSection Title="Add a bike">
-                        
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Picker x:Name="MonPicker2"
@@ -169,11 +151,9 @@
                                         <x:Array Type="{x:Type x:String}">
                                             <x:String>26"</x:String>
                                             <x:String>28"</x:String>
-                                            
                                         </x:Array>
                                     </Picker.ItemsSource>
                                 </Picker>
-                                
                                 <Picker x:Name="MonPicker1"
                                 Title="Color"
                                 Grid.Column="3"
@@ -191,14 +171,9 @@
                                 <Button Text="-"/>
                             </StackLayout>
                         </ViewCell>
-                       
                     </TableSection>
                 </TableRoot>
             </TableView>
-            
-            
         </StackLayout>
-        
     </StackLayout>
-    
 </ContentPage>

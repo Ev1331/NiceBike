@@ -54,7 +54,7 @@ public class PartsManagement
         return parts;
     }
 
-    public void SendPart(EntryCell reference, EntryCell description, EntryCell quantity, EntryCell threshold, EntryCell supplier)
+    public void SendPart(Entry reference, Entry description, Entry quantity, Entry threshold, Entry supplier)
     {
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 

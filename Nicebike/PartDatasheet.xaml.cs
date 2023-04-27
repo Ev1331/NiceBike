@@ -11,11 +11,11 @@ public partial class PartDatasheet : ContentPage
 
     public void SavePart(object sender, EventArgs e)
     {
-        EntryCell reference = this.FindByName<EntryCell>("referenceEntry");
-        EntryCell description = this.FindByName<EntryCell>("descriptionEntry");
-        EntryCell quantity = this.FindByName<EntryCell>("quantityEntry");
-        EntryCell threshold = this.FindByName<EntryCell>("thresholdEntry");
-        EntryCell supplier = this.FindByName<EntryCell>("supplierEntry");
+        Entry reference = this.FindByName<Entry>("referenceEntry");
+        Entry description = this.FindByName<Entry>("descriptionEntry");
+        Entry quantity = this.FindByName<Entry>("quantityEntry");
+        Entry threshold = this.FindByName<Entry>("thresholdEntry");
+        Entry supplier = this.FindByName<Entry>("supplierEntry");
 
         PartsManagement stockManagement = new PartsManagement();
         stockManagement.SendPart(reference, description, quantity, threshold, supplier);

@@ -3,26 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.PartDatasheet"
              Title="PartDatasheet">
-    <VerticalStackLayout>
-        <TableView>
-            <TableRoot>
-                <TableSection>
-                    <EntryCell x:Name="referenceEntry" Label="Reference:"
-                       Placeholder="" />
-                    <EntryCell x:Name="descriptionEntry" Label="Description:"
-                       Placeholder="" />
-                    <EntryCell x:Name="quantityEntry" Label="Quantity:"
-                       Placeholder="" />
-                    <EntryCell x:Name="thresholdEntry" Label="Alert threshold:"
-                       Placeholder="" />
-                    <EntryCell x:Name="supplierEntry" Label="Supplier:"
-                       Placeholder="" />
-                    <ViewCell>
-                        <Button Text="Save"
-                                Clicked="SavePart"/>
-                    </ViewCell>
-                </TableSection>
-            </TableRoot>
-        </TableView>
+    <VerticalStackLayout HorizontalOptions="Center">
+        <Label Text="Reference:"></Label>
+        <Entry x:Name="referenceEntry" WidthRequest="200"/>
+        <Label Text="Description:"></Label>
+        <Entry x:Name="descriptionEntry" WidthRequest="200"/>
+        <Label Text="Alert threshold:"></Label>
+        <Entry x:Name="thresholdEntry" WidthRequest="200"/>
+        <Label Text="Quantity:"></Label>
+        <Entry x:Name="quantityEntry" WidthRequest="200"/>
+        <Label Text="Supplier:"></Label>
+        <Entry x:Name="supplierEntry" WidthRequest="200"/>
+
+        <Picker x:Name="supplierPicker"
+        Title="Select a supplier">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>A</x:String>
+                    <x:String>B</x:String>
+                    <x:String>V</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Save" 
+                Clicked="SavePart"/>
     </VerticalStackLayout>
 </ContentPage>
