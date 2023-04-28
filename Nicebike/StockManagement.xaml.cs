@@ -54,7 +54,7 @@ public class PartsManagement
         return parts;
     }
 
-    public void SendPart(Entry reference, Entry description, Entry quantity, Entry threshold, Entry supplier)
+    public void SendPart(List <Supplier> suppliers, Entry reference, Entry description, Entry quantity, Entry threshold, Picker supplier)
     {
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -67,7 +67,7 @@ public class PartsManagement
         command.Parameters.AddWithValue("@description", description.Text);
         command.Parameters.AddWithValue("@quantity", quantity.Text);
         command.Parameters.AddWithValue("@threshold", threshold.Text);
-        command.Parameters.AddWithValue("@supplier", supplier.Text);
+        command.Parameters.AddWithValue("@supplier", suppliers[supplier.SelectedIndex].idSupplier);
 
         command.ExecuteNonQuery();
     }

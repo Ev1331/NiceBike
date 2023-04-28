@@ -12,16 +12,11 @@
         <Entry x:Name="thresholdEntry" WidthRequest="200"/>
         <Label Text="Quantity:"></Label>
         <Entry x:Name="quantityEntry" WidthRequest="200"/>
-        <Label Text="Supplier:"></Label>
-        <Entry x:Name="supplierEntry" WidthRequest="200"/>
 
         <Picker x:Name="supplierPicker"
         Title="Select a supplier">
             <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>A</x:String>
-                    <x:String>B</x:String>
-                    <x:String>V</x:String>
+                <x:Array Type="{x:Type x:String}" >
                 </x:Array>
             </Picker.ItemsSource>
         </Picker>
