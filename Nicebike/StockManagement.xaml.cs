@@ -1,6 +1,7 @@
 namespace Nicebike;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
+using System.Collections.ObjectModel;
 
 public partial class StockManagement : ContentPage
 {
@@ -12,10 +13,13 @@ public partial class StockManagement : ContentPage
         PartsManagement stockManagement = new PartsManagement();
 
         // Récupérer la liste des fournisseurs à partir de la base de données
-        List<Part> parts = stockManagement.GetAllParts();
+        //List<Part> parts = stockManagement.GetAllParts();
+
+       // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
+        ObservableCollection<Part> observableParts = stockManagement.GetAllParts();
 
         // Assigner la liste des fournisseurs à la source de données du ListView
-        partListView.ItemsSource = parts;
+        partListView.ItemsSource = observableParts;
     }
 
     private async void NewPart(object sender, EventArgs e)
@@ -23,13 +27,28 @@ public partial class StockManagement : ContentPage
         Navigation.PushAsync(new PartDatasheet());
     }
 
+    private void ModifyData(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new PartDatasheet());
+    }
+
+    private void DeletePart(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var IdPart = (int)button.CommandParameter;
+
+        PartsManagement stockManagement = new PartsManagement();
+        stockManagement.DeletePart(IdPart);
+
+        //partListView
+    }
 }
 
 public class PartsManagement
 {
-    public List<Part> GetAllParts()
+    public ObservableCollection<Part> GetAllParts()
     {
-        List<Part> parts = new List<Part>();
+        ObservableCollection<Part> parts = new ObservableCollection<Part>();
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -70,6 +89,20 @@ public class PartsManagement
         command.Parameters.AddWithValue("@supplier", suppliers[supplier.SelectedIndex].idSupplier);
 
         command.ExecuteNonQuery();
+    }
+
+    public void DeletePart(int IdPart)
+    {
+        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+        using MySqlConnection connection = new MySqlConnection(connectionString);
+        connection.Open();
+
+        string sql = "DELETE FROM dbNicebike.part WHERE idPart = @id";
+        using MySqlCommand command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@id", IdPart);
+
+        command.ExecuteNonQuery();
+
     }
 
 }
