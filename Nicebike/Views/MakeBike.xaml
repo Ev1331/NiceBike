@@ -18,7 +18,9 @@
                         Grid.Column="0"
                         Grid.Row="1">
             
-            <CollectionView.ItemsSource>
+            <!--<CollectionView.ItemsSource>
+                
+                
                 <x:Array Type="{x:Type model:Bike}">
                     <model:Bike Color="Blue"
                                 Type="Explorer"
@@ -33,6 +35,8 @@
                     <model:Bike Color="Blue"
                                 Type="Adventure"
                                 Size="26"/>
+                    
+                    
                 </x:Array>
             </CollectionView.ItemsSource>
             <CollectionView.ItemTemplate>
@@ -164,7 +168,7 @@
 
                 </DataTemplate>
 
-            </CollectionView.ItemTemplate>
+            </CollectionView.ItemTemplate>-->
 
 
         </CollectionView>
