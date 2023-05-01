@@ -3,177 +3,147 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nicebike.OrderFilling"
              Title="OrderFilling">
-    
-    
-<!--vertical/horizontal stack layout test-->
+
+    <!--vertical/horizontal stack layout test-->
     <StackLayout Orientation="Vertical">
-        <StackLayout Orientation="Horizontal" BackgroundColor="LightCyan">
+        
+        <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+            
             <StackLayout Orientation="Vertical" Margin="10">
-                <TableView>
-                    <TableRoot>
-                        <TableSection Title="Client Name">
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Button Text="Find" HorizontalOptions="EndAndExpand" />
-                                </StackLayout>
-                            </ViewCell>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Name" WidthRequest="80" />
-                                    <Label Text="Van Pimperzeel Jan" />
-                                </StackLayout>
-                            </ViewCell>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Email" WidthRequest="80" />
-                                    <Label Text="JanVpz@gmail.com" />
-                                </StackLayout>
-                            </ViewCell>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Phone" WidthRequest="80" />
-                                    <Label Text="0477225826" />
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-                    </TableRoot>
-                </TableView>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Find" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Name" WidthRequest="80" />
+                    <Label Text="Van Pimperzeel Jan" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Email" WidthRequest="80" />
+                    <Label Text="JanVpz@gmail.com" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Phone" WidthRequest="80" />
+                    <Label Text="0477225826" />
+                </StackLayout>
             </StackLayout>
+
             <StackLayout Orientation="Vertical" Margin="10" WidthRequest="200">
-                <TableView>
-                    <TableRoot>
-                        <TableSection Title="Address">
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Street" WidthRequest="80" />
-                                    <Label Text="Prom Alma" />
-                                </StackLayout>
-                            </ViewCell>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Number" WidthRequest="80" />
-                                    <Label Text="50" />
-                                </StackLayout>
-                            </ViewCell>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Town" WidthRequest="80" />
-                                    <Label Text="1200 Woluwe" />
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-                    </TableRoot>
-                </TableView>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Street" WidthRequest="80" />
+                    <Label Text="Prom Alma" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Number" WidthRequest="80" />
+                    <Label Text="50" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Town" WidthRequest="80" />
+                    <Label Text="1200 Woluwe" />
+                </StackLayout>
             </StackLayout>
             <StackLayout Orientation="Vertical" Margin="10">
-                <TableView>
-                    <TableRoot>
-                        <TableSection Title="Order Number">
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="0129374872"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-                    </TableRoot>
-                </TableView>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="001"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
+        
+        
         <StackLayout Orientation="Vertical" HeightRequest="450">
-            <TableView BackgroundColor="AntiqueWhite">
-                <TableRoot>
-                    <TableSection Title="Order summary" >
+
+
+            <ListView x:Name="bikesListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Type" WidthRequest="80" FontAttributes="Bold"/>
-                                <Label Text="Frame Size" WidthRequest="80" FontAttributes="Bold" />
-                                <Label Text="Color" WidthRequest="80" FontAttributes="Bold"/>
-                                <Label Text="Number" WidthRequest="80" FontAttributes="Bold"/>
+                                <Label Text="{Binding color}" WidthRequest="400" />
+                                <Label Text="{Binding type}" WidthRequest="100" />
+                                <Label Text="{Binding size}" WidthRequest="100" />
+                                <Label Text="{Binding reference}" WidthRequest="100" />
+                                <Label Text="{Binding bikeModel}" WidthRequest="100" />
+                                <Button Text="-" 
+                                        Clicked="RemoveBike" 
+                                        BackgroundColor="#E6E6E6"
+                                        TextColor="#333333"/>
+                                <Button Text="+" 
+                                        Clicked="AddBike" 
+                                        BackgroundColor="#E6E6E6"
+                                        TextColor="#333333"/>
                             </StackLayout>
                         </ViewCell>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Adventure" WidthRequest="80"/>
-                                <Label Text="28'" WidthRequest="80"/>
-                                <Label Text="Grey" WidthRequest="80"/>
-                                <Label Text="15" WidthRequest="80"/>
-                                <Button Text="+"/>
-                                <Button Text="-"/>
-                            </StackLayout>
-                        </ViewCell>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="City" WidthRequest="80"/>
-                                <Label Text="26'" WidthRequest="80"/>
-                                <Label Text="Red" WidthRequest="80"/>
-                                <Label Text="15" WidthRequest="80"/>
-                                <Button Text="+"/>
-                                <Button Text="-"/>
-                            </StackLayout>
-                        </ViewCell>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Explorer" WidthRequest="80"/>
-                                <Label Text="26'" WidthRequest="80"/>
-                                <Label Text="Blue" WidthRequest="80"/>
-                                <Label Text="20" WidthRequest="80"/>
-                                <Button Text="+"/>
-                                <Button Text="-"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView BackgroundColor="LightBlue">
-                <TableRoot>
-                    <TableSection Title="Add a bike">
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Picker x:Name="MonPicker2"
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <HorizontalStackLayout>
+                <Picker x:Name="colorPicker">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}" >
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                
+                <Picker x:Name="sizePicker">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}" >
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                
+                <Picker x:Name="modelPicker">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}" >
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button Text="Save" 
+                Clicked="SaveBike"/>
+            </HorizontalStackLayout>
+
+            <!--<StackLayout Orientation="Horizontal">
+                <Picker x:Name="MonPicker2"
                                 Title="Type " 
                                 Grid.Column="3"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Adventure</x:String>
-                                            <x:String>City</x:String>
-                                            <x:String>Explorer</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
-                                <Picker x:Name="MonPicker3"
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Adventure</x:String>
+                            <x:String>City</x:String>
+                            <x:String>Explorer</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Picker x:Name="MonPicker3"
                                 Title="Size"
                                 Grid.Column="2"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>26"</x:String>
-                                            <x:String>28"</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
-                                <Picker x:Name="MonPicker1"
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>26"</x:String>
+                            <x:String>28"</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Picker x:Name="MonPicker1"
                                 Title="Color"
                                 Grid.Column="3"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Blue</x:String>
-                                            <x:String>Red</x:String>
-                                            <x:String>Grey</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
-                                <Button Text="+"/>
-                                <Button Text="-"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView>
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Blue</x:String>
+                            <x:String>Red</x:String>
+                            <x:String>Grey</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Button Text="+"/>
+                <Button Text="-"/>
+            </StackLayout>-->
         </StackLayout>
     </StackLayout>
 </ContentPage>

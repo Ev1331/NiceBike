@@ -1,7 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.ObjectModel;
-
-namespace Nicebike.Models
+﻿namespace Nicebike.Models
 {
     public class Bike
     {

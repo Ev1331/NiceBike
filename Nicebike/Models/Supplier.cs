@@ -1,5 +1,4 @@
-﻿using System;
-namespace Nicebike.Models
+﻿namespace Nicebike.Models
 {
 	public class Supplier
 	{
