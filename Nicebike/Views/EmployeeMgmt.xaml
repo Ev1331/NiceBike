@@ -4,55 +4,54 @@
              x:Class="Nicebike.Views.EmployeeMgmt"
              Title="Employee Management">
     <VerticalStackLayout>
-        <Label Text="Search for an employee" FontAttributes="Bold" BackgroundColor="LightBlue" />
-        <HorizontalStackLayout>
 
-            <VerticalStackLayout WidthRequest="100">
-                <Label Text="Id" ></Label>
-                <Label Text="012910"></Label>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout WidthRequest="100">
-                <Label Text="Name"></Label>
-                <Entry Placeholder="Type the name"/>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout WidthRequest="100">
-                <Label Text="Surname"></Label>
-                <Entry Placeholder="Type the surname"/>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout WidthRequest="100">
-                <Label Text="Mail"></Label>
-                <Entry Placeholder="Type the mail"/>
-            </VerticalStackLayout >
-
-            <VerticalStackLayout>
-                <Label Text="Function"></Label>
-                <Picker x:Name="MonPicker4"
+        <!--<VerticalStackLayout>
+            <Label Text="Function"></Label>
+            <Picker x:Name="MonPicker4"
                                  
-                                Grid.Column="3"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Sales representative</x:String>
-                            <x:String>Technician</x:String>
+                            Grid.Column="3"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Sales representative</x:String>
+                        <x:String>Technician</x:String>
                            
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-            </VerticalStackLayout>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </VerticalStackLayout>-->
 
-            <VerticalStackLayout WidthRequest="100">
-                <Label Text="Phone"></Label>
-                <Entry Placeholder="Type the Phone"/>
-            </VerticalStackLayout >
+        <TableView>
+            <TableRoot>
+                <TableSection>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Employee Management" WidthRequest="300"/>
+                            
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection>
+                    <ViewCell>
+                     <StackLayout>
+                         <StackLayout Orientation="Horizontal">
+                             
+                             <Entry x:Name="nameEntry" WidthRequest="200" Placeholder="name"  />
+                             <Entry x:Name="surnameEntry" WidthRequest="200" Placeholder="surname"  />
+                             <Entry x:Name="mailEntry" WidthRequest="200" Placeholder="mail"  />
+                             <Entry x:Name="functionEntry" WidthRequest="200" Placeholder="function"  />
+                             <Entry x:Name="phoneEntry" WidthRequest="200" Placeholder="phone"  />
+                             <Button Text="Add Employee" Clicked="OnConfirmClicked" Background="Green"/>
 
-            <Button Text="Find"></Button>
-            <Button Text="Add"></Button>
-            <Button Text="Modify"></Button>
-        </HorizontalStackLayout>
+                         </StackLayout>
+                        
+                     </StackLayout>
+                    </ViewCell>
+
+                </TableSection>
+            </TableRoot>
+        </TableView>
 
         <ListView x:Name="employeeListView">
             <ListView.ItemTemplate>
@@ -66,6 +65,7 @@
                             <Label Text="{Binding function}" WidthRequest="200"/>
                             <Label Text="{Binding phone}" WidthRequest="200" />
                             <Button Text="Modify information"/>
+                            <Button Text="Delete Employee" Clicked="OnDeleteClicked" Background="Red" CommandParameter="{Binding idEmployee}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

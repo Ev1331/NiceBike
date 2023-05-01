@@ -19,4 +19,9 @@ public partial class SaleRepresentativeHome : ContentPage
     {
         Navigation.PushAsync(new Views.Catalogue());
     }
+
+    private async void NavigateToCustomer(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new ClientsManagement());
+    }
 }

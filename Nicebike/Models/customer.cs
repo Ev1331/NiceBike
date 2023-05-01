@@ -2,14 +2,14 @@
 {
     public class Customer
     {
-        public int idCustomer;
-        public string name;
-        public string surname;
-        public string mail;
-        public string phone;
-        public string street;
-        public string town;
-        public string number;
+        public int idCustomer { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string mail { get; set; }
+        public string phone { get; set; }
+        public string street { get; set; }
+        public string town { get; set; }
+        public string number { get; set; }
 
         public Customer(int idCustomer, string name, string surname, string mail, string phone, string street, string town, string number ) {
             this.idCustomer = idCustomer;

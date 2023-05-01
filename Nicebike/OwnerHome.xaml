@@ -52,6 +52,14 @@
                                 TextColor="#333333"
                                 CornerRadius="8"
                                 Clicked="NavigateToEmployeeMgmt" />
+                    <Button Text="Customers Management"
+                                WidthRequest="350"
+                                HeightRequest="100"
+                                FontSize="24"
+                                BackgroundColor="#E6E6E6"
+                                TextColor="#333333"
+                                CornerRadius="8"
+                                Clicked="NavigateToCustomer" />
                     <Button Text="Stock Management"
                                 WidthRequest="350"
                                 HeightRequest="100"
