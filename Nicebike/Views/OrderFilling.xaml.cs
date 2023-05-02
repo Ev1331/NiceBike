@@ -14,7 +14,6 @@ public partial class OrderFilling : ContentPage
     public OrderFilling()
 	{
 		InitializeComponent();
-        Bike tatatat = new Bike(1, "Red", "AAA", "Standard", "AAA", 0, 2, "AAA");
 
         // Créer une instance de la classe SupplierManagement
         BikesManagement bikesManagement = new BikesManagement();

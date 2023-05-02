@@ -1,25 +1,20 @@
-﻿namespace Nicebike.Models;
-
-//internal class Order
-//{
-//    public double Id { get; set; }
-//    public Customer Customer { get; set; }
-
-//    public List<Bike> Bike { get; set; }
-    
-//}
-
-
-public class Order
+﻿namespace Nicebike.Models
+{
+    public class Order
     {
-    public int Id;
-    public List<Bike> bikeList;
-    public Customer customer;
+        public int IdOrder { get; set; }
+        public int CustomerId { get; set; }
+        public string Date { get; set; }
+        public string DeliveryDate { get; set; }
+        public string Status { get; set; }
 
-    public Order(List<Bike> bikeList, Customer customer, int Id ) {
-        this.customer = customer;
-        this.Id = Id;
-        this.bikeList = bikeList;
-
+        public Order(int IdOrder, int CustomerId, string Date, string DeliveryDate, string Status)
+        {
+            this.IdOrder = IdOrder;
+            this.CustomerId = CustomerId;
+            this.Date = Date;
+            this.DeliveryDate = DeliveryDate;
+            this.Status = Status;
+        }
     }
-    }
+}

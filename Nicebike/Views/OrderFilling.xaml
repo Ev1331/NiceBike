@@ -4,11 +4,9 @@
              x:Class="Nicebike.OrderFilling"
              Title="OrderFilling">
 
-    <!--vertical/horizontal stack layout test-->
     <StackLayout Orientation="Vertical">
-        
         <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
-            
+
             <StackLayout Orientation="Vertical" Margin="10">
                 <StackLayout Orientation="Horizontal">
                     <Button Text="Find" HorizontalOptions="EndAndExpand" />
@@ -47,10 +45,8 @@
                 </StackLayout>
             </StackLayout>
         </StackLayout>
-        
-        
-        <StackLayout Orientation="Vertical" HeightRequest="450">
 
+        <StackLayout Orientation="Vertical" HeightRequest="450">
 
             <ListView x:Name="bikesListView">
                 <ListView.ItemTemplate>
@@ -83,14 +79,14 @@
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
-                
+
                 <Picker x:Name="sizePicker">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}" >
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
-                
+
                 <Picker x:Name="modelPicker">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}" >
@@ -100,50 +96,8 @@
 
                 <Button Text="Save" 
                 Clicked="SaveBike"/>
+                
             </HorizontalStackLayout>
-
-            <!--<StackLayout Orientation="Horizontal">
-                <Picker x:Name="MonPicker2"
-                                Title="Type " 
-                                Grid.Column="3"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Adventure</x:String>
-                            <x:String>City</x:String>
-                            <x:String>Explorer</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <Picker x:Name="MonPicker3"
-                                Title="Size"
-                                Grid.Column="2"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>26"</x:String>
-                            <x:String>28"</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <Picker x:Name="MonPicker1"
-                                Title="Color"
-                                Grid.Column="3"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Blue</x:String>
-                            <x:String>Red</x:String>
-                            <x:String>Grey</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <Button Text="+"/>
-                <Button Text="-"/>
-            </StackLayout>-->
         </StackLayout>
     </StackLayout>
 </ContentPage>

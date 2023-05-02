@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.Views.OrderList"
+             Title="OrderList">
+    <VerticalStackLayout>
+
+        <Button
+            Text="New order"
+            Clicked="GoToNewOrder">
+        </Button>
+
+        <HorizontalStackLayout>
+            <Label Text="ID" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Customer" WidthRequest="400" BackgroundColor="LightGrey"/>
+            <Label Text="Date" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Delivery date" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Status" WidthRequest="100" BackgroundColor="LightGrey"/>
+        </HorizontalStackLayout>
+
+        <ListView x:Name="orderListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding id}" WidthRequest="100"/>
+                            <Label Text="{Binding CustomerId}" WidthRequest="400" />
+                            <Label Text="{Binding Date}" WidthRequest="100" />
+                            <Label Text="{Binding DeliveryDate}" WidthRequest="100" />
+                            <Label Text="{Binding Status}" WidthRequest="100" />
+                            <Button Text="Cancel order" 
+                                    Clicked="DeleteOrder"
+                                    CommandParameter="{Binding id}"
+                                    BackgroundColor="#E6E6E6"
+                                    TextColor="#333333"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+
+</ContentPage>

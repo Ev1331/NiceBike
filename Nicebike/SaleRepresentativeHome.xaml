@@ -45,7 +45,7 @@
                                 TextColor="#333333"
                                 CornerRadius="8"
                                 Clicked="NavigateToCatalogue" />
-                        <Button Text="Order"
+                        <Button Text="Orders"
                                 WidthRequest="350"
                                 HeightRequest="100"
                                 FontSize="24"
