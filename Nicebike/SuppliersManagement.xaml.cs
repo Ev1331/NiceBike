@@ -22,12 +22,12 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
     }
     public void OnConfirmClicked(object sender, EventArgs e)
     {
-        Entry name = this.FindByName<Entry>("nameEntry"); 
-        Entry mail = this.FindByName<Entry>("mailEntry"); 
-        Entry phone = this.FindByName<Entry>("phoneEntry");  
-        Entry street = this.FindByName<Entry>("streetEntry"); 
-        Entry number = this.FindByName<Entry>("numberEntry"); 
-        Entry town = this.FindByName<Entry>("townEntry"); 
+        Entry name = this.FindByName<Entry>("nameEntry");
+        Entry mail = this.FindByName<Entry>("mailEntry");
+        Entry phone = this.FindByName<Entry>("phoneEntry");
+        Entry street = this.FindByName<Entry>("streetEntry");
+        Entry number = this.FindByName<Entry>("numberEntry");
+        Entry town = this.FindByName<Entry>("townEntry");
 
         SupplierManagement supplierManagement = new SupplierManagement();
 
@@ -39,12 +39,28 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
         var button = (Button)sender;
         var idSupplier = (int)button.CommandParameter;
 
+
+
         SupplierManagement supplierManagement = new SupplierManagement();
         supplierManagement.DeleteSupplier(idSupplier);
 
 
-        
+
     }
+
+    private async void OnModifyClicked(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var supplier = (Supplier)button.BindingContext;
+
+
+        var modifyPage = new ModifySupplier(supplier);
+
+
+        await Navigation.PushAsync(modifyPage);
+    }
+
+
 
 
 }
@@ -55,23 +71,23 @@ public class SupplierManagement //sert à traiter les données
     {
         List<Supplier> suppliers = new List<Supplier>();
 
-        
+
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
-        
+
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-        
+
         string sql = "SELECT * FROM dbNicebike.suppliers";
 
-        
+
         using MySqlCommand command = new MySqlCommand(sql, connection);
 
-        
+
         using MySqlDataReader reader = command.ExecuteReader();
 
-        
+
         while (reader.Read())
         {
             Supplier supplier = new Supplier(
@@ -82,18 +98,19 @@ public class SupplierManagement //sert à traiter les données
                 reader.GetString("street"),
                 reader.GetString("town"),
                 reader.GetString("number")
+
             );
 
-            
+
             suppliers.Add(supplier);
         }
 
-        
+
         return suppliers;
     }
     public void SendSupplier(Entry name, Entry mail, Entry phone, Entry street, Entry town, Entry number)
     {
-        
+
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -113,17 +130,17 @@ public class SupplierManagement //sert à traiter les données
         command.ExecuteNonQuery();
 
 
-    
+
     }
     public void DeleteSupplier(int idSupplier)
 
     {
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-        
+
 
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
-        
+
         string sql = "DELETE FROM dbNicebike.suppliers WHERE idSupplier = @id";
 
         using MySqlCommand command = new MySqlCommand(sql, connection);
@@ -134,4 +151,9 @@ public class SupplierManagement //sert à traiter les données
     }
 
 
+
 }
+
+
+
+

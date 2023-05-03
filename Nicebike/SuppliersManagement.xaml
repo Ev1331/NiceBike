@@ -42,15 +42,19 @@
             <ListView x:Name="supplierListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell x:Name="{Binding idSupplier}">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding name}" WidthRequest="200"/>
-                                <Label Text="{Binding mail}" WidthRequest="100" />
-                                <Label Text="{Binding phone}" WidthRequest="100" />
-                                <Label Text="{Binding street}" WidthRequest="100" />
-                                <Label Text="{Binding number}" WidthRequest="100" />
-                                <Label Text="{Binding town}" WidthRequest="100" />
-                                <Button Text="Modify information"/>
+                                
+                                    <Label  Text="{Binding name}" WidthRequest="200"  />
+                                    <Label  Text="{Binding mail}" WidthRequest="200"  />
+                                    <Label  Text="{Binding phone}" WidthRequest="200"  />
+                                    <Label  Text="{Binding street}" WidthRequest="200"  />
+                                    <Label  Text="{Binding number}" WidthRequest="100"  />
+                                    <Label  Text="{Binding town}" WidthRequest="100"  />
+
+
+                                
+                                <Button Text="Modify information" Clicked="OnModifyClicked" Background="Blue" CommandParameter="{Binding idSupplier}"/>
                                 <Button Text="Delete Supplier" Clicked="OnDeleteClicked" Background="Red" CommandParameter="{Binding idSupplier}"/>
                             </StackLayout>
                         </ViewCell>

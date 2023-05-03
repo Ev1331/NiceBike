@@ -1,0 +1,37 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.ModifySupplier"
+             Title="ModifySupplier">
+    <VerticalStackLayout>
+        <TableView>
+            <TableRoot>
+                <TableSection>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Suppliers Management" WidthRequest="300"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection>
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry x:Name="nameChange" Text="{Binding name}" WidthRequest="200" Placeholder="name" />
+                                <Entry x:Name="mailChange" Text="{Binding mail}" WidthRequest="200"  Placeholder="mail"/>
+                                <Entry x:Name="phoneChange" Text="{Binding phone}" WidthRequest="200" Placeholder="phone" />
+                                <Entry x:Name="streetChange" Text="{Binding street}" WidthRequest="200" Placeholder="street" />
+                                <Entry x:Name="numberChange" Text="{Binding number}" WidthRequest="100" Placeholder="number" />
+                                <Entry x:Name="townChange" Text="{Binding town}" WidthRequest="100" Placeholder="town" />
+                                <Button Text="Change Data" Clicked="modifyClicked" Background="Green" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </VerticalStackLayout>
+</ContentPage>
+
+
+
+
