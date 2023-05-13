@@ -27,7 +27,7 @@
                              <Entry x:Name="streetEntry" WidthRequest="150" Placeholder="street"  />
                              <Entry x:Name="townEntry" WidthRequest="150" Placeholder="town"  />
                              <Entry x:Name="numberEntry" WidthRequest="150" Placeholder="number"  />
-                             <Button Text="Add Employee" Clicked="OnConfirmClickedCustomer" Background="Green"/>
+                             <Button Text="Add Customer" Clicked="OnConfirmClickedCustomer" Background="Green"/>
 
                          </StackLayout>
                         

@@ -4,41 +4,60 @@ using Nicebike.Models;
 
 public partial class EmployeeMgmt : ContentPage
 {
+    EmployeeManagement employeeManagement;
+
 	public EmployeeMgmt()
 	{
 		InitializeComponent();
 
-        EmployeeManagement employeeManagement = new EmployeeManagement();
+        this.employeeManagement = new EmployeeManagement();
 
         List<Employee> employees = employeeManagement.GetAllEmployee();
 
         employeeListView.ItemsSource = employees;
     }
 
-    public void OnConfirmClicked(object sender, EventArgs e)
+    public void OnConfirmClickedEmployee(object sender, EventArgs e)
     {
         Entry name = this.FindByName<Entry>("nameEntry");
         Entry surname = this.FindByName<Entry>("surnameEntry");
         Entry mail = this.FindByName<Entry>("mailEntry");
-        Entry function = this.FindByName<Entry>("functionEntry");
+        Entry jobtitle = this.FindByName<Entry>("jobtitleEntry");
         Entry phone = this.FindByName<Entry>("phoneEntry");
 
-        EmployeeManagement employeeManagement = new EmployeeManagement();
+        this.employeeManagement.SendEmployee(name, surname, mail, jobtitle, phone);
 
-        employeeManagement.SendEmployee(name, surname, mail, function, phone);
+        List<Employee> employees = employeeManagement.GetAllEmployee();
 
+        employeeListView.ItemsSource = employees;
 
     }
 
-    public void OnDeleteClicked(object sender, EventArgs e)
+    public void OnDeleteClickedEmployee(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var idEmployee = (int)button.CommandParameter;
 
-        EmployeeManagement employeeManagement = new EmployeeManagement();
-        employeeManagement.DeleteEmployee(idEmployee);
+        this.employeeManagement.DeleteEmployee(idEmployee);
+
+        List<Employee> employees = employeeManagement.GetAllEmployee();
+
+        employeeListView.ItemsSource = employees;
+
+    }
+
+    public async void OnModifyClickedEmployee(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var employee = (Employee)button.BindingContext;
 
 
+        var modifyPage = new ModifyEmployee(employee);
+
+
+        await Navigation.PushAsync(modifyPage);
+
+        Navigation.RemovePage(this);
 
     }
 
@@ -52,18 +71,12 @@ public class EmployeeManagement //sert à traiter les données
 
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-
         string sql = "SELECT * FROM dbNicebike.employee";
 
-
         using MySqlCommand command = new MySqlCommand(sql, connection);
-
-
         using MySqlDataReader reader = command.ExecuteReader();
 
 
@@ -74,7 +87,7 @@ public class EmployeeManagement //sert à traiter les données
                 reader.GetString("Name"),
                 reader.GetString("Surname"),
                 reader.GetString("Mail"),
-                reader.GetString("Function"),
+                reader.GetString("JobTitle"),
                 reader.GetString("Phone")
                 
             );
@@ -83,37 +96,32 @@ public class EmployeeManagement //sert à traiter les données
             employees.Add(employee);
         }
 
-
+        connection.Close();
         return employees;
     }
 
-    public void SendEmployee(Entry name, Entry surname, Entry mail, Entry function, Entry phone)
+    public void SendEmployee(Entry name, Entry surname, Entry mail, Entry jobtitle, Entry phone)
     {
-
-
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-        string sql = "INSERT INTO dbNicebike.employee (Name, Surname, Mail, Function, Phone) VALUES (@name, @surname, @mail, @function, @phone)";
+        string sql = "INSERT INTO dbNicebike.employee (Name, Surname, Mail, JobTitle, Phone) VALUES (@name, @surname, @mail, @jobtitle, @phone)";
         MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@name", name.Text);
         command.Parameters.AddWithValue("@surname", surname.Text);
         command.Parameters.AddWithValue("@mail", mail.Text);
-        command.Parameters.AddWithValue("@function", function.Text);
+        command.Parameters.AddWithValue("@jobtitle", jobtitle.Text);
         command.Parameters.AddWithValue("@phone", phone.Text);
 
         command.ExecuteNonQuery();
+        connection.Close();
     }
 
     public void DeleteEmployee(int idEmployee)
 
     {
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
@@ -123,6 +131,7 @@ public class EmployeeManagement //sert à traiter les données
         command.Parameters.AddWithValue("@id", idEmployee);
 
         command.ExecuteNonQuery();
+        connection.Close();
 
     }
 

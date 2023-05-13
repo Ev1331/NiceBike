@@ -40,9 +40,9 @@
                              <Entry x:Name="nameEntry" WidthRequest="200" Placeholder="name"  />
                              <Entry x:Name="surnameEntry" WidthRequest="200" Placeholder="surname"  />
                              <Entry x:Name="mailEntry" WidthRequest="200" Placeholder="mail"  />
-                             <Entry x:Name="functionEntry" WidthRequest="200" Placeholder="function"  />
+                             <Entry x:Name="jobtitleEntry" WidthRequest="200" Placeholder="jobtitle"  />
                              <Entry x:Name="phoneEntry" WidthRequest="200" Placeholder="phone"  />
-                             <Button Text="Add Employee" Clicked="OnConfirmClicked" Background="Green"/>
+                             <Button Text="Add Employee" Clicked="OnConfirmClickedEmployee" Background="Green"/>
 
                          </StackLayout>
                         
@@ -56,16 +56,16 @@
         <ListView x:Name="employeeListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell x:Name="{Binding idEmployee}">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding idEmployee}" WidthRequest="50" />
                             <Label Text="{Binding name}" WidthRequest="200" />
                             <Label Text="{Binding surname}" WidthRequest="200"/>
                             <Label Text="{Binding mail}" WidthRequest="200" />
-                            <Label Text="{Binding function}" WidthRequest="200"/>
+                            <Label Text="{Binding jobtitle}" WidthRequest="200"/>
                             <Label Text="{Binding phone}" WidthRequest="200" />
-                            <Button Text="Modify information"/>
-                            <Button Text="Delete Employee" Clicked="OnDeleteClicked" Background="Red" CommandParameter="{Binding idEmployee}"/>
+                            <Button Text="Modify information" Clicked="OnModifyClickedEmployee"/>
+                            <Button Text="Delete Employee" Clicked="OnDeleteClickedEmployee" Background="Red" CommandParameter="{Binding idEmployee}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
