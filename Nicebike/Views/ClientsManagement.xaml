@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Nicebike.ClientsManagement"
+             x:Class="Nicebike.Views.ClientsManagement"
              Title="Customers Management">
     <VerticalStackLayout>
 
@@ -27,7 +27,7 @@
                              <Entry x:Name="streetEntry" WidthRequest="150" Placeholder="street"  />
                              <Entry x:Name="townEntry" WidthRequest="150" Placeholder="town"  />
                              <Entry x:Name="numberEntry" WidthRequest="150" Placeholder="number"  />
-                             <Button Text="Add Employee" Clicked="OnConfirmClicked" Background="Green"/>
+                             <Button Text="Add Employee" Clicked="OnConfirmClickedCustomer" Background="Green"/>
 
                          </StackLayout>
                         
@@ -41,7 +41,7 @@
         <ListView x:Name="customersListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell x:Name="{Binding idCustomer}">
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding idCustomer}" WidthRequest="50" />
                             <Label Text="{Binding name}" WidthRequest="150" />
@@ -51,8 +51,8 @@
                             <Label Text="{Binding street}" WidthRequest="150"/>
                             <Label Text="{Binding town}" WidthRequest="150"/>
                             <Label Text="{Binding number}" WidthRequest="50"/>
-                            <Button Text="Modify information"/>
-                            <Button Text="Delete Employee" Clicked="OnDeleteClicked" Background="Red" CommandParameter="{Binding idEmployee}"/>
+                            <Button Text="Modify information" Clicked ="OnModifyClickedCustomer"/>
+                            <Button Text="Delete Employee" Clicked="OnDeleteClickedCustomer" Background="Red" CommandParameter="{Binding idCustomer}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
