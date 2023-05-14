@@ -1,4 +1,4 @@
-namespace Nicebike;
+namespace Nicebike.Views;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
 
@@ -18,7 +18,7 @@ public partial class ClientsManagement : ContentPage
 
 	}
 
-	public void OnConfirmClicked(object sender, EventArgs e)
+	public void OnConfirmClickedCustomer(object sender, EventArgs e)
     {
         Entry name = this.FindByName<Entry>("nameEntry");
         Entry surname = this.FindByName<Entry>("surnameEntry");
@@ -28,15 +28,39 @@ public partial class ClientsManagement : ContentPage
         Entry town = this.FindByName<Entry>("townEntry");
         Entry number = this.FindByName<Entry>("numberEntry");
 
-        customersManagement.SendCustomer(name, surname, mail, phone, street, town, number);
+        this.customersManagement.SendCustomer(name, surname, mail, phone, street, town, number);
+
+        List<Customer> customers = customersManagement.GetAllCustomers();
+
+        customersListView.ItemsSource = customers;
+
     }
 
-    public void OnDeleteClicked(object sender, EventArgs e)
+    public void OnDeleteClickedCustomer(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var idCustomer = (int)button.CommandParameter;
 
-        customersManagement.DeleteCustomer(idCustomer);
+        this.customersManagement.DeleteCustomer(idCustomer);
+
+        List<Customer> customers = customersManagement.GetAllCustomers();
+
+        customersListView.ItemsSource = customers;
+
+    }
+
+    public async void OnModifyClickedCustomer(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var customer = (Customer)button.BindingContext;
+
+
+        var modifyPage = new ModifyCustomer(customer);
+
+
+        await Navigation.PushAsync(modifyPage);
+
+        Navigation.RemovePage(this);
 
     }
 }
@@ -70,7 +94,7 @@ public class CustomersManagement
 
             customers.Add(customer);
         }
-
+        connection.Close();
         return customers;
     }
 
@@ -91,6 +115,7 @@ public class CustomersManagement
         command.Parameters.AddWithValue("@number", number.Text);
 
         command.ExecuteNonQuery();
+        connection.Close();
     }
 
     public void DeleteCustomer(int idCustomer)
@@ -105,5 +130,6 @@ public class CustomersManagement
         command.Parameters.AddWithValue("@id", idCustomer);
 
         command.ExecuteNonQuery();
+        connection.Close();
     }
 }

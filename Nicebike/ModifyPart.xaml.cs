@@ -47,7 +47,7 @@ public partial class ModifyPart : ContentPage
         ModifyPartData modifyPartData = new ModifyPartData();
         modifyPartData.ModifyPart(IdPart, suppliers, reference, description, quantity, threshold, supplier);
 
-        //Shell.Current.Navigation.RemovePage(this);
+        Shell.Current.Navigation.RemovePage(this);
     }
 
 }
