@@ -23,14 +23,19 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding id}" WidthRequest="100"/>
+                            <Label Text="{Binding IdOrder}" WidthRequest="100"/>
                             <Label Text="{Binding CustomerId}" WidthRequest="400" />
                             <Label Text="{Binding Date}" WidthRequest="100" />
                             <Label Text="{Binding DeliveryDate}" WidthRequest="100" />
                             <Label Text="{Binding Status}" WidthRequest="100" />
                             <Button Text="Cancel order" 
                                     Clicked="DeleteOrder"
-                                    CommandParameter="{Binding id}"
+                                    CommandParameter="{Binding IdOrder}"
+                                    BackgroundColor="#E6E6E6"
+                                    TextColor="#333333"/>
+                            <Button Text="Modify order" 
+                                    Clicked="ModifyOrder"
+                                    CommandParameter="{Binding IdOrder}"
                                     BackgroundColor="#E6E6E6"
                                     TextColor="#333333"/>
                         </StackLayout>

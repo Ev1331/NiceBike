@@ -1,30 +1,40 @@
 namespace Nicebike;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
+using Nicebike.Views;
 using System.Collections.ObjectModel;
 
 public partial class OrderFilling : ContentPage
 {
     string[] colorList = { "Red", "Blue", "Grey"};
-    string[] sizeList = { "Small", "Standard", "Large" };
+    string[] sizeList = { "26\"", "28\""};
     List<String> modelList = new List<String>();
     List<BikeModel> bikeModels = new List<BikeModel>();
+    ObservableCollection<Order> orderDetailsList = new ObservableCollection<Order>();
     int i=0;
 
-    public OrderFilling()
+
+    List<int> bikesIdList = new List<int>();
+
+    public OrderFilling(int IdOrder)
 	{
 		InitializeComponent();
 
-        // Créer une instance de la classe SupplierManagement
+        /*
+        OrderManagement orderManagement = new OrderManagement();
+        orderDetailsList = orderManagement.GetAllOrders();
+
         BikesManagement bikesManagement = new BikesManagement();
-        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+
 
         // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
         ObservableCollection<Bike> observableBikes = bikesManagement.GetAllBikes();
 
-        bikesListView.ItemsSource = observableBikes;
 
-        // Récupérer la liste des fournisseurs à partir de la base de données
+        */
+
+        // Récupérer la liste des modèls de vélo à partir de la base de données
+        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
         bikeModels = bikeModelsManagement.GetAllBikeModels();
 
         foreach (BikeModel bikeModel in bikeModels)
@@ -32,6 +42,12 @@ public partial class OrderFilling : ContentPage
             modelList.Add(bikeModels[i].description);
             i++;
         }
+
+        OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+        bikesIdList = orderDetailsManagement.GetOrderDetails(IdOrder);
+
+        orderDetailsListView.ItemsSource = bikesIdList; //orderDetailsList
+
 
         colorPicker.ItemsSource = colorList;
         modelPicker.ItemsSource = modelList;
@@ -146,5 +162,57 @@ public class BikeModelsManagement
             bikeModels.Add(bikeModel);
         }
         return bikeModels;
+    }
+}
+public class OrderDetailsManagement
+{
+    int id;
+    List<int> bikesIdList = new List<int>();
+    List<string> orderIdList = new List<string>();
+    public List<int> GetOrderDetails(int IdOrder)
+
+    {
+        List<Bike> bikes = new List<Bike>();
+
+        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+        using MySqlConnection connection = new MySqlConnection(connectionString);
+        connection.Open();
+
+        string sql = "SELECT * FROM dbNicebike.orderdetails where Order like @IdOrder";
+        //string sql = "SELECT IdOrderDetails FROM dbNicebike.orderdetails where Order=@IdOrder";
+        using MySqlCommand command = new MySqlCommand(sql, connection);
+        using MySqlDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            id = reader.GetInt32("Order");
+            bikesIdList.Add(id);
+        }
+        return bikesIdList;
+
+        /*
+        sql = "SELECT * FROM dbNicebike.bike";
+        using MySqlCommand command2 = new MySqlCommand(sql, connection);
+        using MySqlDataReader reader2 = command2.ExecuteReader();
+
+        command2.ExecuteReader();
+
+        while (reader2.Read())
+        {
+            Bike bike = new Bike(
+                reader2.GetInt32("IdBike"),
+                reader2.GetString("Colour"),
+                reader2.GetString("Type"),
+                reader2.GetString("Size"),
+                reader2.GetString("Ref"),
+                reader2.GetInt32("Technician"),
+                reader2.GetInt32("BikeModel"),
+                reader2.GetString("Status")
+            );
+            bikes.Add(bike);
+        }
+        */
+
+        //return bikeModels;
     }
 }

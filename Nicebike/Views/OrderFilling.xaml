@@ -48,7 +48,7 @@
 
         <StackLayout Orientation="Vertical" HeightRequest="450">
 
-            <ListView x:Name="bikesListView">
+            <ListView x:Name="orderDetailsListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

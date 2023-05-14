@@ -33,7 +33,15 @@ public partial class OrderList : ContentPage
 
     private void GoToNewOrder(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new OrderFilling());
+
+    }
+
+    private void ModifyOrder(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        var IdOrder = (int)button.CommandParameter;
+
+        Navigation.PushAsync(new OrderFilling(IdOrder));
     }
 }
 
@@ -91,9 +99,9 @@ public class OrderManagement
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-        string sql = "DELETE FROM dbNicebike.orderdetails WHERE IdOrder = @id";
+        string sql = "DELETE FROM dbNicebike.order WHERE id = @IdOrder";
         using MySqlCommand command = new MySqlCommand(sql, connection);
-        command.Parameters.AddWithValue("@id", IdOrder);
+        command.Parameters.AddWithValue("@IdOrder", IdOrder);
 
         command.ExecuteNonQuery();
     }

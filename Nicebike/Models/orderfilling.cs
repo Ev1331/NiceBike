@@ -1,10 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿namespace Nicebike.Models;
+public class OrderDetails
+{
+    public int IdOrderDetails { get; set; }
+    public int Order { get; set; }
+    public int Bike { get; set; }
 
-namespace Nicebike.Models;
-internal class Orderfilling
+    public OrderDetails(int IdOrderDetails, int Order, int Bike)
     {
-    public ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
-    
-    
+        this.IdOrderDetails = IdOrderDetails;
+        this.Order = Order;
+        this.Bike = Bike;
     }
-
+}

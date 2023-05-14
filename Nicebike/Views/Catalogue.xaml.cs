@@ -8,8 +8,7 @@ public partial class Catalogue : ContentPage
 	}
     private async void NavigateToOrder(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new OrderFilling());
-
+        Navigation.PushAsync(new OrderList());
     }
     private async void OnImageTapped(object sender, EventArgs e)
     {
