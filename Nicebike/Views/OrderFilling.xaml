@@ -46,6 +46,14 @@
             </StackLayout>
         </StackLayout>
 
+        <HorizontalStackLayout>
+            <Label Text="Color" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Type" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Size" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Reference" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Model" WidthRequest="100" BackgroundColor="LightGrey"/>
+        </HorizontalStackLayout>
+
         <StackLayout Orientation="Vertical" HeightRequest="450">
 
             <ListView x:Name="orderDetailsListView">
@@ -53,17 +61,14 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding color}" WidthRequest="400" />
+                                <Label Text="{Binding color}" WidthRequest="100" />
                                 <Label Text="{Binding type}" WidthRequest="100" />
                                 <Label Text="{Binding size}" WidthRequest="100" />
                                 <Label Text="{Binding reference}" WidthRequest="100" />
                                 <Label Text="{Binding bikeModel}" WidthRequest="100" />
-                                <Button Text="-" 
-                                        Clicked="RemoveBike" 
-                                        BackgroundColor="#E6E6E6"
-                                        TextColor="#333333"/>
-                                <Button Text="+" 
-                                        Clicked="AddBike" 
+                                <Button Text="Remove" 
+                                        Clicked="RemoveBike"
+                                        CommandParameter="{Binding id}"
                                         BackgroundColor="#E6E6E6"
                                         TextColor="#333333"/>
                             </StackLayout>
@@ -95,8 +100,8 @@
                 </Picker>
 
                 <Button Text="Save" 
+                CommandParameter="{Binding IdOrder}"
                 Clicked="SaveBike"/>
-                
             </HorizontalStackLayout>
         </StackLayout>
     </StackLayout>

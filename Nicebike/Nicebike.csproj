@@ -76,6 +76,9 @@
 	  <MauiXaml Update="Views\EmployeeMgmt.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\NewOrder.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\OrderFilling.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

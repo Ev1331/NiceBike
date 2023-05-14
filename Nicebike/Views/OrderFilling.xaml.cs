@@ -6,49 +6,32 @@ using System.Collections.ObjectModel;
 
 public partial class OrderFilling : ContentPage
 {
+    //Remplissage des éléments ListView
     string[] colorList = { "Red", "Blue", "Grey"};
-    string[] sizeList = { "26\"", "28\""};
     List<String> modelList = new List<String>();
+    string[] sizeList = { "26\"", "28\""};
+
     List<BikeModel> bikeModels = new List<BikeModel>();
-    ObservableCollection<Order> orderDetailsList = new ObservableCollection<Order>();
     int i=0;
+    public int IdOrder;
 
+    BikesManagement bikesManagement = new BikesManagement();
+    BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+    OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
 
-    List<int> bikesIdList = new List<int>();
-
-    public OrderFilling(int IdOrder)
+    public OrderFilling(int Id)
 	{
 		InitializeComponent();
+        IdOrder = Id; // IdOrder devient accessible pour la fonction SaveBike
 
-        /*
-        OrderManagement orderManagement = new OrderManagement();
-        orderDetailsList = orderManagement.GetAllOrders();
-
-        BikesManagement bikesManagement = new BikesManagement();
-
-
-        // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
-        ObservableCollection<Bike> observableBikes = bikesManagement.GetAllBikes();
-
-
-        */
-
-        // Récupérer la liste des modèls de vélo à partir de la base de données
-        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
         bikeModels = bikeModelsManagement.GetAllBikeModels();
-
         foreach (BikeModel bikeModel in bikeModels)
         {
             modelList.Add(bikeModels[i].description);
             i++;
         }
 
-        OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
-        bikesIdList = orderDetailsManagement.GetOrderDetails(IdOrder);
-
-        orderDetailsListView.ItemsSource = bikesIdList; //orderDetailsList
-
-
+        orderDetailsListView.ItemsSource = orderDetailsManagement.GetOrderBikes(IdOrder); //Liste des vélos de la commande
         colorPicker.ItemsSource = colorList;
         modelPicker.ItemsSource = modelList;
         sizePicker.ItemsSource = sizeList;
@@ -56,7 +39,9 @@ public partial class OrderFilling : ContentPage
 
     private void RemoveBike(object sender, EventArgs e)
     {
-
+        var button = (Button)sender;
+        var IdBike = (int)button.CommandParameter;
+        bikesManagement.DeleteBike(IdBike);
     }
     private void AddBike(object sender, EventArgs e)
     {
@@ -68,16 +53,16 @@ public partial class OrderFilling : ContentPage
         Picker size = this.FindByName<Picker>("sizePicker");
         Picker model = this.FindByName<Picker>("modelPicker");
 
-        BikesManagement bikesManagement = new BikesManagement();
-        bikesManagement.SendBike(colorList, sizeList, bikeModels, color, "...TYPE...", size,  "...REF...", model, "Waiting");
+        bikesManagement.SendBike(colorList, sizeList, bikeModels, color, "...TYPE...", size,  "...REF...", model, "Waiting", IdOrder);
     }
 }
 
 public class BikesManagement
 {
-    public ObservableCollection<Bike> GetAllBikes()
+    int IdBike;
+    public List<Bike> GetAllBikes()
     {
-        ObservableCollection<Bike> bikes = new ObservableCollection<Bike>();
+        List<Bike> bikes = new List<Bike>();
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -103,21 +88,25 @@ public class BikesManagement
         }
         return bikes;
     }
-
     public void DeleteBike(int IdBike)
     {
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-        string sql = "DELETE FROM dbNicebike.bike WHERE idBike = @id";
+        string sql = "DELETE FROM dbNicebike.orderdetails WHERE Bike = @id";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@id", IdBike);
 
         command.ExecuteNonQuery();
 
+        sql = "DELETE FROM dbNicebike.bike WHERE IdBike = @id";
+        using MySqlCommand command2 = new MySqlCommand(sql, connection);
+        command2.Parameters.AddWithValue("@id", IdBike);
+
+        command2.ExecuteNonQuery();
     }
-    public void SendBike(string[] colorList, string[] sizeList, List<BikeModel> bikeModels, Picker color, string type, Picker size, string reference, Picker bikeModel, string status)
+    public void SendBike(string[] colorList, string[] sizeList, List<BikeModel> bikeModels, Picker color, string type, Picker size, string reference, Picker bikeModel, string status, int IdOrder)
     {
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -135,6 +124,25 @@ public class BikesManagement
         command.Parameters.AddWithValue("@Status", status);
 
         command.ExecuteNonQuery();
+
+        //sql = "SELECT IdBike FROM dbNicebike.bike WHERE Ref = @reference";
+        sql = "SELECT IdBike FROM dbNicebike.bike ORDER BY IdBike DESC LIMIT 1";
+        //command.Parameters.AddWithValue("@reference", reference);
+        MySqlCommand command2 = new MySqlCommand(sql, connection);
+        MySqlDataReader reader = command2.ExecuteReader();
+
+        while (reader.Read())
+        {
+            IdBike = reader.GetInt32("IdBike");  
+        }
+
+        using MySqlConnection connection2 = new MySqlConnection(connectionString);
+        connection2.Open();
+        sql = "INSERT INTO dbNicebike.orderdetails (IdOrder, Bike) VALUES (@IdOrder, @IdBike)";
+        MySqlCommand command3 = new MySqlCommand(sql, connection2);
+        command3.Parameters.AddWithValue("@IdOrder", IdOrder);
+        command3.Parameters.AddWithValue("@IdBike", IdBike);
+        command3.ExecuteNonQuery();
     }
 }
 
@@ -169,17 +177,21 @@ public class OrderDetailsManagement
     int id;
     List<int> bikesIdList = new List<int>();
     List<string> orderIdList = new List<string>();
-    public List<int> GetOrderDetails(int IdOrder)
+    int bikeIndex;
+    public List<Bike> orderBikes = new List<Bike>();
+    public List<Bike> GetOrderBikes(int IdOrder)
 
     {
         List<Bike> bikes = new List<Bike>();
+
+        BikesManagement bikesManagement = new BikesManagement();
+        List<Bike> observableBikes = bikesManagement.GetAllBikes();
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
         string sql = "SELECT * FROM dbNicebike.orderdetails WHERE IdOrder = @IdOrder";
-        //string sql = "SELECT IdOrderDetails FROM dbNicebike.orderdetails where Order=@IdOrder";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@IdOrder", IdOrder);
         using MySqlDataReader reader = command.ExecuteReader();
@@ -187,33 +199,10 @@ public class OrderDetailsManagement
         while (reader.Read())
         {
             id = reader.GetInt32("Bike");
-            bikesIdList.Add(id);
+            bikesIdList.Add(id); 
+            orderBikes.Add(observableBikes.Find(obj => obj.id == id)); //Monte une liste avec les vélos correspondants
         }
-        return bikesIdList;
 
-        /*
-        sql = "SELECT * FROM dbNicebike.bike";
-        using MySqlCommand command2 = new MySqlCommand(sql, connection);
-        using MySqlDataReader reader2 = command2.ExecuteReader();
-
-        command2.ExecuteReader();
-
-        while (reader2.Read())
-        {
-            Bike bike = new Bike(
-                reader2.GetInt32("IdBike"),
-                reader2.GetString("Colour"),
-                reader2.GetString("Type"),
-                reader2.GetString("Size"),
-                reader2.GetString("Ref"),
-                reader2.GetInt32("Technician"),
-                reader2.GetInt32("BikeModel"),
-                reader2.GetString("Status")
-            );
-            bikes.Add(bike);
+        return orderBikes;
         }
-        */
-
-        //return bikeModels;
-    }
 }
