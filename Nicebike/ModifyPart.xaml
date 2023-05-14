@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.ModifyPart">
+    <VerticalStackLayout HorizontalOptions="Center">
+        <Label Text="Reference:"></Label>
+        <Entry x:Name="referenceEntryModify" Text="{Binding reference}" WidthRequest="200"/>
+        <Label Text="Description:"></Label>
+        <Entry x:Name="descriptionEntryModify" Text="{Binding description}" WidthRequest="200"/>
+        <Label Text="Alert threshold:"></Label>
+        <Entry x:Name="thresholdEntryModify" Text="{Binding threshold}" WidthRequest="200"/>
+        <Label Text="Quantity:"></Label>
+        <Entry x:Name="quantityEntryModify" Text="{Binding quantity}" WidthRequest="200"/>
+
+        <Picker x:Name="supplierPickerModify"
+        Title="Select a supplier"
+        SelectedItem="{Binding supplierIndex}">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}" >
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Save" 
+                Clicked="modifyClickedPart"/>
+    </VerticalStackLayout>
+</ContentPage>

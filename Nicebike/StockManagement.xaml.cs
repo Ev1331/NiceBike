@@ -12,9 +12,6 @@ public partial class StockManagement : ContentPage
         // Créer une instance de la classe SupplierManagement
         PartsManagement stockManagement = new PartsManagement();
 
-        // Récupérer la liste des fournisseurs à partir de la base de données
-        //List<Part> parts = stockManagement.GetAllParts();
-
        // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
         ObservableCollection<Part> observableParts = stockManagement.GetAllParts();
 
@@ -27,9 +24,13 @@ public partial class StockManagement : ContentPage
         Navigation.PushAsync(new PartDatasheet());
     }
 
-    private void ModifyData(object sender, EventArgs e)
+    private async void OnModifyClickedPart(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new PartDatasheet());
+        var button = (Button)sender;
+        var part = (Part)button.BindingContext;
+        var modifyPage = new ModifyPart(part);
+
+        await Navigation.PushAsync(modifyPage);
     }
 
     private void DeletePart(object sender, EventArgs e)
@@ -39,8 +40,6 @@ public partial class StockManagement : ContentPage
 
         PartsManagement stockManagement = new PartsManagement();
         stockManagement.DeletePart(IdPart);
-
-        //partListView
     }
 }
 
@@ -96,13 +95,11 @@ public class PartsManagement
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
-
+        
         string sql = "DELETE FROM dbNicebike.part WHERE idPart = @id";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@id", IdPart);
 
         command.ExecuteNonQuery();
-
     }
-
 }

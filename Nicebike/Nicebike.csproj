@@ -61,6 +61,9 @@
 	  <MauiXaml Update="ClientsManagement.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ModifyPart.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PartDatasheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
