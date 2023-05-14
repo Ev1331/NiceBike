@@ -99,7 +99,7 @@ public class OrderManagement
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-        string sql = "DELETE FROM dbNicebike.order WHERE id = @IdOrder";
+        string sql = "DELETE FROM dbNicebike.order WHERE IdOrder = @IdOrder";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@IdOrder", IdOrder);
 

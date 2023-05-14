@@ -178,14 +178,15 @@ public class OrderDetailsManagement
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
-        string sql = "SELECT * FROM dbNicebike.orderdetails where Order like @IdOrder";
+        string sql = "SELECT * FROM dbNicebike.orderdetails WHERE IdOrder = @IdOrder";
         //string sql = "SELECT IdOrderDetails FROM dbNicebike.orderdetails where Order=@IdOrder";
         using MySqlCommand command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@IdOrder", IdOrder);
         using MySqlDataReader reader = command.ExecuteReader();
 
         while (reader.Read())
         {
-            id = reader.GetInt32("Order");
+            id = reader.GetInt32("Bike");
             bikesIdList.Add(id);
         }
         return bikesIdList;
