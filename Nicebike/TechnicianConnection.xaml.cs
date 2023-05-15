@@ -9,6 +9,14 @@ public partial class TechnicianConnection : ContentPage
 
     private async void NavigateToTechnician(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new TechnicianHome());
+        var button = (Button)sender;
+        var idTechnician = Convert.ToInt32(button.CommandParameter);
+        //Navigation.PushAsync(new TechnicianHome(idTechnician));
+        var homeTechnician = new TechnicianHome(idTechnician);
+
+
+       Navigation.PushAsync(homeTechnician);
     }
 }
+
+

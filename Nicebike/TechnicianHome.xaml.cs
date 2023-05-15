@@ -2,10 +2,15 @@
 
 public partial class TechnicianHome : ContentPage
 {
-	public TechnicianHome()
-	{
-		InitializeComponent();
+    int technicianNumber;
 
+    public TechnicianHome(int technicianNumber)
+    {
+        this.technicianNumber = technicianNumber;
+        InitializeComponent();
+        
+
+        // Utilisez technicianNumber comme nécessaire dans votre page TechnicianHome
     }
     private async void NavigateToStock(object sender, EventArgs e)
     {
@@ -17,4 +22,9 @@ public partial class TechnicianHome : ContentPage
     {
         Navigation.PushAsync(new Views.MakeBike());
     }
+    private async void NavigateToBuild(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Build());
+    }
 }
+
