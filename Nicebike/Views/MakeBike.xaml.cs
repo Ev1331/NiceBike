@@ -4,6 +4,8 @@
 
 using System.Data;
 using MySql.Data.MySqlClient;
+
+
 namespace Nicebike.Views
 
 
@@ -35,7 +37,11 @@ namespace Nicebike.Views
         }
         public void OnProcessingClicked(object sender, EventArgs e)
         {
+            var button = (Button)sender;
+            var idBike = (int)button.CommandParameter;
+            MakeBikeManagement makeBikeManagement = new MakeBikeManagement();
 
+            makeBikeManagement.ProcessBike(idBike, TechnicianNumber);
         }
     }
 
@@ -77,6 +83,22 @@ namespace Nicebike.Views
             }
 
             return bikesToBuild;
+        }
+
+        public void ProcessBike(int IdBike, int IdTechnician)
+        {
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+
+            using MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            string sql = "UPDATE dbNicebike.bike SET Technician = @technician, Status = 'InProgess' WHERE IdBike = @IdBike";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            command.Parameters.AddWithValue("@technician", IdTechnician);
+            command.Parameters.AddWithValue("@IdBike", IdBike);
+
+            command.ExecuteNonQuery();
         }
         
     }
