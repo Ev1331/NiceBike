@@ -19,9 +19,10 @@ public partial class TechnicianHome : ContentPage
 	}
 
     private async void NavigateToMakeBike(object sender, EventArgs e)
-    {
-        Navigation.PushAsync(new Views.MakeBike());
-    }
+{
+    await Navigation.PushAsync(new Views.MakeBike(technicianNumber));
+}
+
     private async void NavigateToBuild(object sender, EventArgs e)
     {
         Navigation.PushAsync(new Build());

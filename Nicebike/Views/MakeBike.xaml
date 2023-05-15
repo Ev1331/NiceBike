@@ -1,183 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Nicebike.Models"
              x:Class="Nicebike.Views.MakeBike"
              Title="MakeBike">
 
-    <Grid Padding="20"
-          ColumnDefinitions="*,400,*"
-          RowDefinitions="50, *">
-        <Label Text="List of bikes to be assembled"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center"
-               Grid.Row="0"
-               Grid.Column="0"/>
-        <CollectionView BackgroundColor="Beige"
-                        Grid.Column="0"
-                        Grid.Row="1">
-            
-            <!--<CollectionView.ItemsSource>
-                
-                
-                <x:Array Type="{x:Type model:Bike}">
-                    <model:Bike Color="Blue"
-                                Type="Explorer"
-                                Size="26"/>
+    <HorizontalStackLayout>
+        <VerticalStackLayout BackgroundColor="AliceBlue">
+            <Label x:Name="technicianLabel" />
+        </VerticalStackLayout>
 
-                    <model:Bike Color="Red"
-                                Type="City"
-                                Size="28"/>
-                    <model:Bike Color="Red"
-                                Type="City"
-                                Size="28"/>
-                    <model:Bike Color="Blue"
-                                Type="Adventure"
-                                Size="26"/>
-                    
-                    
-                </x:Array>
-            </CollectionView.ItemsSource>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Bike">
-                    <Frame HeightRequest="100"
-                           Padding="10"
-                           BackgroundColor="Beige">
-                        <Grid ColumnDefinitions="*,*,*,*">
-                        <Label Text="{Binding Type}"
-                               Grid.Column="0"
-                               FontSize="20"
-                               VerticalTextAlignment="Center"
-                               HorizontalTextAlignment="Center"/>
-                        <Label Text="Ref"
-                               Grid.Column="1"
-                               FontSize="20"
-                               VerticalTextAlignment="Center"
-                               HorizontalTextAlignment="Center"/>
-                        <Picker x:Name="MonPicker1"
-                                Title="Parts List"
-                                Grid.Column="2"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Parts</x:String>
-                                    <x:String>Parts</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                        <Picker x:Name="MonPicker"
-                                Title="To do"
-                                Grid.Column="3"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="Center">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>To do</x:String>
-                                    <x:String>In progress</x:String>
-                                    <x:String>Done</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+        <VerticalStackLayout BackgroundColor="Aquamarine">
+            <CollectionView ItemsSource="{Binding Bikes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                    </Grid>   
+                            <Label Text="{Binding color}" Grid.Column="0"  />
+                            <Label Text="{Binding type}" Grid.Column="1" />
+                            <Label Text="{Binding size}" Grid.Column="2" />
+                            <Label Text="{Binding bikeModel}" Grid.Column="3" />
+                            <Button Text="Prendre en charge" Clicked="OnProcessingClicked" Grid.Column="4" /> 
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
 
-                    </Frame>
-                      
-
-                </DataTemplate>
-
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <Label Text="Technician"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center"
-               Grid.Row="1"
-               Grid.Column="1"/>
-        <Button Text="Parts Stock"
-                FontSize="16"
-                FontAttributes="Bold"
-                Grid.Row="1"
-                Grid.Column="1"
-                HeightRequest="50"
-                WidthRequest="250"
-                VerticalOptions="End"
-                Clicked="NavigateToStock"/>
-
-        <Label Text="List of assembled bikes"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center"
-               Grid.Row="0"
-               Grid.Column="2"/>
-
-        <CollectionView BackgroundColor="CadetBlue"
-                        Grid.Column="2"
-                        Grid.Row="1">
-            <CollectionView.ItemsSource>
-                <x:Array Type="{x:Type model:Bike}">
-                    <model:Bike Color="Blue"
-                                Type="Explorer"
-                                Size="26"/>
-
-                    <model:Bike Color="Red"
-                                Type="City"
-                                Size="28"/>
-                </x:Array>
-            </CollectionView.ItemsSource>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Bike">
-                    <Frame HeightRequest="100"
-                           Padding="10"
-                           BackgroundColor="CadetBlue">
-                        <Grid ColumnDefinitions="*,*,*,*">
-                            <Label Text="{Binding Type}"
-                                   Grid.Column="0"
-                                   FontSize="20"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"/>
-                            <Label Text="Ref"
-                                   Grid.Column="1"
-                                   FontSize="20"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"/>
-                            <Picker x:Name="MonPicker1"
-                                    Title="Parts List"
-                                    Grid.Column="2"
-                                    VerticalTextAlignment="Center"
-                                    HorizontalTextAlignment="Center">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Parts</x:String>
-                                        <x:String>Parts</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-                            <Label Text="Done"
-                                   Grid.Column="3"
-                                   FontSize="20"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"/>
-
-                        </Grid>   
-
-                    </Frame>   
-
-                </DataTemplate>
-
-            </CollectionView.ItemTemplate>-->
-
-
-        </CollectionView>
-
-        
-
-        
-    </Grid>
 </ContentPage>
-
-
-<!--test-->
