@@ -31,7 +31,7 @@ public partial class ModifySupplier : ContentPage
         Entry town = this.FindByName<Entry>("townChange");
 
         ModifyData modifyData = new ModifyData();
-        modifyData.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, number.Text, town.Text);
+        modifyData.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
     }
 }
 
