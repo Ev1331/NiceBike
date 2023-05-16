@@ -10,6 +10,22 @@
         </VerticalStackLayout>
 
         <VerticalStackLayout BackgroundColor="Aquamarine">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Couleur" Grid.Column="0" FontAttributes="Bold" />
+                <Label Text="Type" Grid.Column="1" FontAttributes="Bold" />
+                <Label Text="Taille" Grid.Column="2" FontAttributes="Bold" />
+                <Label Text="Modèle de vélo" Grid.Column="3" FontAttributes="Bold" />
+                <Label Text="" Grid.Column="4" FontAttributes="Bold" /> 
+            </Grid>
+
             <CollectionView ItemsSource="{Binding Bikes}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

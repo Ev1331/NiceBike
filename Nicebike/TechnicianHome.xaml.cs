@@ -8,7 +8,7 @@ public partial class TechnicianHome : ContentPage
     {
         this.technicianNumber = technicianNumber;
         InitializeComponent();
-        
+
 
         // Utilisez technicianNumber comme nécessaire dans votre page TechnicianHome
     }
@@ -16,16 +16,16 @@ public partial class TechnicianHome : ContentPage
     {
         Navigation.PushAsync(new StockManagement());
 
-	}
+    }
 
     private async void NavigateToMakeBike(object sender, EventArgs e)
-{
-    await Navigation.PushAsync(new Views.MakeBike(technicianNumber));
-}
+    {
+        await Navigation.PushAsync(new Views.MakeBike(technicianNumber));
+    }
 
     private async void NavigateToBuild(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Build());
+        await Navigation.PushAsync(new Build(technicianNumber));
     }
 }
 

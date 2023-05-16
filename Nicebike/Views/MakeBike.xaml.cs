@@ -25,7 +25,7 @@ namespace Nicebike.Views
 
             TechnicianNumber = technicianNumber;
 
-            // Définir le contexte de liaison (BindingContext) sur la page elle-même
+            
             BindingContext = this;
 
             UpdateLabelText();
@@ -92,7 +92,7 @@ namespace Nicebike.Views
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "UPDATE dbNicebike.bike SET Technician = @technician, Status = 'InProgess' WHERE IdBike = @IdBike";
+            string sql = "UPDATE dbNicebike.bike SET Technician = @technician, Status = 'InProgress' WHERE IdBike = @IdBike";
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             command.Parameters.AddWithValue("@technician", IdTechnician);
