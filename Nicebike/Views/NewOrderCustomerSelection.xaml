@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nicebike.Views.NewOrderCustomerSelection"
+             Title="NewOrderCustomerSelection">
+    <VerticalStackLayout>
+        <Label 
+            Text="Select a customer"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <StackLayout>
+            <SearchBar TextChanged="CustomerSearchClick"
+                       WidthRequest="200"
+                       HorizontalOptions="StartAndExpand"
+                       />
+            <ListView x:Name="searchResults"
+                      ItemSelected="InitialiseOrder"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding name}" WidthRequest="150" />
+                                <Label Text="{Binding surname}" WidthRequest="150"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <Button
+            Text="Manage customers"
+            Clicked="GoToCustomersManagement"/>
+    </VerticalStackLayout>
+</ContentPage>

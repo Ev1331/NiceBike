@@ -20,7 +20,7 @@ public partial class OrderList : ContentPage
 
     private void GoToNewOrder(object sender, EventArgs e)
     {
-
+        Navigation.PushAsync(new NewOrderCustomerSelection());
     }
 
     private void ModifyOrder(object sender, EventArgs e)
@@ -43,14 +43,13 @@ public class OrderManagement
 {
     public BikesManagement bikesManagement = new BikesManagement();
     public OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
-    public ObservableCollection<Order> GetAllOrders()
+    MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+    public string sql;
+public ObservableCollection<Order> GetAllOrders()
     {
         ObservableCollection<Order> orderList = new ObservableCollection<Order>();
 
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-        using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
-
         string sql = "SELECT * FROM dbNicebike.order";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         using MySqlDataReader reader = command.ExecuteReader();
@@ -66,6 +65,7 @@ public class OrderManagement
                     );
             orderList.Add(order);
         }
+        connection.Close();
         return orderList;
     }
 
@@ -80,14 +80,30 @@ public class OrderManagement
         }
 
         //Finally, deletes the order itself
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-        using MySqlConnection connection = new MySqlConnection(connectionString);
-        connection.Open();
 
-        string sql = "DELETE FROM dbNicebike.order WHERE IdOrder = @IdOrder";
+        connection.Open();
+        sql = "DELETE FROM dbNicebike.order WHERE IdOrder = @IdOrder";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@IdOrder", IdOrder);
 
         command.ExecuteNonQuery();
+        connection.Close();
+    }
+
+    public void CreateOrder(int IdCustomer)
+    {   
+        DateTime date = DateTime.Now;
+        DateTime currentDateTime = DateTime.Now;
+        string formattedDateTime = currentDateTime.ToString("yyyy-MM-dd");
+
+        connection.Open();
+        sql = "INSERT INTO dbNicebike.order (customerId, Date, DeliveryDate, Status) VALUES (@IdCustomer, @Date, @DeliveryDate, @Status)";
+        MySqlCommand command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@IdCustomer", IdCustomer);
+        command.Parameters.AddWithValue("@Date", formattedDateTime);
+        command.Parameters.AddWithValue("@DeliveryDate", "Undefined");
+        command.Parameters.AddWithValue("@Status", "Waiting");
+        command.ExecuteNonQuery();
+        connection.Close();
     }
 }

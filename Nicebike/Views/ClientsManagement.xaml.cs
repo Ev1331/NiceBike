@@ -132,4 +132,11 @@ public class CustomersManagement
         command.ExecuteNonQuery();
         connection.Close();
     }
+    public List<Customer> SearchCustomer()
+    {
+        CustomersManagement customersManagement = new CustomersManagement();
+        List<Customer> customersList = customersManagement.GetAllCustomers();
+
+        return customersList;
+    }
 }

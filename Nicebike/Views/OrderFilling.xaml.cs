@@ -60,11 +60,11 @@ public partial class OrderFilling : ContentPage
 public class BikesManagement
 {
     int IdBike;
+    string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
     public List<Bike> GetAllBikes()
     {
         List<Bike> bikes = new List<Bike>();
 
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
@@ -90,7 +90,6 @@ public class BikesManagement
     }
     public void DeleteBike(int IdBike)
     {
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
@@ -108,8 +107,6 @@ public class BikesManagement
     }
     public void SendBike(string[] colorList, string[] sizeList, List<BikeModel> bikeModels, Picker color, string type, Picker size, string reference, Picker bikeModel, string status, int IdOrder)
     {
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
         using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
 
@@ -125,9 +122,7 @@ public class BikesManagement
 
         command.ExecuteNonQuery();
 
-        //sql = "SELECT IdBike FROM dbNicebike.bike WHERE Ref = @reference";
         sql = "SELECT IdBike FROM dbNicebike.bike ORDER BY IdBike DESC LIMIT 1";
-        //command.Parameters.AddWithValue("@reference", reference);
         MySqlCommand command2 = new MySqlCommand(sql, connection);
         MySqlDataReader reader = command2.ExecuteReader();
 
