@@ -22,7 +22,7 @@ public partial class OrderFilling : ContentPage
     public OrderFilling(int Id)
 	{
 		InitializeComponent();
-        IdOrder = Id; // IdOrder devient accessible pour la fonction SaveBike
+        IdOrder = Id; // IdOrder devient accessible pour la fonction SaveBike, do not remove (!)
 
         bikeModels = bikeModelsManagement.GetAllBikeModels();
         foreach (BikeModel bikeModel in bikeModels)
@@ -176,8 +176,6 @@ public class OrderDetailsManagement
 {
     int id;
     List<int> bikesIdList = new List<int>();
-    List<string> orderIdList = new List<string>();
-    int bikeIndex;
     public List<Bike> orderBikes = new List<Bike>();
     public List<Bike> GetOrderBikes(int IdOrder)
 
@@ -203,6 +201,6 @@ public class OrderDetailsManagement
             orderBikes.Add(observableBikes.Find(obj => obj.id == id)); //Monte une liste avec les vélos correspondants
         }
 
-        return orderBikes;
-        }
+    return orderBikes;
+    }
 }
