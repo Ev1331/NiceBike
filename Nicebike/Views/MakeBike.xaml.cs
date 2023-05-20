@@ -99,7 +99,31 @@ namespace Nicebike.Views
             command.Parameters.AddWithValue("@IdBike", IdBike);
 
             command.ExecuteNonQuery();
+            DecrementPart("FRA01");
         }
-        
+        public void DecrementPart(string reference)
+        {
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                
+                string updateSql = "UPDATE dbNicebike.part SET Quantity = Quantity - 1 WHERE Ref = @reference";
+
+
+                MySqlCommand updateCommand = new MySqlCommand(updateSql, connection);
+                updateCommand.Parameters.AddWithValue("@reference", reference);
+                updateCommand.ExecuteNonQuery();
+                            
+                        
+                    
+            }
+        }
+
     }
+
+
 }
+
