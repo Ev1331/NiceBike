@@ -12,15 +12,22 @@ public partial class OrderFilling : ContentPage
     string[] sizeList = { "26\"", "28\""};
 
     List<BikeModel> bikeModels = new List<BikeModel>();
+    List<Order> orders = new List<Order>();
     int i=0;
     public int IdOrder;
+    public Customer orderCustomer;
 
+    CustomersManagement customersManagement = new CustomersManagement();
     BikesManagement bikesManagement = new BikesManagement();
     BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+    OrderManagement orderManagement = new OrderManagement();
     OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
 
     public OrderFilling(int Id)
 	{
+        List<Customer> customers = new List<Customer>();
+        int IdCustomer;
+        
 		InitializeComponent();
         IdOrder = Id; // IdOrder devient accessible pour la fonction SaveBike, do not remove (!)
 
@@ -35,6 +42,12 @@ public partial class OrderFilling : ContentPage
         colorPicker.ItemsSource = colorList;
         modelPicker.ItemsSource = modelList;
         sizePicker.ItemsSource = sizeList;
+
+        orders = orderManagement.GetAllOrders();
+        IdCustomer = (orders.Find(obj => obj.IdOrder == Id)).CustomerId;
+        customers = customersManagement.GetAllCustomers();
+        orderCustomer = customers.Find(obj => obj.idCustomer == IdCustomer);
+        BindingContext = orderCustomer;
     }
 
     private void RemoveBike(object sender, EventArgs e)
@@ -43,10 +56,7 @@ public partial class OrderFilling : ContentPage
         var IdBike = (int)button.CommandParameter;
         bikesManagement.DeleteBike(IdBike);
     }
-    private void AddBike(object sender, EventArgs e)
-    {
 
-    }
     public void SaveBike(object sender, EventArgs e)
     {
         Picker color = this.FindByName<Picker>("colorPicker");
@@ -54,6 +64,11 @@ public partial class OrderFilling : ContentPage
         Picker model = this.FindByName<Picker>("modelPicker");
 
         bikesManagement.SendBike(colorList, sizeList, bikeModels, color, "...TYPE...", size,  "...REF...", model, "Waiting", IdOrder);
+    }
+
+    private void ModifyCustomerInfoClick(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new ModifyCustomer(orderCustomer));
     }
 }
 
@@ -172,19 +187,18 @@ public class OrderDetailsManagement
     int id;
     List<int> bikesIdList = new List<int>();
     public List<Bike> orderBikes = new List<Bike>();
-    public List<Bike> GetOrderBikes(int IdOrder)
 
+    MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+    string sql;
+public List<Bike> GetOrderBikes(int IdOrder)
     {
         List<Bike> bikes = new List<Bike>();
 
         BikesManagement bikesManagement = new BikesManagement();
         List<Bike> observableBikes = bikesManagement.GetAllBikes();
 
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-        using MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
-
-        string sql = "SELECT * FROM dbNicebike.orderdetails WHERE IdOrder = @IdOrder";
+        sql = "SELECT * FROM dbNicebike.orderdetails WHERE IdOrder = @IdOrder";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@IdOrder", IdOrder);
         using MySqlDataReader reader = command.ExecuteReader();
@@ -195,6 +209,7 @@ public class OrderDetailsManagement
             bikesIdList.Add(id); 
             orderBikes.Add(observableBikes.Find(obj => obj.id == id)); //Monte une liste avec les vélos correspondants
         }
+        connection.Close();
 
     return orderBikes;
     }

@@ -8,11 +8,11 @@ public partial class OrderList : ContentPage
 {
     public OrderManagement orderManagement = new OrderManagement();
     public OrderList()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
-        ObservableCollection<Order> orderList = orderManagement.GetAllOrders();
+        List<Order> orderList = orderManagement.GetAllOrders();
 
         // Assigner la liste des fournisseurs à la source de données du ListView
         orderListView.ItemsSource = orderList;
@@ -45,9 +45,9 @@ public class OrderManagement
     public OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
     MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
     public string sql;
-public ObservableCollection<Order> GetAllOrders()
+    public List<Order> GetAllOrders()
     {
-        ObservableCollection<Order> orderList = new ObservableCollection<Order>();
+        List<Order> orderList = new List<Order>();
 
         connection.Open();
         string sql = "SELECT * FROM dbNicebike.order";
@@ -91,7 +91,7 @@ public ObservableCollection<Order> GetAllOrders()
     }
 
     public void CreateOrder(int IdCustomer)
-    {   
+    {
         DateTime date = DateTime.Now;
         DateTime currentDateTime = DateTime.Now;
         string formattedDateTime = currentDateTime.ToString("yyyy-MM-dd");

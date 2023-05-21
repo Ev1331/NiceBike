@@ -5,47 +5,37 @@
              Title="OrderFilling">
 
     <StackLayout Orientation="Vertical">
-        <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+        <HorizontalStackLayout>
+            <Label Text="First name:" WidthRequest="100"/>
+            <Label Text="{Binding name}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Last name:" WidthRequest="100"/>
+            <Label Text="{Binding surname}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="E-mail:" WidthRequest="100"/>
+            <Label Text="{Binding mail}"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Address:" WidthRequest="100"/>
+            <VerticalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="{Binding street}"/>
+                    <Label Text=", "/>
+                    <Label Text="{Binding number}"/>                    
+                </HorizontalStackLayout>
+                <Label Text="{Binding town}"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
 
-            <StackLayout Orientation="Vertical" Margin="10">
-                <StackLayout Orientation="Horizontal">
-                    <Button Text="Find" HorizontalOptions="EndAndExpand" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Name" WidthRequest="80" />
-                    <Label Text="Van Pimperzeel Jan" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Email" WidthRequest="80" />
-                    <Label Text="JanVpz@gmail.com" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Phone" WidthRequest="80" />
-                    <Label Text="0477225826" />
-                </StackLayout>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical" Margin="10" WidthRequest="200">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Street" WidthRequest="80" />
-                    <Label Text="Prom Alma" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Number" WidthRequest="80" />
-                    <Label Text="50" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Town" WidthRequest="80" />
-                    <Label Text="1200 Woluwe" />
-                </StackLayout>
-            </StackLayout>
-            <StackLayout Orientation="Vertical" Margin="10">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="001"/>
-                </StackLayout>
-            </StackLayout>
-        </StackLayout>
-
+        <Button Text="Modify information" 
+                Clicked="ModifyCustomerInfoClick"
+                BackgroundColor="#E6E6E6"
+                TextColor="#333333"
+                WidthRequest="350"
+                HorizontalOptions="Start"/>
+        
         <HorizontalStackLayout>
             <Label Text="Color" WidthRequest="100" BackgroundColor="LightGrey"/>
             <Label Text="Type" WidthRequest="100" BackgroundColor="LightGrey"/>
