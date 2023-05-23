@@ -41,13 +41,19 @@ public partial class OrderList : ContentPage
 
 public class OrderManagement
 {
+    public CustomersManagement customersManagement = new CustomersManagement();
     public BikesManagement bikesManagement = new BikesManagement();
     public OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+
     MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
     public string sql;
+    string customerName;
+    int id;
     public List<Order> GetAllOrders()
     {
         List<Order> orderList = new List<Order>();
+        List<Customer> customerList = new List<Customer>();
+        customerList = customersManagement.GetAllCustomers();
 
         connection.Open();
         string sql = "SELECT * FROM dbNicebike.order";
@@ -56,12 +62,15 @@ public class OrderManagement
 
         while (reader.Read())
         {
+            id = reader.GetInt32("CustomerID");
+            customerName = customerList.Find(obj => obj.idCustomer == reader.GetInt32("CustomerID")).surname + " " + customerList.Find(obj => obj.idCustomer == reader.GetInt32("CustomerID")).name;
             Order order = new Order(
                         reader.GetInt32("IdOrder"),
-                        reader.GetInt32("CustomerID"),
+                        id,
                         reader.GetString("Date"),
                         reader.GetString("DeliveryDate"),
-                        reader.GetString("Status")
+                        reader.GetString("Status"),
+                        customerName
                     );
             orderList.Add(order);
         }

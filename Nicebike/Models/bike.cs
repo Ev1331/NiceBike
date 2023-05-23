@@ -8,10 +8,11 @@
         public string size { get; set; }
         public string reference { get; set; }
         public int technician { get; set; }
-        public int bikeModel { get; set; }
+        public int bikeModelId { get; set; }
         public string status { get; set; }
+        public string bikeModelName { get; set; }
 
-        public Bike(int id, string color, string type, string size, string reference, int technician, int bikeModel, string status)
+        public Bike(int id, string color, string type, string size, string reference, int technician, int bikeModelId, string status, string bikeModelName)
         {
             this.id = id;
             this.color = color;
@@ -19,8 +20,9 @@
             this.size = size;
             this.reference = reference;
             this.technician = technician;
-            this.bikeModel = bikeModel;
+            this.bikeModelId = bikeModelId;
             this.status = status;
+            this.bikeModelName = bikeModelName;
         }
     }
 }

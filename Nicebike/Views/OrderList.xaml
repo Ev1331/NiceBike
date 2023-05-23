@@ -24,7 +24,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding IdOrder}" WidthRequest="100"/>
-                            <Label Text="{Binding CustomerId}" WidthRequest="400" />
+                            <Label Text="{Binding CustomerName}" WidthRequest="400" />
                             <Label Text="{Binding Date}" WidthRequest="100" />
                             <Label Text="{Binding DeliveryDate}" WidthRequest="100" />
                             <Label Text="{Binding Status}" WidthRequest="100" />

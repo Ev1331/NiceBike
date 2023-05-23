@@ -50,6 +50,10 @@ namespace Nicebike.Views
         public List<Bike> BikesToBuild()
         {
             List<Bike> bikesToBuild = new List<Bike>();
+            BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            List<BikeModel> bikeModels = new List<BikeModel>();
+            bikeModels = bikeModelsManagement.GetAllBikeModels();
+            int BikeModelId;
 
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -66,7 +70,7 @@ namespace Nicebike.Views
             {
                 if (reader.GetString("Status") == "Waiting")
                 {
-
+                    BikeModelId = reader.GetInt32("BikeModel");
                     Bike bike = new Bike(
                         reader.GetInt32("IdBike"),
                         reader.GetString("Colour"),
@@ -74,8 +78,9 @@ namespace Nicebike.Views
                         reader.GetString("Size"),
                         reader.GetString("Ref"),
                         reader.GetInt32("Technician"),
-                        reader.GetInt32("BikeModel"),
-                        reader.GetString("Status")
+                        BikeModelId,
+                        reader.GetString("Status"),
+                        bikeModels.Find(obj => obj.id == BikeModelId).description
                     );
 
                     bikesToBuild.Add(bike);

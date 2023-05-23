@@ -47,6 +47,11 @@ public class PartsManagement
 {
     public ObservableCollection<Part> GetAllParts()
     {
+        int idSupplier;
+        SupplierManagement supplierManagement = new SupplierManagement();
+        List<Supplier> suppliers = new List<Supplier>();
+        suppliers = supplierManagement.GetAllSuppliers();
+
         ObservableCollection<Part> parts = new ObservableCollection<Part>();
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
@@ -59,13 +64,15 @@ public class PartsManagement
 
         while (reader.Read())
         {
+            idSupplier = reader.GetInt32("Supplier");
             Part part = new Part(
                 reader.GetInt32("IdPart"),
                 reader.GetString("Ref"),
                 reader.GetString("Description"),
                 reader.GetInt32("Quantity"),
                 reader.GetInt32("Threshold"),
-                reader.GetInt32("Supplier")
+                idSupplier,
+                suppliers.Find(obj => obj.idSupplier == idSupplier).name
             );
             parts.Add(part);
         }

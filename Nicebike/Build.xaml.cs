@@ -45,6 +45,11 @@ public class BuildManagement
 {
     public List<Bike> BikesForBuilder(int id)
     {
+        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+        List<BikeModel> bikeModels = new List<BikeModel>();
+        bikeModels = bikeModelsManagement.GetAllBikeModels();
+        int BikeModelId;
+
         List<Bike> bikesForBuilder = new List<Bike>();
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
@@ -62,6 +67,7 @@ public class BuildManagement
         {
             if (reader.GetString("Status") == "InProgress" && reader.GetInt32("Technician") == id)
             {
+                BikeModelId = reader.GetInt32("BikeModel");
                 Bike bike = new Bike(
                     reader.GetInt32("IdBike"),
                     reader.GetString("Colour"),
@@ -69,8 +75,9 @@ public class BuildManagement
                     reader.GetString("Size"),
                     reader.GetString("Ref"),
                     reader.GetInt32("Technician"),
-                    reader.GetInt32("BikeModel"),
-                    reader.GetString("Status")
+                    BikeModelId,
+                    reader.GetString("Status"),
+                    bikeModels.Find(obj => obj.id == BikeModelId).description
                 );
 
                 bikesForBuilder.Add(bike);

@@ -78,6 +78,10 @@ public class BikesManagement
     string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
     public List<Bike> GetAllBikes()
     {
+        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+        List<BikeModel> bikeModels = new List<BikeModel>();
+        bikeModels = bikeModelsManagement.GetAllBikeModels();
+        int BikeModelId;
         List<Bike> bikes = new List<Bike>();
 
         using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -89,6 +93,7 @@ public class BikesManagement
 
         while (reader.Read())
         {
+            BikeModelId = reader.GetInt32("BikeModel");
             Bike bike = new Bike(
                 reader.GetInt32("IdBike"),
                 reader.GetString("Colour"),
@@ -96,8 +101,9 @@ public class BikesManagement
                 reader.GetString("Size"),
                 reader.GetString("Ref"),
                 reader.GetInt32("Technician"),
-                reader.GetInt32("BikeModel"),
-                reader.GetString("Status")
+                BikeModelId,
+                reader.GetString("Status"),
+                bikeModels.Find(obj => obj.id == BikeModelId).description
             );
             bikes.Add(bike);
         }
