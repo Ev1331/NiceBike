@@ -82,18 +82,19 @@ public class EmployeeManagement //sert à traiter les données
 
         while (reader.Read())
         {
-            Employee employee = new Employee(
+            if (reader.GetString("IdEmployee") != "0") {
+                Employee employee = new Employee(
                 reader.GetInt32("IdEmployee"),
                 reader.GetString("Name"),
                 reader.GetString("Surname"),
                 reader.GetString("Mail"),
                 reader.GetString("JobTitle"),
-                reader.GetString("Phone")
+                reader.GetString("Phone"));
+
+                employees.Add(employee);
+            }
                 
-            );
-
-
-            employees.Add(employee);
+            
         }
 
         connection.Close();
