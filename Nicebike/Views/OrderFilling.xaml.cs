@@ -59,13 +59,29 @@ public partial class OrderFilling : ContentPage
         bikesManagement.DeleteBike(IdBike);
     }
 
-    public void SaveBike(object sender, EventArgs e)
+    public async void SaveBike(object sender, EventArgs e)
     {
+
         Picker color = this.FindByName<Picker>("colorPicker");
         Picker size = this.FindByName<Picker>("sizePicker");
         Picker model = this.FindByName<Picker>("modelPicker");
+        Entry quantity = this.FindByName<Entry>("quantityEntry");
 
-        bikesManagement.SendBike(colorList, sizeList, bikeModels, color, "...TYPE...", size,  "...REF...", model, "Waiting", IdOrder);
+        int number;
+        bool success = int.TryParse(quantity.Text, out number);
+
+        if (success)
+        {
+            for (int i = 0; i < number; i++)
+            {
+                bikesManagement.SendBike(colorList, sizeList, bikeModels, color, "...TYPE...", size, "...REF...", model, "Waiting", IdOrder);
+            }
+        }
+
+
+        await Navigation.PushAsync(new OrderFilling(IdOrder));
+        Navigation.RemovePage(this);
+
     }
 
     private void ModifyCustomerInfoClick(object sender, EventArgs e)
@@ -76,9 +92,11 @@ public partial class OrderFilling : ContentPage
 
 public class BikesManagement
 {
-    int IdBike;
+    int IdBike1;
+    int IdOrder1;
     string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-    int Bikecount = 0;
+    int BikecountPlus = 0;
+    int BikecountMinus = 6;
     public List<Bike> GetAllBikes()
     {
         BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
@@ -128,6 +146,11 @@ public class BikesManagement
         command2.Parameters.AddWithValue("@id", IdBike);
 
         command2.ExecuteNonQuery();
+
+        
+
+        
+
     }
     public void SendBike(string[] colorList, string[] sizeList, List<BikeModel> bikeModels, Picker color, string type, Picker size, string reference, Picker bikeModel, string status, int IdOrder)
     {
@@ -152,7 +175,7 @@ public class BikesManagement
 
         while (reader.Read())
         {
-            IdBike = reader.GetInt32("IdBike");  
+            IdBike1 = reader.GetInt32("IdBike");  
         }
 
         using MySqlConnection connection2 = new MySqlConnection(connectionString);
@@ -160,14 +183,14 @@ public class BikesManagement
         sql = "INSERT INTO dbNicebike.orderdetails (IdOrder, Bike) VALUES (@IdOrder, @IdBike)";
         MySqlCommand command3 = new MySqlCommand(sql, connection2);
         command3.Parameters.AddWithValue("@IdOrder", IdOrder);
-        command3.Parameters.AddWithValue("@IdBike", IdBike);
+        command3.Parameters.AddWithValue("@IdBike", IdBike1);
         command3.ExecuteNonQuery();
 
 
-        Bikecount++;
-        if (Bikecount == 6)
+        BikecountPlus++;
+        if (BikecountPlus == 6)
         {
-            Bikecount = 0;
+            BikecountPlus = 0;
             string newDeliveryDate = "";
             using MySqlConnection connection3 = new MySqlConnection(connectionString);
             connection3.Open();

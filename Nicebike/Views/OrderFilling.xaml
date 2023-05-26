@@ -66,26 +66,28 @@
             </ListView>
 
             <HorizontalStackLayout>
-                <Picker x:Name="colorPicker">
+                <Picker x:Name="colorPicker" WidthRequest="75">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}" >
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Picker x:Name="sizePicker">
+                <Picker x:Name="sizePicker" WidthRequest="75">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}" >
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Picker x:Name="modelPicker">
+                <Picker x:Name="modelPicker" WidthRequest="75">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}" >
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
+
+                <Entry x:Name="quantityEntry" WidthRequest="75" Placeholder="quantity" />
 
                 <Button Text="Save" 
                 CommandParameter="{Binding IdOrder}"

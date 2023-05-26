@@ -31,7 +31,9 @@ public partial class ModifyCustomer : ContentPage
         modifyData.modifyCustomer(customerId, name.Text, surname.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
 
         await Navigation.PushAsync(new ClientsManagement());
+
         Navigation.RemovePage(this);
+
 
     }
 }
@@ -41,6 +43,8 @@ public class ModifyData
 {
     public void modifyCustomer(int id, string name, string surname, string mail, string phone, string street, string town, string number)
     {
+
+
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
         using MySqlConnection connection = new MySqlConnection(connectionString);
