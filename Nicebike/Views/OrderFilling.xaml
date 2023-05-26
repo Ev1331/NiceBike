@@ -38,7 +38,6 @@
         
         <HorizontalStackLayout>
             <Label Text="Color" WidthRequest="100" BackgroundColor="LightGrey"/>
-            <Label Text="Type" WidthRequest="100" BackgroundColor="LightGrey"/>
             <Label Text="Size" WidthRequest="100" BackgroundColor="LightGrey"/>
             <Label Text="Reference" WidthRequest="100" BackgroundColor="LightGrey"/>
             <Label Text="Model" WidthRequest="100" BackgroundColor="LightGrey"/>
@@ -52,9 +51,8 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding color}" WidthRequest="100" />
-                                <Label Text="{Binding type}" WidthRequest="100" />
                                 <Label Text="{Binding size}" WidthRequest="100" />
-                                <Label Text="{Binding reference}" WidthRequest="100" />
+                                <Label Text="{Binding id}" WidthRequest="100" />
                                 <Label Text="{Binding bikeModelName}" WidthRequest="100" />
                                 <Button Text="Remove" 
                                         Clicked="RemoveBike"

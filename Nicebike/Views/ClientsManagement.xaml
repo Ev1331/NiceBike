@@ -52,7 +52,7 @@
                             <Label Text="{Binding town}" WidthRequest="150"/>
                             <Label Text="{Binding number}" WidthRequest="50"/>
                             <Button Text="Modify information" Clicked ="OnModifyClickedCustomer"/>
-                            <Button Text="Delete Employee" Clicked="OnDeleteClickedCustomer" Background="Red" CommandParameter="{Binding idCustomer}"/>
+                            <Button Text="Delete customer" Clicked="OnDeleteClickedCustomer" Background="Red" CommandParameter="{Binding idCustomer}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
