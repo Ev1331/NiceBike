@@ -93,6 +93,7 @@
                 CommandParameter="{Binding IdOrder}"
                 Clicked="SaveBike"/>
             </HorizontalStackLayout>
+            <Button Text="Confirm" Clicked="Confirm" WidthRequest="200"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

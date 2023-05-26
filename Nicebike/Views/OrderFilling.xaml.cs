@@ -88,6 +88,12 @@ public partial class OrderFilling : ContentPage
     {
         Navigation.PushAsync(new ModifyCustomer(orderCustomer));
     }
+
+    private void Confirm(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new OrderList());
+        Navigation.RemovePage(this);
+    }
 }
 
 public class BikesManagement

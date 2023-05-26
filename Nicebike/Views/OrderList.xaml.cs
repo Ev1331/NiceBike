@@ -30,6 +30,7 @@ public partial class OrderList : ContentPage
         var IdOrder = (int)button.CommandParameter;
 
         Navigation.PushAsync(new OrderFilling(IdOrder));
+        Navigation.RemovePage(this);
     }
     private void DeleteOrder(object sender, EventArgs e)
     {
