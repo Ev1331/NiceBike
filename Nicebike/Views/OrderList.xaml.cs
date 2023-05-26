@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
 
@@ -14,7 +15,7 @@ public partial class OrderList : ContentPage
         // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
         List<Order> orderList = orderManagement.GetAllOrders();
 
-        // Assigner la liste des fournisseurs à la source de données du ListView
+        // Assigner la liste des fournisseurs ï¿½ la source de donnï¿½es du ListView
         orderListView.ItemsSource = orderList;
     }
 
@@ -110,9 +111,42 @@ public class OrderManagement
         MySqlCommand command = new MySqlCommand(sql, connection);
         command.Parameters.AddWithValue("@IdCustomer", IdCustomer);
         command.Parameters.AddWithValue("@Date", formattedDateTime);
-        command.Parameters.AddWithValue("@DeliveryDate", "Undefined");
+        command.Parameters.AddWithValue("@DeliveryDate", DeliveryDate());
         command.Parameters.AddWithValue("@Status", "Waiting");
         command.ExecuteNonQuery();
         connection.Close();
+    }
+
+    public String DeliveryDate()
+    {
+
+        sql = "SELECT * FROM dbNicebike.order ORDER BY STR_TO_DATE(DeliveryDate, '%Y-%m-%d') DESC LIMIT 1";
+        using MySqlCommand command = new MySqlCommand(sql, connection);
+        using MySqlDataReader reader = command.ExecuteReader();
+        string deliveryDate = "";
+
+
+        while (reader.Read())
+        {
+            string latestDeleveryDate = reader.GetString("DeliveryDate");
+            DateTime date = DateTime.ParseExact(latestDeleveryDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            DateTime newDate = date.AddDays(1+3);
+            deliveryDate = newDate.ToString("yyyy-MM-dd");
+        }
+
+        if (string.IsNullOrEmpty(deliveryDate))
+        {
+            // Aucune date de livraison trouvÃ©e, utiliser la date actuelle + 1 jour
+            DateTime currentDate = DateTime.Now.Date;
+            DateTime newDate = currentDate.AddDays(1+3);
+            deliveryDate = newDate.ToString("yyyy-MM-dd");
+        }
+
+        return deliveryDate;
+
+
+
+
+
     }
 }

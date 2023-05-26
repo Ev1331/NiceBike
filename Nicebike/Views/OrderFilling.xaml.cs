@@ -1,12 +1,14 @@
 namespace Nicebike;
+
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
 using Nicebike.Views;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 public partial class OrderFilling : ContentPage
 {
-    //Remplissage des éléments ListView
+    //Remplissage des ï¿½lï¿½ments ListView
     string[] colorList = { "Red", "Blue", "Grey"};
     List<String> modelList = new List<String>();
     string[] sizeList = { "26\"", "28\""};
@@ -38,7 +40,7 @@ public partial class OrderFilling : ContentPage
             i++;
         }
 
-        orderDetailsListView.ItemsSource = orderDetailsManagement.GetOrderBikes(IdOrder); //Liste des vélos de la commande
+        orderDetailsListView.ItemsSource = orderDetailsManagement.GetOrderBikes(IdOrder); //Liste des vï¿½los de la commande
         colorPicker.ItemsSource = colorList;
         modelPicker.ItemsSource = modelList;
         sizePicker.ItemsSource = sizeList;
@@ -76,6 +78,7 @@ public class BikesManagement
 {
     int IdBike;
     string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+    int Bikecount = 0;
     public List<Bike> GetAllBikes()
     {
         BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
@@ -159,6 +162,38 @@ public class BikesManagement
         command3.Parameters.AddWithValue("@IdOrder", IdOrder);
         command3.Parameters.AddWithValue("@IdBike", IdBike);
         command3.ExecuteNonQuery();
+
+
+        Bikecount++;
+        if (Bikecount == 6)
+        {
+            Bikecount = 0;
+            string newDeliveryDate = "";
+            using MySqlConnection connection3 = new MySqlConnection(connectionString);
+            connection3.Open();
+            sql = "SELECT * FROM dbNicebike.order WHERE IdOrder = @IdOrder";
+            using MySqlCommand command4 = new MySqlCommand(sql, connection3);
+            command4.Parameters.AddWithValue("@IdOrder", IdOrder);
+            using MySqlDataReader reader1 = command4.ExecuteReader();
+
+            while (reader1.Read())
+            {
+                string DeleveryDate = reader1.GetString("DeliveryDate");
+                DateTime date = DateTime.ParseExact(DeleveryDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                DateTime newDate = date.AddDays(1);
+                newDeliveryDate = newDate.ToString("yyyy-MM-dd");
+            }
+
+            using MySqlConnection connection4 = new MySqlConnection(connectionString);
+            connection4.Open();
+            sql = "UPDATE dbNicebike.order SET DeliveryDate = @newDeliveryDate WHERE IdOrder = @IdOrder";
+            MySqlCommand command5 = new MySqlCommand(sql, connection4);
+            command5.Parameters.AddWithValue("@newDeliveryDate", newDeliveryDate);
+            command5.Parameters.AddWithValue("@IdOrder", IdOrder);
+
+            command5.ExecuteNonQuery();
+
+        }
     }
 }
 
@@ -213,7 +248,7 @@ public List<Bike> GetOrderBikes(int IdOrder)
         {
             id = reader.GetInt32("Bike");
             bikesIdList.Add(id); 
-            orderBikes.Add(observableBikes.Find(obj => obj.id == id)); //Monte une liste avec les vélos correspondants
+            orderBikes.Add(observableBikes.Find(obj => obj.id == id)); //Monte une liste avec les vï¿½los correspondants
         }
         connection.Close();
 
