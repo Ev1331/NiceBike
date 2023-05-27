@@ -26,7 +26,7 @@ public partial class NewOrderCustomerSelection : ContentPage
         Navigation.PushAsync(new ClientsManagement());
     }
 
-    private void InitialiseOrder(object sender, EventArgs e)
+    private async void InitialiseOrder(object sender, EventArgs e)
     {
         int IdCustomer = ((Customer)(searchResults.SelectedItem)).idCustomer;
         orderManagement.CreateOrder(IdCustomer);
@@ -44,6 +44,7 @@ public partial class NewOrderCustomerSelection : ContentPage
             IdOrder = reader.GetInt32("IdOrder");
         }
 
-        Navigation.PushAsync(new OrderFilling(IdOrder));
+        await Navigation.PushAsync(new OrderFilling(IdOrder));
+        Navigation.RemovePage(this);
     }
 }

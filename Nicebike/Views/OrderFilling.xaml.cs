@@ -8,7 +8,7 @@ using System.Globalization;
 
 public partial class OrderFilling : ContentPage
 {
-    //Remplissage des �l�ments ListView
+    //ListView filling
     string[] colorList = { "Red", "Blue", "Grey"};
     List<String> modelList = new List<String>();
     string[] sizeList = { "26\"", "28\""};
@@ -31,7 +31,7 @@ public partial class OrderFilling : ContentPage
         int IdCustomer;
         
 		InitializeComponent();
-        IdOrder = Id; // IdOrder devient accessible pour la fonction SaveBike, do not remove (!)
+        IdOrder = Id; // IdOrder accessible for the SaveBike function, do not remove (!)
 
         bikeModels = bikeModelsManagement.GetAllBikeModels();
         foreach (BikeModel bikeModel in bikeModels)
@@ -40,7 +40,7 @@ public partial class OrderFilling : ContentPage
             i++;
         }
 
-        orderDetailsListView.ItemsSource = orderDetailsManagement.GetOrderBikes(IdOrder); //Liste des v�los de la commande
+        orderDetailsListView.ItemsSource = orderDetailsManagement.GetOrderBikes(IdOrder); //List of the bikes from this order
         colorPicker.ItemsSource = colorList;
         modelPicker.ItemsSource = modelList;
         sizePicker.ItemsSource = sizeList;
@@ -84,14 +84,14 @@ public partial class OrderFilling : ContentPage
 
     }
 
-    private void ModifyCustomerInfoClick(object sender, EventArgs e)
+    private void GoToCustomersManagementClick(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ModifyCustomer(orderCustomer));
+        Navigation.PushAsync(new ClientsManagement());
     }
 
-    private void Confirm(object sender, EventArgs e)
+    private async void Confirm(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new OrderList());
+        await Navigation.PushAsync(new OrderList());
         Navigation.RemovePage(this);
     }
 }
@@ -254,7 +254,7 @@ public class BikeModelsManagement
 }
 public class OrderDetailsManagement
 {
-    int id;
+    public int id;
     List<int> bikesIdList = new List<int>();
     public List<Bike> orderBikes = new List<Bike>();
 
@@ -282,5 +282,22 @@ public List<Bike> GetOrderBikes(int IdOrder)
         connection.Close();
 
     return orderBikes;
+    }
+
+public int GetAssociatedOrderId(int IdBike)
+    {
+        connection.Open();
+        sql = "SELECT * FROM dbNicebike.orderdetails WHERE Bike = @IdBike";
+        using MySqlCommand command = new MySqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@IdBike", IdBike);
+        using MySqlDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+            id = reader.GetInt32("IdOrder");
+        }
+
+        connection.Close();
+     return id;
     }
 }

@@ -5,16 +5,51 @@
              Title="StockManagement">
     
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout VerticalOptions="StartAndExpand">
             <Button Text="New part"
                 Clicked="NewPart">
             </Button>
 
             <HorizontalStackLayout>
-                <Entry Placeholder="Name"/>
-                <Entry Placeholder="Quantity"/>
-                <Button Text="Add"/>
-                <Button Text="Remove"/>
+                
+                <VerticalStackLayout
+                    VerticalOptions="StartAndExpand">
+                    <SearchBar TextChanged="partSearchBar_TextChanged"
+                           WidthRequest="400"
+                           HorizontalOptions="StartAndExpand"
+                           Placeholder="Select a part to restock or destock"/>
+                    <ListView x:Name="partSearchResults"
+                          ItemSelected="partSearchResults_ItemSelected"
+                          VerticalOptions="StartAndExpand"
+                          >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding reference}" WidthRequest="150" />
+                                        <Label Text="{Binding description}" WidthRequest="150"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Entry Placeholder="Enter a quantity"
+                           x:Name="QuantityEntry"
+                           HeightRequest="30"
+                           WidthRequest="200"/>
+                    <Button Text="Add"
+                            Clicked="AddQuantityClick"
+                            HeightRequest="30"/>
+                    <Button Text="Remove"
+                            Clicked="RemoveQuantityClick"
+                            HeightRequest="30"/>
+                    <Button Text="Restock all low parts"
+                        Clicked="RestockAllClick"
+                        HeightRequest="30"/>
+                </HorizontalStackLayout>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
@@ -26,11 +61,37 @@
                 <Label Text="Supplier" WidthRequest="100" BackgroundColor="LightGrey"/>
             </HorizontalStackLayout>
 
+            <ListView x:Name="lowPartListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding id}" WidthRequest="100"/>
+                                <Label Text="{Binding description}" WidthRequest="400" />
+                                <Label Text="{Binding reference}" WidthRequest="100" />
+                                <Label Text="{Binding quantity}" WidthRequest="100" TextColor="Red" />
+                                <Label Text="{Binding threshold}" WidthRequest="100" />
+                                <Label Text="{Binding supplierName}" WidthRequest="100" />
+                                <Button Text="Modify data" 
+                                        Clicked="OnModifyClickedPart" 
+                                        BackgroundColor="#E6E6E6"
+                                        TextColor="#333333"/>
+                                <Button Text="Delete part" 
+                                        Clicked="DeletePart" 
+                                        CommandParameter="{Binding id}"
+                                        BackgroundColor="#E6E6E6"
+                                        TextColor="#333333"/>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
             <ListView x:Name="partListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
+                            <HorizontalStackLayout>
                                 <Label Text="{Binding id}" WidthRequest="100"/>
                                 <Label Text="{Binding description}" WidthRequest="400" />
                                 <Label Text="{Binding reference}" WidthRequest="100" />
@@ -46,7 +107,7 @@
                                         CommandParameter="{Binding id}"
                                         BackgroundColor="#E6E6E6"
                                         TextColor="#333333"/>
-                            </StackLayout>
+                            </HorizontalStackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

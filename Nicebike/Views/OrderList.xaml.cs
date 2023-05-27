@@ -19,25 +19,29 @@ public partial class OrderList : ContentPage
         orderListView.ItemsSource = orderList;
     }
 
-    private void GoToNewOrder(object sender, EventArgs e)
+    private async void GoToNewOrder(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new NewOrderCustomerSelection());
+        await Navigation.PushAsync(new NewOrderCustomerSelection());
+        Navigation.RemovePage(this);
     }
 
-    private void ModifyOrder(object sender, EventArgs e)
+    private async void ModifyOrder(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var IdOrder = (int)button.CommandParameter;
 
-        Navigation.PushAsync(new OrderFilling(IdOrder));
+        await Navigation.PushAsync(new OrderFilling(IdOrder));
         Navigation.RemovePage(this);
     }
-    private void DeleteOrder(object sender, EventArgs e)
+    private async void DeleteOrder(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var IdOrder = (int)button.CommandParameter;
 
         orderManagement.DeleteOrder(IdOrder);
+
+        await Navigation.PushAsync(new OrderList());
+        Navigation.RemovePage(this);
     }
 }
 
@@ -58,7 +62,7 @@ public class OrderManagement
         customerList = customersManagement.GetAllCustomers();
 
         connection.Open();
-        string sql = "SELECT * FROM dbNicebike.order";
+        sql = "SELECT * FROM dbNicebike.order";
         using MySqlCommand command = new MySqlCommand(sql, connection);
         using MySqlDataReader reader = command.ExecuteReader();
 
@@ -144,10 +148,5 @@ public class OrderManagement
         }
 
         return deliveryDate;
-
-
-
-
-
     }
 }

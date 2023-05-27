@@ -27,7 +27,7 @@ public partial class PartDatasheet : ContentPage
         supplierPicker.ItemsSource = suppliersnames;
     }
 
-    public void SavePart(object sender, EventArgs e)
+    public async void SavePart(object sender, EventArgs e)
     {
         Entry reference = this.FindByName<Entry>("referenceEntry");
         Entry description = this.FindByName<Entry>("descriptionEntry");
@@ -37,7 +37,8 @@ public partial class PartDatasheet : ContentPage
 
         PartsManagement stockManagement = new PartsManagement();
         stockManagement.SendPart(suppliers, reference, description, quantity, threshold, supplier);
-        
-        Shell.Current.Navigation.RemovePage(this);
+
+        await Navigation.PushAsync(new StockManagement());
+        Navigation.RemovePage(this);
     }
 }

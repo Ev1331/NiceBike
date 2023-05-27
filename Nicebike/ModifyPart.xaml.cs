@@ -36,7 +36,7 @@ public partial class ModifyPart : ContentPage
         BindingContext = part;
     }
 
-    public void modifyClickedPart(object sender, EventArgs e)
+    public async void modifyClickedPart(object sender, EventArgs e)
     {
         Entry reference = this.FindByName<Entry>("referenceEntryModify");
         Entry description = this.FindByName<Entry>("descriptionEntryModify");
@@ -47,7 +47,8 @@ public partial class ModifyPart : ContentPage
         ModifyPartData modifyPartData = new ModifyPartData();
         modifyPartData.ModifyPart(IdPart, suppliers, reference, description, quantity, threshold, supplier);
 
-        Shell.Current.Navigation.RemovePage(this);
+        await Navigation.PushAsync(new StockManagement());
+        Navigation.RemovePage(this);
     }
 
 }

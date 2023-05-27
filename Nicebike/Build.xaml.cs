@@ -89,7 +89,7 @@ public class BuildManagement
 
     }
     public void FinishBike(int IdBike, int IdTechnician)
-    {
+    {        
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
         using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -102,5 +102,29 @@ public class BuildManagement
         command.Parameters.AddWithValue("@IdBike", IdBike);
 
         command.ExecuteNonQuery();
+        connection.Close();
+
+        //If all bikes are done, the order is don
+        OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+        int IdOrder = orderDetailsManagement.GetAssociatedOrderId(IdBike);
+        List<Bike> orderBikes = orderDetailsManagement.GetOrderBikes(IdOrder);
+        int bikesDone = 0;
+
+        foreach (Bike bike in orderBikes)
+        {
+            if (bike.status == "Done")
+            {
+                bikesDone++;
+            }
+        }
+        if (bikesDone == orderBikes.Count)
+        {
+            connection.Open();
+            sql = "UPDATE dbNicebike.order SET Status = 'Done' WHERE IdOrder = @IdOrder";
+            using MySqlCommand command2 = new MySqlCommand(sql, connection);
+            command2.Parameters.AddWithValue("@IdOrder", IdOrder);
+            command2.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 }

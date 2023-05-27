@@ -39,10 +39,10 @@
                             </Grid.ColumnDefinitions>
                             
                             <Label Text="{Binding color}" Grid.Column="0"  />
-                            <Label Text="{Binding type}" Grid.Column="1" />
+                            <Label Text="{Binding id}" Grid.Column="1" />
                             <Label Text="{Binding size}" Grid.Column="2" />
                             <Label Text="{Binding bikeModelName}" Grid.Column="3" />
-                            <Button Text="Velo Terminé" Clicked="OnFinishedClicked" CommandParameter="{Binding id}" Grid.Column="4" /> 
+                            <Button Text="Finished bike" Clicked="OnFinishedClicked" CommandParameter="{Binding id}" Grid.Column="4" /> 
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
