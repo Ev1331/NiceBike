@@ -1,14 +1,8 @@
 ﻿using Nicebike.Models;
-
-
-
 using System.Data;
 using MySql.Data.MySqlClient;
 
-
 namespace Nicebike.Views
-
-
 {
     public partial class MakeBike : ContentPage
     {
@@ -25,7 +19,6 @@ namespace Nicebike.Views
 
             TechnicianNumber = technicianNumber;
 
-            
             BindingContext = this;
 
             UpdateLabelText();
@@ -35,6 +28,7 @@ namespace Nicebike.Views
         {
             technicianLabel.Text = $"Technicien {TechnicianNumber}";
         }
+
         public void OnProcessingClicked(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -53,7 +47,6 @@ namespace Nicebike.Views
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
             List<BikeModel> bikeModels = new List<BikeModel>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
-            int BikeModelId;
 
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -70,17 +63,18 @@ namespace Nicebike.Views
             {
                 if (reader.GetString("Status") == "Waiting")
                 {
-                    BikeModelId = reader.GetInt32("BikeModel");
+                    int bikeModelId = reader.GetInt32("BikeModel");
+                    string size = reader.GetString("Size");
                     Bike bike = new Bike(
                         reader.GetInt32("IdBike"),
                         reader.GetString("Colour"),
                         reader.GetString("Type"),
-                        reader.GetString("Size"),
+                        size,
                         reader.GetString("Ref"),
                         reader.GetInt32("Technician"),
-                        BikeModelId,
+                        bikeModelId,
                         reader.GetString("Status"),
-                        bikeModels.Find(obj => obj.id == BikeModelId).description
+                        bikeModels.Find(obj => obj.id == bikeModelId).description
                     );
 
                     bikesToBuild.Add(bike);
@@ -104,8 +98,16 @@ namespace Nicebike.Views
             command.Parameters.AddWithValue("@IdBike", IdBike);
 
             command.ExecuteNonQuery();
-            DecrementPart("FRA01");
+
+            (int bikeModelId, string size) = GetBikeModelIdAndSize(IdBike);
+            List<string> references = GetReferencesByBikeModelIdAndSize(bikeModelId, size);
+
+            foreach (string reference in references)
+            {
+                DecrementPart(reference);
+            }
         }
+
         public void DecrementPart(string reference)
         {
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
@@ -114,21 +116,66 @@ namespace Nicebike.Views
             {
                 connection.Open();
 
-                
                 string updateSql = "UPDATE dbNicebike.part SET Quantity = Quantity - 1 WHERE Ref = @reference";
-
 
                 MySqlCommand updateCommand = new MySqlCommand(updateSql, connection);
                 updateCommand.Parameters.AddWithValue("@reference", reference);
                 updateCommand.ExecuteNonQuery();
-                            
-                        
-                    
             }
         }
 
+        private (int bikeModelId, string size) GetBikeModelIdAndSize(int idBike)
+        {
+            int bikeModelId = 0;
+            string size = string.Empty;
+
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+
+            using MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            string sql = "SELECT BikeModel, Size FROM dbNicebike.bike WHERE IdBike = @idBike";
+
+            using MySqlCommand command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@idBike", idBike);
+
+            using MySqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                bikeModelId = reader.GetInt32("BikeModel");
+                size = reader.GetString("Size");
+            }
+
+            return (bikeModelId, size);
+        }
+
+        private List<string> GetReferencesByBikeModelIdAndSize(int bikeModelId, string size)
+        {
+            if (bikeModelId == 1) // city
+            {
+                if (size == "26\"")
+                    return new List<string> { "FRA12", "FRA01", "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "FRA04", "TYR03", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "TYR06", "TYR07",  "TYR08"};
+                else if (size == "28\"")
+                    return new List<string> { "FRA12", "FRA11", "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "FRA04", "TYR03", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "TYR06", "TYR07",  "TYR08" };
+
+            }
+            else if (bikeModelId == 2) // explorer
+            {
+                if (size == "26\"")
+                    return new List<string> { "FRA12", "FRA01", "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "TYR02", "TYR01", "FRA04", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "TYR07",  "TYR08"};
+                else if (size == "28\"")
+                    return new List<string> { "FRA12", "FRA11", "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "TYR02", "TYR01", "FRA04", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "TYR07", "TYR08" };
+            }
+            else if (bikeModelId == 3) // adventure
+            {
+                if (size == "26\"")
+                    return new List<string> { "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "FRA09", "TYR07", "TYR08"};
+                else if (size == "28\"")
+                    return new List<string> { "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "FRA10", "TYR07", "TYR08" };
+
+            }
+
+            return new List<string>(); // Retourne une liste vide si le BikeModelId ou la taille ne sont pas reconnus
+        }
     }
-
-
 }
-
