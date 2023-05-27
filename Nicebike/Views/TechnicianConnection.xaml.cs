@@ -1,4 +1,4 @@
-﻿namespace Nicebike;
+﻿namespace Nicebike.Views;
 
 public partial class TechnicianConnection : ContentPage
 {

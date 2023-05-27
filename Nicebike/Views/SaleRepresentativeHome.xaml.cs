@@ -1,5 +1,4 @@
-﻿namespace Nicebike;
-using Nicebike.Views;
+﻿namespace Nicebike.Views;
 
 public partial class SaleRepresentativeHome : ContentPage
 {
@@ -18,7 +17,7 @@ public partial class SaleRepresentativeHome : ContentPage
     }
     private async void NavigateToCatalogue(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Views.Catalogue());
+        Navigation.PushAsync(new Catalogue());
     }
 
     private async void NavigateToCustomer(object sender, EventArgs e)

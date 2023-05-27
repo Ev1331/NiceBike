@@ -2,6 +2,7 @@ namespace Nicebike.Views;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
 using Nicebike.Views;
+using Nicebike.ViewModels;
 using System.Collections.ObjectModel;
 
 public partial class NewOrderCustomerSelection : ContentPage

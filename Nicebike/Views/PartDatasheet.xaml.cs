@@ -1,6 +1,7 @@
-namespace Nicebike;
+namespace Nicebike.Views;
 using MySql.Data.MySqlClient;
 using Nicebike.Models;
+using Nicebike.ViewModels;
 
 public partial class PartDatasheet : ContentPage
 {
@@ -11,10 +12,10 @@ public partial class PartDatasheet : ContentPage
     public PartDatasheet()
 	{
 		InitializeComponent();
-        // Créer une instance de la classe SupplierManagement
+        // Crï¿½er une instance de la classe SupplierManagement
         SupplierManagement supplierManagement = new SupplierManagement();
 
-        // Récupérer la liste des fournisseurs à partir de la base de données
+        // Rï¿½cupï¿½rer la liste des fournisseurs ï¿½ partir de la base de donnï¿½es
         suppliers = supplierManagement.GetAllSuppliers();
 
         foreach (Supplier supplier in suppliers)
@@ -23,7 +24,7 @@ public partial class PartDatasheet : ContentPage
             i = i + 1;
         }
 
-        // Assigner la liste des fournisseurs à la source de données du ListView
+        // Assigner la liste des fournisseurs ï¿½ la source de donnï¿½es du ListView
         supplierPicker.ItemsSource = suppliersnames;
     }
 

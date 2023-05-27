@@ -1,5 +1,6 @@
 ﻿
 namespace Nicebike;
+using Nicebike.Views;
 
 public partial class MainPage : ContentPage
 {

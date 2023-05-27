@@ -1,4 +1,4 @@
-﻿namespace Nicebike;
+﻿namespace Nicebike.Views;
 
 public partial class ProductionManagerHome : ContentPage
 {
@@ -13,5 +13,10 @@ public partial class ProductionManagerHome : ContentPage
     private async void NavigateToSuppliers(object sender, EventArgs e)
     {
         Navigation.PushAsync(new SuppliersManagement());
+    }
+
+    private async void NavigateToPlanning(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Views.Planning());
     }
 }
