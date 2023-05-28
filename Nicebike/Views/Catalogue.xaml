@@ -20,7 +20,7 @@
                                  Spacing="5">
                         <Image Source="city.png" >
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnImageTapped"/>
+                                <TapGestureRecognizer Tapped="OnCityImageTapped"/>
                             </Image.GestureRecognizers>
                         </Image>
                         <Label Text="City" FontSize="Small" HorizontalOptions="Center" />

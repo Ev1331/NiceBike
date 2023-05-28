@@ -62,46 +62,18 @@
                 </Button>
             </StackLayout>
 
-            <HorizontalStackLayout BackgroundColor="White"
-                                   Margin="0, 20"
-                                   Padding="20">
-                <VerticalStackLayout HorizontalOptions="Start">
-                    <Label 
-                        Text="Price"
+            <HorizontalStackLayout Margin="0, 20"
+                                   HorizontalOptions="CenterAndExpand">
+                <Label x:Name="cityPriceLabel" Text="{Binding cityPrice}"
                         FontAttributes="Bold"
                         FontSize="Large"
                         Margin="0, 0, 0, 10"/>
-
-                    <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
-                        <Label Text="Quantity" WidthRequest="80" FontAttributes="Bold"/>
-                        <Label Text="Price / pc" WidthRequest="80" FontAttributes="Bold"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
-                        <Label Text="5" WidthRequest="80"/>
-                        <Label Text="698 €" WidthRequest="80"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
-                        <Label Text="10" WidthRequest="80"/>
-                        <Label Text="664 €" WidthRequest="80"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
-                        <Label Text="50" WidthRequest="80"/>
-                        <Label Text="630 €" WidthRequest="80"/>
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
-                        <Label Text="100" WidthRequest="80"/>
-                        <Label Text="598 €" WidthRequest="80"/>
-                    </StackLayout>
-                </VerticalStackLayout>
-
+                <Label Text=" €"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        Margin="0, 0, 0, 10"/>
             </HorizontalStackLayout>
-
-
-
+            
             <StackLayout Orientation="Horizontal"
                          Margin="0, 20"
                          HorizontalOptions="Center"

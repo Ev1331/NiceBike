@@ -2,8 +2,9 @@ namespace Nicebike;
 
 public partial class AdventureInfo : ContentPage
 {
-	public AdventureInfo()
+    public AdventureInfo(int price)
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
+        adventurePriceLabel.Text = price.ToString();
+    }
 }

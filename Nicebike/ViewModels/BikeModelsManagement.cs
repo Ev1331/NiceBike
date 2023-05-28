@@ -5,12 +5,11 @@ namespace Nicebike.ViewModels
 {
 	public class BikeModelsManagement
 	{
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
         public List<BikeModel> GetAllBikeModels()
         {
             List<BikeModel> bikeModels = new List<BikeModel>();
 
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             string sql = "SELECT * FROM dbNicebike.bikemodel";
@@ -26,6 +25,8 @@ namespace Nicebike.ViewModels
                 );
                 bikeModels.Add(bikeModel);
             }
+            connection.Close();
+
             return bikeModels;
         }
     }
