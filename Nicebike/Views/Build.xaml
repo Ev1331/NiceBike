@@ -9,14 +9,14 @@
             <Label x:Name="technicianLabel" />
         </VerticalStackLayout>
 
-        <VerticalStackLayout BackgroundColor="Aquamarine">
+        <VerticalStackLayout >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
                 <Label Text="Color" Grid.Column="0" FontAttributes="Bold" />
