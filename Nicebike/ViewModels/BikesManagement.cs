@@ -2,6 +2,7 @@
 using Nicebike.Models;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+
 namespace Nicebike.ViewModels
 {
 	public class BikesManagement
@@ -14,10 +15,14 @@ namespace Nicebike.ViewModels
         public List<Bike> GetAllBikes()
         {
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            OrderManagement orderManagement = new OrderManagement();
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
             List<BikeModel> bikeModels = new List<BikeModel>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             int BikeModelId;
             List<Bike> bikes = new List<Bike>();
+            List<Order> order = new List<Order>();
+            order = orderManagement.GetAllOrders();
 
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
@@ -28,6 +33,7 @@ namespace Nicebike.ViewModels
 
             while (reader.Read())
             {
+                int IdOrder = orderDetailsManagement.GetAssociatedOrderId(reader.GetInt32("IdBike"));
                 BikeModelId = reader.GetInt32("BikeModel");
                 Bike bike = new Bike(
                     reader.GetInt32("IdBike"),
@@ -39,7 +45,8 @@ namespace Nicebike.ViewModels
                     BikeModelId,
                     reader.GetString("Status"),
                     bikeModels.Find(obj => obj.id == BikeModelId).description,
-                    bikeModels.Find(obj => obj.id == BikeModelId).price
+                    bikeModels.Find(obj => obj.id == BikeModelId).price,
+                    order.Find(obj => obj.IdOrder == IdOrder).DeliveryDate
                 );
                 bikes.Add(bike);
             }

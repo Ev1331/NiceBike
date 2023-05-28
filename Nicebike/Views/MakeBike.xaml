@@ -23,7 +23,8 @@
                 <Label Text="Reference" Grid.Column="1" FontAttributes="Bold" />
                 <Label Text="Size" Grid.Column="2" FontAttributes="Bold" />
                 <Label Text="Model" Grid.Column="3" FontAttributes="Bold" />
-                <Label Text="" Grid.Column="4" FontAttributes="Bold" /> 
+                <Label Text="Estimated end of production" Grid.Column="4" FontAttributes="Bold" />
+                <Label Text="" Grid.Column="5" FontAttributes="Bold" /> 
             </Grid>
 
             <CollectionView ItemsSource="{Binding Bikes}">
@@ -35,6 +36,7 @@
                                 <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
@@ -42,7 +44,8 @@
                             <Label Text="{Binding id}" Grid.Column="1" />
                             <Label Text="{Binding size}" Grid.Column="2" />
                             <Label Text="{Binding bikeModelName}" Grid.Column="3" />
-                            <Button Text="Take Charge" Clicked="OnProcessingClicked" CommandParameter="{Binding id}" Grid.Column="4" /> 
+                            <Label Text="{Binding dateProduction}" Grid.Column="4"/>
+                            <Button Text="Take Charge" Clicked="OnProcessingClicked" CommandParameter="{Binding id}" Grid.Column="5" /> 
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

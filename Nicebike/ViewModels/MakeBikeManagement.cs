@@ -1,6 +1,8 @@
 ﻿using System;
 using Nicebike.Models;
 using MySql.Data.MySqlClient;
+using System.Globalization;
+
 namespace Nicebike.ViewModels
 {
 	public class MakeBikeManagement
@@ -9,8 +11,12 @@ namespace Nicebike.ViewModels
         {
             List<Bike> bikesToBuild = new List<Bike>();
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+            OrderManagement orderManagement = new OrderManagement();
             List<BikeModel> bikeModels = new List<BikeModel>();
+            List<Order> order = new List<Order>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
+            order = orderManagement.GetAllOrders();
 
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -27,8 +33,14 @@ namespace Nicebike.ViewModels
             {
                 if (reader.GetString("Status") == "Waiting")
                 {
+                    
+                    int IdOrder = orderDetailsManagement.GetAssociatedOrderId(reader.GetInt32("IdBike"));
                     int BikeModelId = reader.GetInt32("BikeModel");
                     string size = reader.GetString("Size");
+                    string deliveryDate = order.Find(obj => obj.IdOrder == IdOrder).DeliveryDate;
+                    DateTime date = DateTime.ParseExact(deliveryDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    DateTime newDate = date.AddDays(-3);
+                    string productionDate = newDate.ToString("yyyy-MM-dd");
                     Bike bike = new Bike(
                         reader.GetInt32("IdBike"),
                         reader.GetString("Colour"),
@@ -39,7 +51,8 @@ namespace Nicebike.ViewModels
                         BikeModelId,
                         reader.GetString("Status"),
                         bikeModels.Find(obj => obj.id == BikeModelId).description,
-                        bikeModels.Find(obj => obj.id == BikeModelId).price
+                        bikeModels.Find(obj => obj.id == BikeModelId).price,
+                        productionDate
                     );
 
                     bikesToBuild.Add(bike);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Nicebike.Models;
 using MySql.Data.MySqlClient;
+
 namespace Nicebike.ViewModels
 {
 	public class BuildManagement
@@ -8,11 +9,16 @@ namespace Nicebike.ViewModels
         public List<Bike> BikesForBuilder(int id)
         {
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            OrderManagement orderManagement = new OrderManagement();
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
             List<BikeModel> bikeModels = new List<BikeModel>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             int BikeModelId;
 
             List<Bike> bikesForBuilder = new List<Bike>();
+
+            List<Order> order = new List<Order>();
+            order = orderManagement.GetAllOrders();
 
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -29,6 +35,7 @@ namespace Nicebike.ViewModels
             {
                 if (reader.GetString("Status") == "InProgress" && reader.GetInt32("Technician") == id)
                 {
+                    int IdOrder = orderDetailsManagement.GetAssociatedOrderId(reader.GetInt32("IdBike"));
                     BikeModelId = reader.GetInt32("BikeModel");
                     Bike bike = new Bike(
                         reader.GetInt32("IdBike"),
@@ -40,7 +47,8 @@ namespace Nicebike.ViewModels
                         BikeModelId,
                         reader.GetString("Status"),
                         bikeModels.Find(obj => obj.id == BikeModelId).description,
-                        bikeModels.Find(obj => obj.id == BikeModelId).price
+                        bikeModels.Find(obj => obj.id == BikeModelId).price,
+                        order.Find(obj => obj.IdOrder == IdOrder).DeliveryDate
                     );
 
                     bikesForBuilder.Add(bike);
