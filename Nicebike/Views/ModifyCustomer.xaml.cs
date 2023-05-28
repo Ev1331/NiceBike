@@ -7,6 +7,7 @@ public partial class ModifyCustomer : ContentPage
 {
     Customer customer;
     int customerId;
+    CustomersManagement customersManagement = new CustomersManagement();
 
 	public ModifyCustomer(Customer customer)
 	{
@@ -28,8 +29,7 @@ public partial class ModifyCustomer : ContentPage
         Entry town = this.FindByName<Entry>("townChange");
         Entry number = this.FindByName<Entry>("numberChange");
 
-        ModifyDataCustomer modifyCustomerData = new ModifyDataCustomer();
-        modifyCustomerData.modifyCustomer(customerId, name.Text, surname.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
+        customersManagement.modifyCustomer(customerId, name.Text, surname.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
 
         await Navigation.PushAsync(new ClientsManagement());
 

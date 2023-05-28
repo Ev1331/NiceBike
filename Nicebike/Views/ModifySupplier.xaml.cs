@@ -10,6 +10,7 @@ public partial class ModifySupplier : ContentPage
 {
     Supplier supplier;
     int supplierId;
+    SupplierManagement supplierManagement = new SupplierManagement();
 
     public ModifySupplier(Supplier supplier)
     {
@@ -30,8 +31,7 @@ public partial class ModifySupplier : ContentPage
         Entry number = this.FindByName<Entry>("numberChange");
         Entry town = this.FindByName<Entry>("townChange");
 
-        ModifyDataSupplier modifyDataSupplier = new ModifyDataSupplier();
-        modifyDataSupplier.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
+        supplierManagement.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
     }
 }
 
