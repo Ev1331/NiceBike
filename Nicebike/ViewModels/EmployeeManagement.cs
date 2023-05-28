@@ -42,7 +42,7 @@ namespace Nicebike.ViewModels
             return employees;
         }
 
-        public void SendEmployee(Entry name, Entry surname, Entry mail, Entry jobtitle, Entry phone)
+        public void SendEmployee(string[] jobTitleList, Entry name, Entry surname, Entry mail, Picker jobtitle, Entry phone)
         {
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -53,7 +53,7 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@name", name.Text);
             command.Parameters.AddWithValue("@surname", surname.Text);
             command.Parameters.AddWithValue("@mail", mail.Text);
-            command.Parameters.AddWithValue("@jobtitle", jobtitle.Text);
+            command.Parameters.AddWithValue("@jobtitle", jobTitleList[jobtitle.SelectedIndex]);
             command.Parameters.AddWithValue("@phone", phone.Text);
 
             command.ExecuteNonQuery();

@@ -40,7 +40,12 @@
                              <Entry x:Name="nameEntry" WidthRequest="200" Placeholder="name"  />
                              <Entry x:Name="surnameEntry" WidthRequest="200" Placeholder="surname"  />
                              <Entry x:Name="mailEntry" WidthRequest="200" Placeholder="mail"  />
-                             <Entry x:Name="jobtitleEntry" WidthRequest="200" Placeholder="jobtitle"  />
+                             <Picker x:Name="jobTitlePicker" WidthRequest="200">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}" >
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                              </Picker>
                              <Entry x:Name="phoneEntry" WidthRequest="200" Placeholder="phone"  />
                              <Button Text="Add Employee" Clicked="OnConfirmClickedEmployee" Background="Green"/>
 

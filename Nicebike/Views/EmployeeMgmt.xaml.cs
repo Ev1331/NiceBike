@@ -6,8 +6,9 @@ using Nicebike.ViewModels;
 public partial class EmployeeMgmt : ContentPage
 {
     EmployeeManagement employeeManagement;
+    string[] jobTitleList = { "Technician", "Sale Representative", "Production Manager" };
 
-	public EmployeeMgmt()
+    public EmployeeMgmt()
 	{
 		InitializeComponent();
 
@@ -16,6 +17,7 @@ public partial class EmployeeMgmt : ContentPage
         List<Employee> employees = employeeManagement.GetAllEmployee();
 
         employeeListView.ItemsSource = employees;
+        jobTitlePicker.ItemsSource = jobTitleList;
     }
 
     public void OnConfirmClickedEmployee(object sender, EventArgs e)
@@ -23,14 +25,13 @@ public partial class EmployeeMgmt : ContentPage
         Entry name = this.FindByName<Entry>("nameEntry");
         Entry surname = this.FindByName<Entry>("surnameEntry");
         Entry mail = this.FindByName<Entry>("mailEntry");
-        Entry jobtitle = this.FindByName<Entry>("jobtitleEntry");
+        Picker jobtitle = this.FindByName<Picker>("jobTitlePicker");
         Entry phone = this.FindByName<Entry>("phoneEntry");
 
-        this.employeeManagement.SendEmployee(name, surname, mail, jobtitle, phone);
+        this.employeeManagement.SendEmployee(jobTitleList,name, surname, mail, jobtitle, phone);
 
-        List<Employee> employees = employeeManagement.GetAllEmployee();
-
-        employeeListView.ItemsSource = employees;
+        Navigation.PushAsync(new EmployeeMgmt());
+        Navigation.RemovePage(this);
 
     }
 

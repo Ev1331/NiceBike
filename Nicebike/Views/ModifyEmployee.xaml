@@ -31,7 +31,12 @@
                                 <Entry x:Name="nameChange" Text="{Binding name}" WidthRequest="200" Placeholder="name" />
                                 <Entry x:Name="surnameChange" Text="{Binding surname}" WidthRequest="200" Placeholder="surname" />
                                 <Entry x:Name="mailChange" Text="{Binding mail}" WidthRequest="200"  Placeholder="mail"/>
-                                <Entry x:Name="jobtitleChange" Text="{Binding jobtitle}" WidthRequest="200" Placeholder="jobtitle"/>
+                                <Picker x:Name="jobTitlePicker" WidthRequest="200" SelectedItem="{Binding jobtitle}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}" >
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
                                 <Entry x:Name="phoneChange" Text="{Binding phone}" WidthRequest="200" Placeholder="phone" />
                                 <Button Text="Change Data" Clicked="modifyClickedEmployee" Background="Green" />
                             </StackLayout>

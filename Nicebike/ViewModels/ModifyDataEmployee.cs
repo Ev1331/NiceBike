@@ -5,7 +5,7 @@ namespace Nicebike.ViewModels
 {
 	public class ModifyDataEmployee
 	{
-        public void modifyEmployee(int id, string name, string surname, string mail, string jobtitle, string phone)
+        public void modifyEmployee(string[] jobTitleList, int id, string name, string surname, string mail, Picker jobtitle, string phone)
         {
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
@@ -18,7 +18,7 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@surname", surname);
             command.Parameters.AddWithValue("@mail", mail);
-            command.Parameters.AddWithValue("@jobtitle", jobtitle);
+            command.Parameters.AddWithValue("@jobtitle", jobTitleList[jobtitle.SelectedIndex]);
             command.Parameters.AddWithValue("@phone", phone);
             command.Parameters.AddWithValue("@id", id);
 
