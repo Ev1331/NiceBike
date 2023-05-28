@@ -95,7 +95,7 @@ namespace Nicebike.ViewModels
             {
                 string latestDeleveryDate = reader.GetString("DeliveryDate");
                 DateTime date = DateTime.ParseExact(latestDeleveryDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                DateTime newDate = date.AddDays(1 + 3);
+                DateTime newDate = date.AddDays(1);
                 deliveryDate = newDate.ToString("yyyy-MM-dd");
             }
 
