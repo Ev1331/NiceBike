@@ -1,11 +1,8 @@
 namespace Nicebike;
 
-using MySql.Data.MySqlClient;
 using Nicebike.Models;
 using Nicebike.Views;
 using Nicebike.ViewModels;
-using System.Collections.ObjectModel;
-using System.Globalization;
 
 public partial class OrderFilling : ContentPage
 {
@@ -18,7 +15,6 @@ public partial class OrderFilling : ContentPage
     List<Order> orders = new List<Order>();
     int i=0;
     public int IdOrder;
-    public Customer orderCustomer;
 
     CustomersManagement customersManagement = new CustomersManagement();
     BikesManagement bikesManagement = new BikesManagement();
@@ -27,12 +23,14 @@ public partial class OrderFilling : ContentPage
     OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
 
     public OrderFilling(int Id)
-	{
-        List<Customer> customers = new List<Customer>();
-        int IdCustomer;
-        
-		InitializeComponent();
+    {
         IdOrder = Id; // IdOrder accessible for the SaveBike function, do not remove (!)
+        List<Customer> customers = new List<Customer>();
+        List<Bike> orderBikes = orderDetailsManagement.GetOrderBikes(IdOrder);
+        int IdCustomer;
+        int totalPrice;
+
+        InitializeComponent();
 
         bikeModels = bikeModelsManagement.GetAllBikeModels();
         foreach (BikeModel bikeModel in bikeModels)
@@ -41,7 +39,10 @@ public partial class OrderFilling : ContentPage
             i++;
         }
 
-        orderDetailsListView.ItemsSource = orderDetailsManagement.GetOrderBikes(IdOrder); //List of the bikes from this order
+        totalPrice = orderDetailsManagement.GetOrderPrice(orderBikes);
+        totalPriceLabel.Text = totalPrice.ToString();
+
+        orderDetailsListView.ItemsSource = orderBikes; //List of the bikes from this order
         colorPicker.ItemsSource = colorList;
         modelPicker.ItemsSource = modelList;
         sizePicker.ItemsSource = sizeList;
@@ -49,15 +50,17 @@ public partial class OrderFilling : ContentPage
         orders = orderManagement.GetAllOrders();
         IdCustomer = (orders.Find(obj => obj.IdOrder == Id)).CustomerId;
         customers = customersManagement.GetAllCustomers();
-        orderCustomer = customers.Find(obj => obj.idCustomer == IdCustomer);
-        BindingContext = orderCustomer;
+        BindingContext = customers.Find(obj => obj.idCustomer == IdCustomer);
     }
 
-    private void RemoveBike(object sender, EventArgs e)
+    private async void RemoveBike(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var IdBike = (int)button.CommandParameter;
         bikesManagement.DeleteBike(IdBike);
+
+        await Navigation.PushAsync(new OrderFilling(IdOrder));
+        Navigation.RemovePage(this);
     }
 
     public async void SaveBike(object sender, EventArgs e)
@@ -79,10 +82,8 @@ public partial class OrderFilling : ContentPage
             }
         }
 
-
         await Navigation.PushAsync(new OrderFilling(IdOrder));
         Navigation.RemovePage(this);
-
     }
 
     private void GoToCustomersManagementClick(object sender, EventArgs e)

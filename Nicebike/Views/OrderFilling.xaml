@@ -41,6 +41,7 @@
             <Label Text="Size" WidthRequest="100" BackgroundColor="LightGrey"/>
             <Label Text="Reference" WidthRequest="100" BackgroundColor="LightGrey"/>
             <Label Text="Model" WidthRequest="100" BackgroundColor="LightGrey"/>
+            <Label Text="Price in €" WidthRequest="100" BackgroundColor="LightGrey"/>
         </HorizontalStackLayout>
 
         <StackLayout Orientation="Vertical" HeightRequest="450">
@@ -54,6 +55,7 @@
                                 <Label Text="{Binding size}" WidthRequest="100" />
                                 <Label Text="{Binding id}" WidthRequest="100" />
                                 <Label Text="{Binding bikeModelName}" WidthRequest="100" />
+                                <Label Text="{Binding bikePrice}" WidthRequest="100" />
                                 <Button Text="Remove" 
                                         Clicked="RemoveBike"
                                         CommandParameter="{Binding id}"
@@ -87,12 +89,19 @@
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Entry x:Name="quantityEntry" WidthRequest="75" Placeholder="quantity" />
+                <Entry x:Name="quantityEntry" WidthRequest="75" Placeholder="Quantity" />
 
                 <Button Text="Save" 
                 CommandParameter="{Binding IdOrder}"
                 Clicked="SaveBike"/>
             </HorizontalStackLayout>
+            
+            <HorizontalStackLayout>
+                <Label Text="Total price = " FontSize="Large"/>
+                <Label x:Name="totalPriceLabel" Text="{Binding totalPrice}" FontSize="Large"/>
+                <Label Text="€" FontSize="Large"/>
+            </HorizontalStackLayout>
+            
             <Button Text="Confirm" Clicked="Confirm" WidthRequest="200"/>
         </StackLayout>
     </StackLayout>

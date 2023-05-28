@@ -12,7 +12,9 @@
         public string status { get; set; }
         public string bikeModelName { get; set; }
 
-        public Bike(int id, string color, string type, string size, string reference, int technician, int bikeModelId, string status, string bikeModelName)
+        public int bikePrice { get; set; }
+
+        public Bike(int id, string color, string type, string size, string reference, int technician, int bikeModelId, string status, string bikeModelName, int bikePrice)
         {
             this.id = id;
             this.color = color;
@@ -23,6 +25,7 @@
             this.bikeModelId = bikeModelId;
             this.status = status;
             this.bikeModelName = bikeModelName;
+            this.bikePrice = bikePrice;
         }
     }
 }

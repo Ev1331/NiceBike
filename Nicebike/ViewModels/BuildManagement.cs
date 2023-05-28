@@ -39,7 +39,8 @@ namespace Nicebike.ViewModels
                         reader.GetInt32("Technician"),
                         BikeModelId,
                         reader.GetString("Status"),
-                        bikeModels.Find(obj => obj.id == BikeModelId).description
+                        bikeModels.Find(obj => obj.id == BikeModelId).description,
+                        bikeModels.Find(obj => obj.id == BikeModelId).price
                     );
 
                     bikesForBuilder.Add(bike);

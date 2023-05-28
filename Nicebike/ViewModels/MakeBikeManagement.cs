@@ -27,7 +27,7 @@ namespace Nicebike.ViewModels
             {
                 if (reader.GetString("Status") == "Waiting")
                 {
-                    int bikeModelId = reader.GetInt32("BikeModel");
+                    int BikeModelId = reader.GetInt32("BikeModel");
                     string size = reader.GetString("Size");
                     Bike bike = new Bike(
                         reader.GetInt32("IdBike"),
@@ -36,9 +36,10 @@ namespace Nicebike.ViewModels
                         size,
                         reader.GetString("Ref"),
                         reader.GetInt32("Technician"),
-                        bikeModelId,
+                        BikeModelId,
                         reader.GetString("Status"),
-                        bikeModels.Find(obj => obj.id == bikeModelId).description
+                        bikeModels.Find(obj => obj.id == BikeModelId).description,
+                        bikeModels.Find(obj => obj.id == BikeModelId).price
                     );
 
                     bikesToBuild.Add(bike);

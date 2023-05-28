@@ -51,6 +51,17 @@ namespace Nicebike.ViewModels
             connection.Close();
             return id;
         }
+
+        public int GetOrderPrice(List<Bike> bikes)
+        {
+            int totalPrice = 0;
+            foreach(Bike bike in bikes)
+            {
+                totalPrice += bike.bikePrice;
+            }
+
+            return totalPrice;
+        }
     }
 }
 
