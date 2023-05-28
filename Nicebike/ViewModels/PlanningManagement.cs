@@ -7,7 +7,7 @@ namespace Nicebike.ViewModels
 {
 	public class PlanningManagement
 	{
-        MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+        
         public string sql;
         public CustomersManagement customersManagement = new CustomersManagement();
 
@@ -18,6 +18,7 @@ namespace Nicebike.ViewModels
             List<Customer> customerList = new List<Customer>();
             customerList = customersManagement.GetAllCustomers();
 
+            MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
             connection.Open();
             sql = "SELECT * FROM dbNicebike.order";
             using MySqlCommand command = new MySqlCommand(sql, connection);
@@ -54,17 +55,20 @@ namespace Nicebike.ViewModels
 
         public void ModifyProductionDate(int id, string productionDate)
         {
+            MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
             connection.Open();
             DateTime date = DateTime.ParseExact(productionDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             DateTime newDate = date.AddDays(3);
             string deliveryDate = newDate.ToString("yyyy-MM-dd");
 
-            sql = "UPDATE dbNicebike.order SET DeliveryDate = @deliveryDate WHERE IdOrder = @IdOrder";
+            string sql = "UPDATE dbNicebike.order SET DeliveryDate = @deliveryDate WHERE IdOrder = @IdOrder";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@deliveryDate", deliveryDate);
             command.Parameters.AddWithValue("@IdOrder", id);
 
             command.ExecuteNonQuery();
+
+            connection.Close();
         }
     }
 }
