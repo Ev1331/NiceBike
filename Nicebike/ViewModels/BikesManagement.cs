@@ -12,11 +12,14 @@ namespace Nicebike.ViewModels
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         int BikecountPlus = 0;
         int BikecountMinus = 6;
+
+        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+        OrderManagement orderManagement = new OrderManagement();
+        OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+
         public List<Bike> GetAllBikes()
         {
-            BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
-            OrderManagement orderManagement = new OrderManagement();
-            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+            
             List<BikeModel> bikeModels = new List<BikeModel>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             int BikeModelId;

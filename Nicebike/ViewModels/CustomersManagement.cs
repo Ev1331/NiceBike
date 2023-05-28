@@ -5,15 +5,18 @@ namespace Nicebike.ViewModels
 {
 	public class CustomersManagement
 	{
+        private string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+        private string sql;
+
         public List<Customer> GetAllCustomers()
         {
             List<Customer> customers = new List<Customer>();
 
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+            
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "SELECT * FROM dbNicebike.customer";
+            sql = "SELECT * FROM dbNicebike.customer";
 
             using MySqlCommand command = new MySqlCommand(sql, connection);
             using MySqlDataReader reader = command.ExecuteReader();
@@ -38,11 +41,11 @@ namespace Nicebike.ViewModels
 
         public void SendCustomer(Entry name, Entry surname, Entry mail, Entry phone, Entry street, Entry town, Entry number)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+   
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "INSERT INTO dbNicebike.customer (Name, Surname, Mail, Phone, Street, Town, Number) VALUES (@name, @surname, @mail, @phone, @street, @town, @number)";
+            sql = "INSERT INTO dbNicebike.customer (Name, Surname, Mail, Phone, Street, Town, Number) VALUES (@name, @surname, @mail, @phone, @street, @town, @number)";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@name", name.Text);
             command.Parameters.AddWithValue("@surname", surname.Text);
@@ -58,11 +61,11 @@ namespace Nicebike.ViewModels
 
         public void DeleteCustomer(int idCustomer)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+            
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "DELETE FROM dbNicebike.customer WHERE idCustomer = @id";
+            sql = "DELETE FROM dbNicebike.customer WHERE idCustomer = @id";
 
             using MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@id", idCustomer);
@@ -81,13 +84,10 @@ namespace Nicebike.ViewModels
         public void modifyCustomer(int id, string name, string surname, string mail, string phone, string street, string town, string number)
         {
 
-
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "UPDATE dbNicebike.customer SET Name = @name, Surname = @surname, Mail = @mail, Phone = @phone, Street = @street, Town = @town, Number = @number WHERE IdCustomer = @id";
+            sql = "UPDATE dbNicebike.customer SET Name = @name, Surname = @surname, Mail = @mail, Phone = @phone, Street = @street, Town = @town, Number = @number WHERE IdCustomer = @id";
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             command.Parameters.AddWithValue("@name", name);
