@@ -101,7 +101,4 @@
 	  <BundleResource Include="Resources\Images\city.png" />
 	  <BundleResource Include="Resources\Images\adventure.png" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	</ItemGroup>
 </Project>

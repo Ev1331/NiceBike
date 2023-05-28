@@ -10,12 +10,13 @@ public partial class StockManagement : ContentPage
     public ObservableCollection<Part> lowParts = new ObservableCollection<Part>();
     public ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
     public PartsManagement stockManagement = new PartsManagement();
+    private SearchBarFilter searchBarFilter = new SearchBarFilter();
     public int IdPart;
     public StockManagement()
     {
         InitializeComponent();
 
-        ObservableCollection<Part> observableParts = stockManagement.GetAllParts();
+        List<Part> observableParts = stockManagement.GetAllParts();
 
         foreach (Part part in observableParts){
             if(part.quantity < part.threshold)
@@ -33,16 +34,17 @@ public partial class StockManagement : ContentPage
 
     private async void NewPart(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new PartDatasheet());
+        await Navigation.PushAsync(new PartDatasheet());
+        Navigation.RemovePage(this);
     }
 
     private async void OnModifyClickedPart(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var part = (Part)button.BindingContext;
-        var modifyPage = new ModifyPart(part);
 
-        await Navigation.PushAsync(modifyPage);
+        await Navigation.PushAsync(new ModifyPart(part));
+        Navigation.RemovePage(this);
     }
 
     private async void DeletePart(object sender, EventArgs e)
@@ -78,9 +80,7 @@ public partial class StockManagement : ContentPage
 
     private void partSearchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
-        SearchBar searchBar = (SearchBar)sender;
-        //searchResults.ItemsSource = customersList.GetSearchResults(searchBar.Text);
-        partSearchResults.ItemsSource = stockManagement.GetAllParts();
+        partSearchResults.ItemsSource = searchBarFilter.GetFilteredParts(((SearchBar)sender).Text);
     }
 
     private void partSearchResults_ItemSelected(object sender, SelectedItemChangedEventArgs e)

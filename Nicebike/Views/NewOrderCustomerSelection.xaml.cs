@@ -8,18 +8,16 @@ using System.Collections.ObjectModel;
 public partial class NewOrderCustomerSelection : ContentPage
 {
     public int IdOrder;
-    CustomersManagement customersManagement = new CustomersManagement();
-    public OrderManagement orderManagement = new OrderManagement();
+    private OrderManagement orderManagement = new OrderManagement();
+    private SearchBarFilter searchBarFilter = new SearchBarFilter();
     public NewOrderCustomerSelection()
 	{
 		InitializeComponent();
 	}
 
-    private void CustomerSearchClick(object sender, TextChangedEventArgs e)
+    private void CustomerSearchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
-        SearchBar searchBar = (SearchBar)sender;
-        //searchResults.ItemsSource = customersList.GetSearchResults(searchBar.Text);
-        searchResults.ItemsSource = customersManagement.GetAllCustomers();
+        customerSearchResults.ItemsSource = searchBarFilter.GetFilteredCustomers(((SearchBar)sender).Text);
     }
 
     private void GoToCustomersManagement(object sender, EventArgs e)
@@ -29,7 +27,7 @@ public partial class NewOrderCustomerSelection : ContentPage
 
     private async void InitialiseOrder(object sender, EventArgs e)
     {
-        int IdCustomer = ((Customer)(searchResults.SelectedItem)).idCustomer;
+        int IdCustomer = ((Customer)(customerSearchResults.SelectedItem)).idCustomer;
         orderManagement.CreateOrder(IdCustomer);
 
         string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";

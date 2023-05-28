@@ -10,14 +10,14 @@ namespace Nicebike.ViewModels
 	{
         MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
         string sql;
-        public ObservableCollection<Part> GetAllParts()
+        public List<Part> GetAllParts()
         {
             int idSupplier;
             SupplierManagement supplierManagement = new SupplierManagement();
             List<Supplier> suppliers = new List<Supplier>();
             suppliers = supplierManagement.GetAllSuppliers();
 
-            ObservableCollection<Part> parts = new ObservableCollection<Part>();
+            List<Part> parts = new List<Part>();
 
             connection.Open();
 
@@ -43,17 +43,17 @@ namespace Nicebike.ViewModels
             return parts;
         }
 
-        public void SendPart(List<Supplier> suppliers, Entry reference, Entry description, Entry quantity, Entry threshold, Picker supplier)
+        public void SendPart(List<Supplier> suppliers, Entry reference, Entry description, Entry quantity, Entry threshold, int IdSupplier)
         {
             connection.Open();
 
-            sql = "INSERT INTO dbNicebike.part (Ref, Description, Quantity, Threshold, Supplier) VALUES (@reference, @description, @quantity, @threshold, @supplier)";
+            sql = "INSERT INTO dbNicebike.part (Ref, Description, Quantity, Threshold, Supplier) VALUES (@reference, @description, @quantity, @threshold, @IdSupplier)";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@reference", reference.Text);
             command.Parameters.AddWithValue("@description", description.Text);
             command.Parameters.AddWithValue("@quantity", quantity.Text);
             command.Parameters.AddWithValue("@threshold", threshold.Text);
-            command.Parameters.AddWithValue("@supplier", suppliers[supplier.SelectedIndex].idSupplier);
+            command.Parameters.AddWithValue("@IdSupplier", IdSupplier);
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -97,7 +97,7 @@ namespace Nicebike.ViewModels
             connection.Close();
         }
 
-        public async void RestockAll(ObservableCollection<Part> lowParts)
+        public void RestockAll(ObservableCollection<Part> lowParts)
         {
             connection.Open();
 

@@ -13,14 +13,30 @@
         <Label Text="Quantity:"></Label>
         <Entry x:Name="quantityEntry" WidthRequest="200"/>
 
-        <Picker x:Name="supplierPicker"
-        Title="Select a supplier">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}" >
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+        <StackLayout>
+            <SearchBar TextChanged="supplierSearchBar_TextChanged"
+                       Placeholder="Search a supplier..."
+                       WidthRequest="200"
+                       HorizontalOptions="StartAndExpand"
+                       />
+            <ListView x:Name="supplierSearchResults"
+                      ItemSelected="supplierSearchResults_ItemSelected"
+                      HeightRequest="200"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding name}" WidthRequest="150"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
 
+        <Button Text="Manage suppliers" 
+                Clicked="ManageSuppliers"/>
         <Button Text="Save" 
                 Clicked="SavePart"/>
     </VerticalStackLayout>

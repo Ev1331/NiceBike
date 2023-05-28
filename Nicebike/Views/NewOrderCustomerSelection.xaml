@@ -9,11 +9,11 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <StackLayout>
-            <SearchBar TextChanged="CustomerSearchClick"
+            <SearchBar TextChanged="CustomerSearchBar_TextChanged"
                        WidthRequest="200"
                        HorizontalOptions="StartAndExpand"
                        />
-            <ListView x:Name="searchResults"
+            <ListView x:Name="customerSearchResults"
                       ItemSelected="InitialiseOrder"
                       HeightRequest="200"
                       >
@@ -21,8 +21,8 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding name}" WidthRequest="150" />
-                                <Label Text="{Binding surname}" WidthRequest="150"/>
+                                <Label Text="{Binding surname}" WidthRequest="150" />
+                                <Label Text="{Binding name}" WidthRequest="150"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
