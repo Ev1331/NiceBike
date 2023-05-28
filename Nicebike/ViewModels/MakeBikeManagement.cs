@@ -51,8 +51,10 @@ namespace Nicebike.ViewModels
 
         public void ProcessBike(int IdBike, int IdTechnician)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+            int IdOrder = orderDetailsManagement.GetAssociatedOrderId(IdBike);
 
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -63,6 +65,14 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@IdBike", IdBike);
 
             command.ExecuteNonQuery();
+            connection.Close();
+
+            connection.Open();
+            sql = "UPDATE dbNicebike.order SET Status = 'In progress...' WHERE IdOrder = @IdOrder";
+            command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@IdOrder", IdOrder);
+            command.ExecuteNonQuery();
+            connection.Close();
 
             (int bikeModelId, string size) = GetBikeModelIdAndSize(IdBike);
             List<string> references = GetReferencesByBikeModelIdAndSize(bikeModelId, size);
