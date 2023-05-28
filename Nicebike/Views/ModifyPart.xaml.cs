@@ -10,6 +10,7 @@ public partial class ModifyPart : ContentPage
     List<String> suppliersnames = new List<String>();
     List<Supplier> suppliers = new List<Supplier>();
     private SearchBarFilter searchBarFilter = new SearchBarFilter();
+    PartsManagement partsManagement = new PartsManagement();
 
     Part part;
     private int IdSupplier;
@@ -34,8 +35,7 @@ public partial class ModifyPart : ContentPage
         Entry quantity = this.FindByName<Entry>("quantityEntryModify");
         Entry threshold = this.FindByName<Entry>("thresholdEntryModify");
 
-        ModifyDataPart modifyDataPart = new ModifyDataPart();
-        modifyDataPart.ModifyPart(IdPart, suppliers, reference, description, quantity, threshold, IdSupplier);
+        partsManagement.ModifyPart(IdPart, suppliers, reference, description, quantity, threshold, IdSupplier);
 
         await Navigation.PushAsync(new StockManagement());
         Navigation.RemovePage(this);
