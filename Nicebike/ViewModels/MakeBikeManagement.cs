@@ -7,14 +7,14 @@ namespace Nicebike.ViewModels
 {
 	public class MakeBikeManagement
 	{
-        private BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
-        private OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
-        private OrderManagement orderManagement = new OrderManagement();
-        private string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+        
         private string sql;
 
         public List<Bike> BikesToBuild()
         {
+            BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+            OrderManagement orderManagement = new OrderManagement();
             List<Bike> bikesToBuild = new List<Bike>();
             
             List<BikeModel> bikeModels = new List<BikeModel>();
@@ -22,8 +22,8 @@ namespace Nicebike.ViewModels
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             order = orderManagement.GetAllOrders();
 
-            
 
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -68,8 +68,10 @@ namespace Nicebike.ViewModels
 
         public void ProcessBike(int IdBike, int IdTechnician)
         {
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
             int IdOrder = orderDetailsManagement.GetAssociatedOrderId(IdBike);
 
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -100,7 +102,7 @@ namespace Nicebike.ViewModels
 
         public void DecrementPart(string reference)
         {
-
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
@@ -118,7 +120,7 @@ namespace Nicebike.ViewModels
             int bikeModelId = 0;
             string size = string.Empty;
 
-
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 

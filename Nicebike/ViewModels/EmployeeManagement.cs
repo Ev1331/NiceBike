@@ -5,12 +5,11 @@ namespace Nicebike.ViewModels
 {
 	public class EmployeeManagement
 	{
-        private string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
         private string sql;
         public List<Employee> GetAllEmployee()
         {
             List<Employee> employees = new List<Employee>();
-
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -44,6 +43,7 @@ namespace Nicebike.ViewModels
 
         public void SendEmployee(string[] jobTitleList, Entry name, Entry surname, Entry mail, Picker jobtitle, Entry phone)
         {
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -62,6 +62,7 @@ namespace Nicebike.ViewModels
         public void DeleteEmployee(int idEmployee)
 
         {
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -77,6 +78,7 @@ namespace Nicebike.ViewModels
 
         public void modifyEmployee(string[] jobTitleList, int id, string name, string surname, string mail, Picker jobtitle, string phone)
         {
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -97,7 +99,7 @@ namespace Nicebike.ViewModels
         {
             List<Employee> employees = new List<Employee>();
 
-
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 

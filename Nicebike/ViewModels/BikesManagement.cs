@@ -13,13 +13,14 @@ namespace Nicebike.ViewModels
         int BikecountPlus = 0;
         int BikecountMinus = 6;
 
-        BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
-        OrderManagement orderManagement = new OrderManagement();
-        OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+        
+        
 
         public List<Bike> GetAllBikes()
         {
-            
+            BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            OrderManagement orderManagement = new OrderManagement();
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
             List<BikeModel> bikeModels = new List<BikeModel>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             int BikeModelId;

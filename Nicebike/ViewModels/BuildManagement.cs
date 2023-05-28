@@ -6,15 +6,12 @@ namespace Nicebike.ViewModels
 {
 	public class BuildManagement
 	{
-        private BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
-        private OrderManagement orderManagement = new OrderManagement();
-        private OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
-
-        private string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
 
         public List<Bike> BikesForBuilder(int id)
         {
-            
+            BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+            OrderManagement orderManagement = new OrderManagement();
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
             List<BikeModel> bikeModels = new List<BikeModel>();
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             int BikeModelId;
@@ -24,8 +21,8 @@ namespace Nicebike.ViewModels
             List<Order> order = new List<Order>();
             order = orderManagement.GetAllOrders();
 
-            
 
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -65,7 +62,9 @@ namespace Nicebike.ViewModels
         }
         public void FinishBike(int IdBike, int IdTechnician)
         {
+            OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
 
+            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
