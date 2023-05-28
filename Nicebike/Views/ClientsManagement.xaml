@@ -20,13 +20,13 @@
                      <StackLayout>
                          <StackLayout Orientation="Horizontal">
                              
-                             <Entry x:Name="nameEntry" WidthRequest="150" Placeholder="name"  />
+                             <Entry x:Name="nameEntry" WidthRequest="200" Placeholder="name"  />
                              <Entry x:Name="surnameEntry" WidthRequest="150" Placeholder="surname"  />
-                             <Entry x:Name="mailEntry" WidthRequest="150" Placeholder="mail"  />
+                             <Entry x:Name="mailEntry" WidthRequest="175" Placeholder="mail"  />
                              <Entry x:Name="phoneEntry" WidthRequest="150" Placeholder="phone"  />
-                             <Entry x:Name="streetEntry" WidthRequest="150" Placeholder="street"  />
+                             <Entry x:Name="streetEntry" WidthRequest="200" Placeholder="street"  />
                              <Entry x:Name="townEntry" WidthRequest="150" Placeholder="town"  />
-                             <Entry x:Name="numberEntry" WidthRequest="150" Placeholder="number"  />
+                             <Entry x:Name="numberEntry" WidthRequest="75" Placeholder="number"  />
                              <Button Text="Add Customer" Clicked="OnConfirmClickedCustomer" Background="Green"/>
 
                          </StackLayout>
@@ -46,11 +46,11 @@
                             <Label Text="{Binding idCustomer}" WidthRequest="50" />
                             <Label Text="{Binding name}" WidthRequest="150" />
                             <Label Text="{Binding surname}" WidthRequest="150"/>
-                            <Label Text="{Binding mail}" WidthRequest="150" />
+                            <Label Text="{Binding mail}" WidthRequest="175" />
                             <Label Text="{Binding phone}" WidthRequest="150" />
-                            <Label Text="{Binding street}" WidthRequest="150"/>
+                            <Label Text="{Binding street}" WidthRequest="200"/>
                             <Label Text="{Binding town}" WidthRequest="150"/>
-                            <Label Text="{Binding number}" WidthRequest="50"/>
+                            <Label Text="{Binding number}" WidthRequest="75"/>
                             <Button Text="Modify information" Clicked ="OnModifyClickedCustomer"/>
                             <Button Text="Delete customer" Clicked="OnDeleteClickedCustomer" Background="Red" CommandParameter="{Binding idCustomer}"/>
                         </StackLayout>

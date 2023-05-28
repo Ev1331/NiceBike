@@ -41,7 +41,7 @@ public partial class OrderList : ContentPage
 
         orderManagement.DeleteOrder(IdOrder);
 
-        await Navigation.PushAsync(new OrderList());
-        Navigation.RemovePage(this);
+        List<Order> orderList = orderManagement.GetAllOrders();
+        orderListView.ItemsSource = orderList;
     }
 }
