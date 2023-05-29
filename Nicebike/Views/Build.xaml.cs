@@ -26,13 +26,20 @@ public partial class Build : ContentPage
     {
         technicianLabel.Text = $"Technicien {BuilderNumber}";
     }
-    private void OnFinishedClicked(object sender, EventArgs e)
+    private async void OnFinishedClicked(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var idBike = (int)button.CommandParameter;
         BuildManagement buildManagement = new BuildManagement();
 
         buildManagement.FinishBike(idBike, BuilderNumber);
+
+        var buildPage = new Build(BuilderNumber);
+        
+
+        await Navigation.PushAsync(buildPage);
+
+        Navigation.RemovePage(this);
     }
 
 

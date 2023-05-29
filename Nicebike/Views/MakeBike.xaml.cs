@@ -27,13 +27,19 @@ namespace Nicebike.Views
             technicianLabel.Text = $"Technicien {TechnicianNumber}";
         }
 
-        public void OnProcessingClicked(object sender, EventArgs e)
+        public async void OnProcessingClicked(object sender, EventArgs e)
         {
             var button = (Button)sender;
             var idBike = (int)button.CommandParameter;
             MakeBikeManagement makeBikeManagement = new MakeBikeManagement();
 
             makeBikeManagement.ProcessBike(idBike, TechnicianNumber);
+            var makePage = new MakeBike(TechnicianNumber);
+
+
+            await Navigation.PushAsync(makePage);
+
+            Navigation.RemovePage(this);
         }
     }
 }

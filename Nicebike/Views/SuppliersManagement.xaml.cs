@@ -5,7 +5,6 @@ using MySql.Data.MySqlClient;
 using Nicebike.Models;
 using Nicebike.ViewModels;
 
-
 public partial class SuppliersManagement : ContentPage
 {
     public SuppliersManagement()
@@ -21,7 +20,7 @@ public partial class SuppliersManagement : ContentPage
         // Assigner la liste des fournisseurs à la source de données du ListView
         supplierListView.ItemsSource = suppliers;
     }
-    public void OnConfirmClicked(object sender, EventArgs e)
+    public async void OnConfirmClicked(object sender, EventArgs e)
     {
         Entry name = this.FindByName<Entry>("nameEntry");
         Entry mail = this.FindByName<Entry>("mailEntry");
@@ -33,14 +32,20 @@ public partial class SuppliersManagement : ContentPage
         SupplierManagement supplierManagement = new SupplierManagement();
 
         supplierManagement.SendSupplier(name, mail, phone, street, town, number);
+
+        await Navigation.PushAsync(new SuppliersManagement());
+        Navigation.RemovePage(this);
     }
-    public void OnDeleteClicked(object sender, EventArgs e)
+    public async void OnDeleteClicked(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var idSupplier = (int)button.CommandParameter;
 
         SupplierManagement supplierManagement = new SupplierManagement();
         supplierManagement.DeleteSupplier(idSupplier);
+
+        await Navigation.PushAsync(new SuppliersManagement());
+        Navigation.RemovePage(this);
     }
 
     private async void OnModifyClicked(object sender, EventArgs e)
@@ -50,5 +55,6 @@ public partial class SuppliersManagement : ContentPage
         var modifyPage = new ModifySupplier(supplier);
 
         await Navigation.PushAsync(modifyPage);
+        Navigation.RemovePage(this);
     }
 }
