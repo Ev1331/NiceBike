@@ -6,8 +6,8 @@ using Nicebike.ViewModels;
 
 public partial class StockManagement : ContentPage
 {
-    private ObservableCollection<Part> okParts = new ObservableCollection<Part>();
-    private ObservableCollection<Part> lowParts = new ObservableCollection<Part>();
+    private List<Part> okParts = new List<Part>();
+    private List<Part> lowParts = new List<Part>();
     private PartsManagement stockManagement = new PartsManagement();
     private SearchBarFilter searchBarFilter = new SearchBarFilter();
     private int IdPart;

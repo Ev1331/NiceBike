@@ -5,18 +5,15 @@ namespace Nicebike.ViewModels
 {
 	public class CustomersManagement
 	{
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
         private string sql;
-
         public List<Customer> GetAllCustomers()
         {
             List<Customer> customers = new List<Customer>();
 
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "SELECT * FROM dbNicebike.customer";
-
             using MySqlCommand command = new MySqlCommand(sql, connection);
             using MySqlDataReader reader = command.ExecuteReader();
 
@@ -40,8 +37,6 @@ namespace Nicebike.ViewModels
 
         public void SendCustomer(Entry name, Entry surname, Entry mail, Entry phone, Entry street, Entry town, Entry number)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "INSERT INTO dbNicebike.customer (Name, Surname, Mail, Phone, Street, Town, Number) VALUES (@name, @surname, @mail, @phone, @street, @town, @number)";
@@ -72,15 +67,8 @@ namespace Nicebike.ViewModels
             command.ExecuteNonQuery();
             connection.Close();
         }
-        public List<Customer> SearchCustomer()
-        {
-            CustomersManagement customersManagement = new CustomersManagement();
-            List<Customer> customersList = customersManagement.GetAllCustomers();
 
-            return customersList;
-        }
-
-        public void modifyCustomer(int id, string name, string surname, string mail, string phone, string street, string town, string number)
+        public void ModifyCustomer(int id, string name, string surname, string mail, string phone, string street, string town, string number)
         {
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -99,7 +87,7 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@id", id);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
     }
 }
-

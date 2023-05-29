@@ -7,9 +7,8 @@ namespace Nicebike.ViewModels
 {
 	public class MakeBikeManagement
 	{
-        
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
         private string sql;
-
         public List<Bike> BikesToBuild()
         {
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
@@ -22,22 +21,16 @@ namespace Nicebike.ViewModels
             bikeModels = bikeModelsManagement.GetAllBikeModels();
             order = orderManagement.GetAllOrders();
 
-
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "SELECT * FROM dbNicebike.bike";
-
             using MySqlCommand command = new MySqlCommand(sql, connection);
-
             using MySqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
                 if (reader.GetString("Status") == "Waiting")
                 {
-                    
                     int IdOrder = orderDetailsManagement.GetAssociatedOrderId(reader.GetInt32("IdBike"));
                     int BikeModelId = reader.GetInt32("BikeModel");
                     string size = reader.GetString("Size");
@@ -62,7 +55,7 @@ namespace Nicebike.ViewModels
                     bikesToBuild.Add(bike);
                 }
             }
-
+            connection.Close();
             return bikesToBuild;
         }
 
@@ -71,16 +64,12 @@ namespace Nicebike.ViewModels
             OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
             int IdOrder = orderDetailsManagement.GetAssociatedOrderId(IdBike);
 
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "UPDATE dbNicebike.bike SET Technician = @technician, Status = 'InProgress' WHERE IdBike = @IdBike";
             MySqlCommand command = new MySqlCommand(sql, connection);
-
             command.Parameters.AddWithValue("@technician", IdTechnician);
             command.Parameters.AddWithValue("@IdBike", IdBike);
-
             command.ExecuteNonQuery();
             connection.Close();
 
@@ -102,17 +91,13 @@ namespace Nicebike.ViewModels
 
         public void DecrementPart(string reference)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
+            connection.Open();
 
-                string updateSql = "UPDATE dbNicebike.part SET Quantity = Quantity - 1 WHERE Ref = @reference";
-
-                MySqlCommand updateCommand = new MySqlCommand(updateSql, connection);
-                updateCommand.Parameters.AddWithValue("@reference", reference);
-                updateCommand.ExecuteNonQuery();
-            }
+            string updateSql = "UPDATE dbNicebike.part SET Quantity = Quantity - 1 WHERE Ref = @reference";
+            MySqlCommand updateCommand = new MySqlCommand(updateSql, connection);
+            updateCommand.Parameters.AddWithValue("@reference", reference);
+            updateCommand.ExecuteNonQuery();
+            connection.Close();
         }
 
         private (int bikeModelId, string size) GetBikeModelIdAndSize(int idBike)
@@ -120,12 +105,9 @@ namespace Nicebike.ViewModels
             int bikeModelId = 0;
             string size = string.Empty;
 
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "SELECT BikeModel, Size FROM dbNicebike.bike WHERE IdBike = @idBike";
-
             using MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@idBike", idBike);
 
@@ -135,7 +117,7 @@ namespace Nicebike.ViewModels
                 bikeModelId = reader.GetInt32("BikeModel");
                 size = reader.GetString("Size");
             }
-
+            connection.Close();
             return (bikeModelId, size);
         }
 
@@ -162,12 +144,8 @@ namespace Nicebike.ViewModels
                     return new List<string> { "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "FRA09", "TYR07", "TYR08" };
                 else if (size == "28\"")
                     return new List<string> { "BRA01", "CHA01", "CHA02", "DER02", "BRA02", "FRA02", "FRA03", "FRA05", "CHAO3", "TYR04", "TYR05", "FRA06", "FRA07", "FRA08", "FRA10", "TYR07", "TYR08" };
-
             }
-
             return new List<string>(); // Retourne une liste vide si le BikeModelId ou la taille ne sont pas reconnus
         }
     }
 }
-
-

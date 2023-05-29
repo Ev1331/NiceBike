@@ -4,20 +4,18 @@ using MySql.Data.MySqlClient;
 namespace Nicebike.ViewModels
 {
 	public class EmployeeManagement
-	{
+    {
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
         private string sql;
         public List<Employee> GetAllEmployee()
         {
             List<Employee> employees = new List<Employee>();
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "SELECT * FROM dbNicebike.employee";
 
             using MySqlCommand command = new MySqlCommand(sql, connection);
             using MySqlDataReader reader = command.ExecuteReader();
-
 
             while (reader.Read())
             {
@@ -33,18 +31,13 @@ namespace Nicebike.ViewModels
 
                     employees.Add(employee);
                 }
-
-
             }
-
             connection.Close();
             return employees;
         }
 
         public void SendEmployee(string[] jobTitleList, Entry name, Entry surname, Entry mail, Picker jobtitle, Entry phone)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "INSERT INTO dbNicebike.employee (Name, Surname, Mail, JobTitle, Phone) VALUES (@name, @surname, @mail, @jobtitle, @phone)";
@@ -62,8 +55,6 @@ namespace Nicebike.ViewModels
         public void DeleteEmployee(int idEmployee)
 
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "DELETE FROM dbNicebike.employee WHERE idEmployee = @id";
@@ -76,10 +67,8 @@ namespace Nicebike.ViewModels
 
         }
 
-        public void modifyEmployee(string[] jobTitleList, int id, string name, string surname, string mail, Picker jobtitle, string phone)
+        public void ModifyEmployee(string[] jobTitleList, int id, string name, string surname, string mail, Picker jobtitle, string phone)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "UPDATE dbNicebike.employee SET Name = @name, Surname = @surname, Mail = @mail, JobTitle = @jobtitle, Phone = @phone WHERE IdEmployee = @id";
@@ -93,23 +82,18 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@id", id);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
 
         public List<Employee> GetTechnician()
         {
             List<Employee> employees = new List<Employee>();
 
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
             sql = "SELECT * FROM dbNicebike.employee WHERE JobTitle = 'Technician'";
-
             using MySqlCommand command = new MySqlCommand(sql, connection);
-
             using MySqlDataReader reader = command.ExecuteReader();
-
-
 
             while (reader.Read())
             {
@@ -127,10 +111,8 @@ namespace Nicebike.ViewModels
                     employees.Add(employee);
                 }
             }
+            connection.Close();
             return employees;
         }
-
     }
 }
-
-

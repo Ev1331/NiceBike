@@ -25,7 +25,7 @@ public partial class ModifyCustomer : ContentPage
         Entry town = this.FindByName<Entry>("townChange");
         Entry number = this.FindByName<Entry>("numberChange");
 
-        customersManagement.modifyCustomer(customerId, name.Text, surname.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
+        customersManagement.ModifyCustomer(customerId, name.Text, surname.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
 
         await Navigation.PushAsync(new ClientsManagement());
         Navigation.RemovePage(this);

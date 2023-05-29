@@ -95,7 +95,7 @@ namespace Nicebike.ViewModels
             connection.Close();
         }
 
-        public void RestockAll(ObservableCollection<Part> lowParts)
+        public void RestockAll(List<Part> lowParts)
         {
             connection.Open();
 

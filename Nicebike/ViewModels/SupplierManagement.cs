@@ -60,7 +60,7 @@ namespace Nicebike.ViewModels
             connection.Close();
         }
 
-        public void modifySupplier(int id, string name, string mail, string phone, string street, string town, string number)
+        public void ModifySupplier(int id, string name, string mail, string phone, string street, string town, string number)
         {
             connection.Open();
 

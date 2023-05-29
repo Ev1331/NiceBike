@@ -26,7 +26,7 @@ public partial class ModifyEmployee : ContentPage
         Picker jobtitle = this.FindByName<Picker>("jobTitlePicker");
         Entry phone = this.FindByName<Entry>("phoneChange");
 
-        employeeManagement.modifyEmployee(jobTitleList, employeeId, name.Text, surname.Text, mail.Text, jobtitle, phone.Text);
+        employeeManagement.ModifyEmployee(jobTitleList, employeeId, name.Text, surname.Text, mail.Text, jobtitle, phone.Text);
 
         await Navigation.PushAsync(new EmployeeMgmt());
         Navigation.RemovePage(this);

@@ -19,7 +19,7 @@ public partial class EmployeeMgmt : ContentPage
         jobTitlePicker.ItemsSource = jobTitleList;
     }
 
-    public void OnConfirmClickedEmployee(object sender, EventArgs e)
+    public async void OnConfirmClickedEmployee(object sender, EventArgs e)
     {
         Entry name = this.FindByName<Entry>("nameEntry");
         Entry surname = this.FindByName<Entry>("surnameEntry");
@@ -29,7 +29,7 @@ public partial class EmployeeMgmt : ContentPage
 
         this.employeeManagement.SendEmployee(jobTitleList,name, surname, mail, jobtitle, phone);
 
-        Navigation.PushAsync(new EmployeeMgmt());
+        await Navigation.PushAsync(new EmployeeMgmt());
         Navigation.RemovePage(this);
     }
 

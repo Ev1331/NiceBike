@@ -25,7 +25,7 @@ public partial class ModifySupplier : ContentPage
         Entry number = this.FindByName<Entry>("numberChange");
         Entry town = this.FindByName<Entry>("townChange");
 
-        supplierManagement.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
+        supplierManagement.ModifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
 
         var supplierPage = new SuppliersManagement();
         await Navigation.PushAsync(supplierPage);
