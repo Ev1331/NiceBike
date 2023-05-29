@@ -21,7 +21,7 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
         // Assigner la liste des fournisseurs à la source de données du ListView
         supplierListView.ItemsSource = suppliers;
     }
-    public void OnConfirmClicked(object sender, EventArgs e)
+    public async void OnConfirmClicked(object sender, EventArgs e)
     {
         Entry name = this.FindByName<Entry>("nameEntry");
         Entry mail = this.FindByName<Entry>("mailEntry");
@@ -34,8 +34,15 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
 
         supplierManagement.SendSupplier(name, mail, phone, street, town, number);
 
+        var supplierPage = new SuppliersManagement();
+
+
+        await Navigation.PushAsync(supplierPage);
+
+        Navigation.RemovePage(this);
+
     }
-    public void OnDeleteClicked(object sender, EventArgs e)
+    public async void OnDeleteClicked(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var idSupplier = (int)button.CommandParameter;
@@ -45,6 +52,13 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
         SupplierManagement supplierManagement = new SupplierManagement();
         supplierManagement.DeleteSupplier(idSupplier);
 
+
+        var supplierPage = new SuppliersManagement();
+
+
+        await Navigation.PushAsync(supplierPage);
+
+        Navigation.RemovePage(this);
 
 
     }
@@ -59,6 +73,12 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
 
 
         await Navigation.PushAsync(modifyPage);
+
+
+       
+
+
+        
     }
 
 

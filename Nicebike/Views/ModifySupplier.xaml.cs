@@ -22,7 +22,7 @@ public partial class ModifySupplier : ContentPage
         BindingContext = supplier;
     }
 
-    public void modifyClicked(object sender, EventArgs e)
+    public async void modifyClicked(object sender, EventArgs e)
     {
         Entry name = this.FindByName<Entry>("nameChange");
         Entry mail = this.FindByName<Entry>("mailChange");
@@ -32,6 +32,11 @@ public partial class ModifySupplier : ContentPage
         Entry town = this.FindByName<Entry>("townChange");
 
         supplierManagement.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
+
+        var supplierPage = new SuppliersManagement();
+        await Navigation.PushAsync(supplierPage);
+
+        Navigation.RemovePage(this);
     }
 }
 
