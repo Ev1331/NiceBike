@@ -8,16 +8,14 @@ namespace Nicebike.ViewModels
 {
 	public class PartsManagement
 	{
-        MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
-        string sql;
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+        private string sql;
         public List<Part> GetAllParts()
         {
-            int idSupplier;
             SupplierManagement supplierManagement = new SupplierManagement();
-            List<Supplier> suppliers = new List<Supplier>();
-            suppliers = supplierManagement.GetAllSuppliers();
-
+            List<Supplier> suppliers = supplierManagement.GetAllSuppliers();
             List<Part> parts = new List<Part>();
+            int idSupplier;
 
             connection.Open();
 
@@ -133,4 +131,3 @@ namespace Nicebike.ViewModels
         }
     }
 }
-

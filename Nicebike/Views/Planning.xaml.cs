@@ -4,18 +4,14 @@ using Nicebike.ViewModels;
 
 public partial class Planning : ContentPage
 {
-    public PlanningManagement planningManagement;
+    private PlanningManagement planningManagement;
 
     public Planning()
 	{
 		InitializeComponent();
 
         planningManagement = new PlanningManagement();
-
-        // ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
         List<Order> orderList = planningManagement.GetOrders();
-
-        // Assigner la liste des fournisseurs � la source de donn�es du ListView
         orderListPlanning.ItemsSource = orderList;
     }
 
@@ -29,6 +25,4 @@ public partial class Planning : ContentPage
         Navigation.RemovePage(this);
 
     }
-
-
 }

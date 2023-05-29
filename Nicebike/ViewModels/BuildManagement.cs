@@ -6,21 +6,16 @@ namespace Nicebike.ViewModels
 {
 	public class BuildManagement
 	{
-
         public List<Bike> BikesForBuilder(int id)
         {
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
             OrderManagement orderManagement = new OrderManagement();
             OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
-            List<BikeModel> bikeModels = new List<BikeModel>();
-            bikeModels = bikeModelsManagement.GetAllBikeModels();
-            int BikeModelId;
 
+            List<BikeModel> bikeModels = bikeModelsManagement.GetAllBikeModels();
+            List<Order> order = orderManagement.GetAllOrders();
             List<Bike> bikesForBuilder = new List<Bike>();
-
-            List<Order> order = new List<Order>();
-            order = orderManagement.GetAllOrders();
-
+            int BikeModelId;
 
             string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
             using MySqlConnection connection = new MySqlConnection(connectionString);
@@ -51,14 +46,10 @@ namespace Nicebike.ViewModels
                         bikeModels.Find(obj => obj.id == BikeModelId).price,
                         order.Find(obj => obj.IdOrder == IdOrder).DeliveryDate
                     );
-
                     bikesForBuilder.Add(bike);
                 }
             }
-
             return bikesForBuilder;
-
-
         }
         public void FinishBike(int IdBike, int IdTechnician)
         {
@@ -101,4 +92,3 @@ namespace Nicebike.ViewModels
         }
     }
 }
-

@@ -1,12 +1,8 @@
-﻿
-
-using Nicebike.Models;
+﻿using Nicebike.Models;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Nicebike.ViewModels;
 namespace Nicebike.Views;
-
-
 
 public partial class Build : ContentPage
 {

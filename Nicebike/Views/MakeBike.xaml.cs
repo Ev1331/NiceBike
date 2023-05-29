@@ -9,17 +9,14 @@ namespace Nicebike.Views
     {
         public int TechnicianNumber { get; set; }
         public List<Bike> Bikes { get; set; }
-
         public MakeBike(int technicianNumber)
         {
-            InitializeComponent();
-
             MakeBikeManagement makeBikeManagement = new MakeBikeManagement();
 
+            InitializeComponent();
+
             Bikes = makeBikeManagement.BikesToBuild();
-
             TechnicianNumber = technicianNumber;
-
             BindingContext = this;
 
             UpdateLabelText();

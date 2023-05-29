@@ -7,19 +7,19 @@ namespace Nicebike.ViewModels
 {
 	public class OrderManagement
 	{
-        public CustomersManagement customersManagement = new CustomersManagement();
-        public BikesManagement bikesManagement = new BikesManagement();
-        public OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+        private string sql;
 
-        MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
-        public string sql;
-        string customerName;
-        int id;
+        private CustomersManagement customersManagement = new CustomersManagement();
+        private BikesManagement bikesManagement = new BikesManagement();
+        private OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+
+        private string customerName;
+        private int id;
         public List<Order> GetAllOrders()
         {
             List<Order> orderList = new List<Order>();
-            List<Customer> customerList = new List<Customer>();
-            customerList = customersManagement.GetAllCustomers();
+            List<Customer> customerList = customersManagement.GetAllCustomers();
 
             connection.Open();
             sql = "SELECT * FROM dbNicebike.order";
@@ -55,7 +55,6 @@ namespace Nicebike.ViewModels
             }
 
             //Finally, deletes the order itself
-
             connection.Open();
             sql = "DELETE FROM dbNicebike.order WHERE IdOrder = @IdOrder";
             using MySqlCommand command = new MySqlCommand(sql, connection);
@@ -90,7 +89,6 @@ namespace Nicebike.ViewModels
             using MySqlDataReader reader = command.ExecuteReader();
             string deliveryDate = "";
 
-
             while (reader.Read())
             {
                 string latestDeleveryDate = reader.GetString("DeliveryDate");
@@ -111,4 +109,3 @@ namespace Nicebike.ViewModels
         }
     }
 }
-

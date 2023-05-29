@@ -6,19 +6,19 @@ using Nicebike.ViewModels;
 
 public partial class StockManagement : ContentPage
 {
-    public ObservableCollection<Part> okParts = new ObservableCollection<Part>();
-    public ObservableCollection<Part> lowParts = new ObservableCollection<Part>();
-    public ObservableCollection<Part> observableParts = new ObservableCollection<Part>();
-    public PartsManagement stockManagement = new PartsManagement();
+    private ObservableCollection<Part> okParts = new ObservableCollection<Part>();
+    private ObservableCollection<Part> lowParts = new ObservableCollection<Part>();
+    private PartsManagement stockManagement = new PartsManagement();
     private SearchBarFilter searchBarFilter = new SearchBarFilter();
-    public int IdPart;
+    private int IdPart;
     public StockManagement()
     {
         InitializeComponent();
 
-        List<Part> observableParts = stockManagement.GetAllParts();
+        List<Part> parts = stockManagement.GetAllParts();
 
-        foreach (Part part in observableParts){
+        foreach (Part part in parts)
+        {
             if(part.quantity < part.threshold)
             {
                 lowParts.Add(part);

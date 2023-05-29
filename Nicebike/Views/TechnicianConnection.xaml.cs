@@ -4,8 +4,6 @@ namespace Nicebike.Views;
 using Nicebike.Models;
 using Nicebike.ViewModels;
 
-
-
 public partial class TechnicianConnection : ContentPage
 {
     public List<Employee> Employees { get; set; }
@@ -21,15 +19,8 @@ public partial class TechnicianConnection : ContentPage
     {
         var button = (Button)sender;
         var idTechnician = Convert.ToInt32(button.CommandParameter);
-        //Navigation.PushAsync(new TechnicianHome(idTechnician));
         var homeTechnician = new TechnicianHome(idTechnician);
-
 
        Navigation.PushAsync(homeTechnician);
     }
-
-    
-
 }
-
-

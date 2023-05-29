@@ -18,10 +18,6 @@
             this.street = street;
             this.town = town;
             this.number = number;
-
-
-
         }
 	}
 }
-

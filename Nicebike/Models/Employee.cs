@@ -8,7 +8,6 @@
         public string mail { get; set; }
         public string jobtitle { get; set; }
         public string phone { get; set; }
-
         public Employee(int idEmployee, string name, string surname, string mail, string jobtitle, string phone)
 		{
 			this.idEmployee = idEmployee;
@@ -20,4 +19,3 @@
 		}
 	}
 }
-

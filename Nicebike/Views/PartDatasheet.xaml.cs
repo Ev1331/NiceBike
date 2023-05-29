@@ -5,7 +5,7 @@ using Nicebike.ViewModels;
 
 public partial class PartDatasheet : ContentPage
 {
-    List<Supplier> suppliers = new List<Supplier>();
+    private List<Supplier> suppliers = new List<Supplier>();
     private SearchBarFilter searchBarFilter = new SearchBarFilter();
     
     private int IdSupplier;

@@ -4,27 +4,17 @@ using MySql.Data.MySqlClient;
 namespace Nicebike.ViewModels
 {
 	public class SupplierManagement
-	{
+    {
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+        public string sql;
         public List<Supplier> GetAllSuppliers()
         {
             List<Supplier> suppliers = new List<Supplier>();
 
-
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-
-
             string sql = "SELECT * FROM dbNicebike.suppliers";
-
-
             using MySqlCommand command = new MySqlCommand(sql, connection);
-
-
             using MySqlDataReader reader = command.ExecuteReader();
-
 
             while (reader.Read())
             {
@@ -36,27 +26,17 @@ namespace Nicebike.ViewModels
                     reader.GetString("street"),
                     reader.GetString("town"),
                     reader.GetString("number")
-
                 );
-
-
                 suppliers.Add(supplier);
             }
-
-
             return suppliers;
         }
+
         public void SendSupplier(Entry name, Entry mail, Entry phone, Entry street, Entry town, Entry number)
         {
-
-
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "INSERT INTO dbNicebike.suppliers (Name, Mail, Phone, Street, Town, Number) VALUES (@name, @mail, @phone, @street, @town, @number)";
+            sql = "INSERT INTO dbNicebike.suppliers (Name, Mail, Phone, Street, Town, Number) VALUES (@name, @mail, @phone, @street, @town, @number)";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@name", name.Text);
             command.Parameters.AddWithValue("@mail", mail.Text);
@@ -66,38 +46,26 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@number", number.Text);
 
             command.ExecuteNonQuery();
-
-
-
+            connection.Close();
         }
         public void DeleteSupplier(int idSupplier)
-
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "DELETE FROM dbNicebike.suppliers WHERE idSupplier = @id";
-
-            using MySqlCommand command = new MySqlCommand(sql, connection);
+            sql = "DELETE FROM dbNicebike.suppliers WHERE idSupplier = @id";
+            MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@id", idSupplier);
 
             command.ExecuteNonQuery();
-
+            connection.Close();
         }
 
         public void modifySupplier(int id, string name, string mail, string phone, string street, string town, string number)
         {
-            string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-
-            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "UPDATE dbNicebike.suppliers SET Name = @name, Mail = @mail, Phone = @phone, Street = @street, Town = @town, Number = @number WHERE IdSupplier = @id";
+            sql = "UPDATE dbNicebike.suppliers SET Name = @name, Mail = @mail, Phone = @phone, Street = @street, Town = @town, Number = @number WHERE IdSupplier = @id";
             MySqlCommand command = new MySqlCommand(sql, connection);
-
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@mail", mail);
             command.Parameters.AddWithValue("@phone", phone);
@@ -107,7 +75,7 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@id", id);
 
             command.ExecuteNonQuery();
+            connection.Close();
         }
     }
 }
-

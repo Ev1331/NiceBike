@@ -4,21 +4,15 @@ using MySql.Data.MySqlClient;
 using Nicebike.Models;
 using Nicebike.ViewModels;
 
-
-
 public partial class ModifySupplier : ContentPage
 {
-    Supplier supplier;
-    int supplierId;
-    SupplierManagement supplierManagement = new SupplierManagement();
+    private SupplierManagement supplierManagement = new SupplierManagement();
+    private int supplierId;
 
     public ModifySupplier(Supplier supplier)
     {
         InitializeComponent();
-        this.supplier = supplier;
         supplierId = supplier.idSupplier;
-
-        // Définir le contexte de liaison des données
         BindingContext = supplier;
     }
 
@@ -34,5 +28,3 @@ public partial class ModifySupplier : ContentPage
         supplierManagement.modifySupplier(supplierId, name.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
     }
 }
-
-

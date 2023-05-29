@@ -5,19 +5,15 @@ using Nicebike.ViewModels;
 
 public partial class ModifyCustomer : ContentPage
 {
-    Customer customer;
-    int customerId;
-    CustomersManagement customersManagement = new CustomersManagement();
+    private CustomersManagement customersManagement = new CustomersManagement();
+    private int customerId;
 
 	public ModifyCustomer(Customer customer)
 	{
 		InitializeComponent();
-        this.customer = customer;
         customerId = customer.idCustomer;
-
         BindingContext = customer;
 	}
-
 
     public async void modifyClickedCustomer(object sender, EventArgs e)
     {
@@ -32,12 +28,6 @@ public partial class ModifyCustomer : ContentPage
         customersManagement.modifyCustomer(customerId, name.Text, surname.Text, mail.Text, phone.Text, street.Text, town.Text, number.Text);
 
         await Navigation.PushAsync(new ClientsManagement());
-
         Navigation.RemovePage(this);
-
-
     }
 }
-
-
-

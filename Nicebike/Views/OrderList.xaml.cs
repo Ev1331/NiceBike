@@ -8,7 +8,7 @@ namespace Nicebike.Views;
 
 public partial class OrderList : ContentPage
 {
-    public OrderManagement orderManagement = new OrderManagement();
+    private OrderManagement orderManagement = new OrderManagement();
     public OrderList()
     {
         InitializeComponent();

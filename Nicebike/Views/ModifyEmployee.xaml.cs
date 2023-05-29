@@ -6,20 +6,15 @@ using MySql.Data.MySqlClient;
 
 public partial class ModifyEmployee : ContentPage
 {
-    Employee employee;
-    int employeeId;
-    string[] jobTitleList = { "Technician", "Sale Representative", "Production Manager" };
-    EmployeeManagement employeeManagement = new EmployeeManagement();
+    private EmployeeManagement employeeManagement = new EmployeeManagement();
+    private string[] jobTitleList = { "Technician", "Sale Representative", "Production Manager" };
+    private int employeeId;
 
     public ModifyEmployee(Employee employee)
 	{
 		InitializeComponent();
-
-        this.employee = employee;
         employeeId = employee.idEmployee;
-
         jobTitlePicker.ItemsSource = jobTitleList;
-
         BindingContext = employee;
     }
 
@@ -35,6 +30,5 @@ public partial class ModifyEmployee : ContentPage
 
         await Navigation.PushAsync(new EmployeeMgmt());
         Navigation.RemovePage(this);
-
     }
 }

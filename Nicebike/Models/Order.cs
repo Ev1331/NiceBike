@@ -8,7 +8,6 @@
         public string DeliveryDate { get; set; }
         public string Status { get; set; }
         public string CustomerName { get; set; }
-
         public Order(int IdOrder, int CustomerId, string Date, string DeliveryDate, string Status, string CustomerName)
         {
             this.IdOrder = IdOrder;

@@ -6,29 +6,29 @@ using Nicebike.ViewModels;
 
 public partial class OrderFilling : ContentPage
 {
+    private CustomersManagement customersManagement = new CustomersManagement();
+    private BikesManagement bikesManagement = new BikesManagement();
+    private BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
+    private OrderManagement orderManagement = new OrderManagement();
+    private OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
+
     //ListView filling
-    string[] colorList = { "Red", "Blue", "Grey"};
-    List<String> modelList = new List<String>();
-    string[] sizeList = { "26\"", "28\""};
+    private string[] colorList = { "Red", "Blue", "Grey"};
+    private string[] sizeList = { "26\"", "28\""};
+    private List<String> modelList = new List<String>();
 
-    List<BikeModel> bikeModels = new List<BikeModel>();
-    List<Order> orders = new List<Order>();
-    int i=0;
+    private List<BikeModel> bikeModels = new List<BikeModel>();
+    private List<Order> orders = new List<Order>();
     public int IdOrder;
-
-    CustomersManagement customersManagement = new CustomersManagement();
-    BikesManagement bikesManagement = new BikesManagement();
-    BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
-    OrderManagement orderManagement = new OrderManagement();
-    OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
 
     public OrderFilling(int Id)
     {
         IdOrder = Id; // IdOrder accessible for the SaveBike function, do not remove (!)
-        List<Customer> customers = new List<Customer>();
         List<Bike> orderBikes = orderDetailsManagement.GetOrderBikes(IdOrder);
+        List<Customer> customers = customersManagement.GetAllCustomers();
         int IdCustomer;
         int totalPrice;
+        int i = 0;
 
         InitializeComponent();
 
@@ -49,7 +49,6 @@ public partial class OrderFilling : ContentPage
 
         orders = orderManagement.GetAllOrders();
         IdCustomer = (orders.Find(obj => obj.IdOrder == Id)).CustomerId;
-        customers = customersManagement.GetAllCustomers();
         BindingContext = customers.Find(obj => obj.idCustomer == IdCustomer);
     }
 

@@ -10,7 +10,6 @@
         public string street { get; set; }
         public string town { get; set; }
         public string number { get; set; }
-
         public Customer(int idCustomer, string name, string surname, string mail, string phone, string street, string town, string number ) {
             this.idCustomer = idCustomer;
             this.name = name;

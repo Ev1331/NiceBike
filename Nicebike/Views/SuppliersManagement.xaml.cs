@@ -6,7 +6,7 @@ using Nicebike.Models;
 using Nicebike.ViewModels;
 
 
-public partial class SuppliersManagement : ContentPage //sert à afficher les données
+public partial class SuppliersManagement : ContentPage
 {
     public SuppliersManagement()
     {
@@ -33,41 +33,22 @@ public partial class SuppliersManagement : ContentPage //sert à afficher les do
         SupplierManagement supplierManagement = new SupplierManagement();
 
         supplierManagement.SendSupplier(name, mail, phone, street, town, number);
-
     }
     public void OnDeleteClicked(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var idSupplier = (int)button.CommandParameter;
 
-
-
         SupplierManagement supplierManagement = new SupplierManagement();
         supplierManagement.DeleteSupplier(idSupplier);
-
-
-
     }
 
     private async void OnModifyClicked(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var supplier = (Supplier)button.BindingContext;
-
-
         var modifyPage = new ModifySupplier(supplier);
-
 
         await Navigation.PushAsync(modifyPage);
     }
-
-
-
-
 }
-
-
-
-
-
-

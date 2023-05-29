@@ -7,24 +7,20 @@ using System.Reflection.Metadata;
 
 public partial class ModifyPart : ContentPage
 {
-    List<String> suppliersnames = new List<String>();
-    List<Supplier> suppliers = new List<Supplier>();
+    private List<Supplier> suppliers = new List<Supplier>();
     private SearchBarFilter searchBarFilter = new SearchBarFilter();
-    PartsManagement partsManagement = new PartsManagement();
+    private PartsManagement partsManagement = new PartsManagement();
 
-    Part part;
     private int IdSupplier;
     int IdPart;
-    int i = 0;
     public ModifyPart(Part part)
     {
-        InitializeComponent();
-        this.part = part;
-        IdPart = part.id;
-
         SupplierManagement supplierManagement = new SupplierManagement();
-        suppliers = supplierManagement.GetAllSuppliers();
 
+        InitializeComponent();
+
+        IdPart = part.id;
+        suppliers = supplierManagement.GetAllSuppliers();
         BindingContext = part;
     }
 

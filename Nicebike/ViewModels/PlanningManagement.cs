@@ -7,25 +7,21 @@ namespace Nicebike.ViewModels
 {
 	public class PlanningManagement
 	{
-        
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
         public string sql;
         public CustomersManagement customersManagement = new CustomersManagement();
-
-
         public List<Order> GetOrders()
         {
+            List<Customer> customerList = customersManagement.GetAllCustomers();
             List<Order> orderList = new List<Order>();
-            List<Customer> customerList = new List<Customer>();
-            customerList = customersManagement.GetAllCustomers();
-
-            MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+            string customerName;
+            string productionDate;
+            int id;
+            
             connection.Open();
             sql = "SELECT * FROM dbNicebike.order";
             using MySqlCommand command = new MySqlCommand(sql, connection);
             using MySqlDataReader reader = command.ExecuteReader();
-            string customerName;
-            int id;
-            string productionDate;
 
             while (reader.Read())
             {
@@ -47,7 +43,6 @@ namespace Nicebike.ViewModels
                             );
                     orderList.Add(order);
                 }
-
             }
             connection.Close();
             return orderList;
@@ -55,7 +50,6 @@ namespace Nicebike.ViewModels
 
         public void ModifyProductionDate(int id, string productionDate)
         {
-            MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
             connection.Open();
             DateTime date = DateTime.ParseExact(productionDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             DateTime newDate = date.AddDays(3);
@@ -67,9 +61,7 @@ namespace Nicebike.ViewModels
             command.Parameters.AddWithValue("@IdOrder", id);
 
             command.ExecuteNonQuery();
-
             connection.Close();
         }
     }
 }
-

@@ -7,9 +7,9 @@ using System.Collections.ObjectModel;
 
 public partial class NewOrderCustomerSelection : ContentPage
 {
-    public int IdOrder;
     private OrderManagement orderManagement = new OrderManagement();
     private SearchBarFilter searchBarFilter = new SearchBarFilter();
+    private int IdOrder;
     public NewOrderCustomerSelection()
 	{
 		InitializeComponent();

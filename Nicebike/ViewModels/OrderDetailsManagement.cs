@@ -5,18 +5,16 @@ namespace Nicebike.ViewModels
 {
 	public class OrderDetailsManagement
 	{
-        public int id;
-        List<int> bikesIdList = new List<int>();
-        public List<Bike> orderBikes = new List<Bike>();
+        private MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
+        private string sql;
 
-        MySqlConnection connection = new MySqlConnection("server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;");
-        string sql;
+        private List<int> bikesIdList = new List<int>();
+        private List<Bike> orderBikes = new List<Bike>();
+        private int id;
         public List<Bike> GetOrderBikes(int IdOrder)
         {
-            List<Bike> bikes = new List<Bike>();
-
             BikesManagement bikesManagement = new BikesManagement();
-            List<Bike> observableBikes = bikesManagement.GetAllBikes();
+            List<Bike> bikes = bikesManagement.GetAllBikes();
 
             connection.Open();
             sql = "SELECT * FROM dbNicebike.orderdetails WHERE IdOrder = @IdOrder";
@@ -28,7 +26,7 @@ namespace Nicebike.ViewModels
             {
                 id = reader.GetInt32("Bike");
                 bikesIdList.Add(id);
-                orderBikes.Add(observableBikes.Find(obj => obj.id == id)); //Monte une liste avec les v�los correspondants
+                orderBikes.Add(bikes.Find(obj => obj.id == id)); //Monte une liste avec les v�los correspondants
             }
             connection.Close();
 
@@ -47,8 +45,8 @@ namespace Nicebike.ViewModels
             {
                 id = reader.GetInt32("IdOrder");
             }
-
             connection.Close();
+            
             return id;
         }
 
@@ -64,4 +62,3 @@ namespace Nicebike.ViewModels
         }
     }
 }
-

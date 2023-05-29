@@ -5,9 +5,8 @@ using Nicebike.ViewModels;
 
 public partial class EmployeeMgmt : ContentPage
 {
-    EmployeeManagement employeeManagement;
-    string[] jobTitleList = { "Technician", "Sale Representative", "Production Manager" };
-
+    private EmployeeManagement employeeManagement;
+    private string[] jobTitleList = { "Technician", "Sale Representative", "Production Manager" };
     public EmployeeMgmt()
 	{
 		InitializeComponent();
@@ -32,7 +31,6 @@ public partial class EmployeeMgmt : ContentPage
 
         Navigation.PushAsync(new EmployeeMgmt());
         Navigation.RemovePage(this);
-
     }
 
     public void OnDeleteClickedEmployee(object sender, EventArgs e)
@@ -45,23 +43,15 @@ public partial class EmployeeMgmt : ContentPage
         List<Employee> employees = employeeManagement.GetAllEmployee();
 
         employeeListView.ItemsSource = employees;
-
     }
 
     public async void OnModifyClickedEmployee(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var employee = (Employee)button.BindingContext;
-
-
         var modifyPage = new ModifyEmployee(employee);
 
-
         await Navigation.PushAsync(modifyPage);
-
         Navigation.RemovePage(this);
-
     }
-
 }
-

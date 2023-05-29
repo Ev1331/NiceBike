@@ -4,18 +4,13 @@ using Nicebike.ViewModels;
 
 public partial class ClientsManagement : ContentPage
 {
-    CustomersManagement customersManagement;
-
+    private CustomersManagement customersManagement;
 	public ClientsManagement()
 	{
 		InitializeComponent();
-
         this.customersManagement = new CustomersManagement();
-
         List<Customer> customers = customersManagement.GetAllCustomers();
-
 		customersListView.ItemsSource = customers;
-
 	}
 
 	public void OnConfirmClickedCustomer(object sender, EventArgs e)
@@ -33,7 +28,6 @@ public partial class ClientsManagement : ContentPage
         List<Customer> customers = customersManagement.GetAllCustomers();
 
         customersListView.ItemsSource = customers;
-
     }
 
     public void OnDeleteClickedCustomer(object sender, EventArgs e)
@@ -42,25 +36,18 @@ public partial class ClientsManagement : ContentPage
         var idCustomer = (int)button.CommandParameter;
 
         this.customersManagement.DeleteCustomer(idCustomer);
-
         List<Customer> customers = customersManagement.GetAllCustomers();
 
         customersListView.ItemsSource = customers;
-
     }
 
     public async void OnModifyClickedCustomer(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var customer = (Customer)button.BindingContext;
-
-
         var modifyPage = new ModifyCustomer(customer);
 
-
         await Navigation.PushAsync(modifyPage);
-
         Navigation.RemovePage(this);
-
     }
 }

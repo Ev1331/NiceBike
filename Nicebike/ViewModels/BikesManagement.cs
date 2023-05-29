@@ -7,31 +7,25 @@ namespace Nicebike.ViewModels
 {
 	public class BikesManagement
 	{
-        int IdBike;
-        int IdOrder;
-        string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
-        int BikecountPlus = 0;
-        int BikecountMinus = 6;
-
-        
-        
-
+        private string connectionString = "server=pat.infolab.ecam.be;port=63309;database=dbNicebike;user=projet_gl;password=root;";
+        private string sql;
+        private int IdBike;
+        private int BikecountPlus = 0;
         public List<Bike> GetAllBikes()
         {
             BikeModelsManagement bikeModelsManagement = new BikeModelsManagement();
             OrderManagement orderManagement = new OrderManagement();
             OrderDetailsManagement orderDetailsManagement = new OrderDetailsManagement();
-            List<BikeModel> bikeModels = new List<BikeModel>();
-            bikeModels = bikeModelsManagement.GetAllBikeModels();
-            int BikeModelId;
+
+            List<BikeModel> bikeModels = bikeModelsManagement.GetAllBikeModels();
+            List<Order> order = orderManagement.GetAllOrders();
             List<Bike> bikes = new List<Bike>();
-            List<Order> order = new List<Order>();
-            order = orderManagement.GetAllOrders();
+            int BikeModelId;
 
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "SELECT * FROM dbNicebike.bike";
+            sql = "SELECT * FROM dbNicebike.bike";
             using MySqlCommand command = new MySqlCommand(sql, connection);
             using MySqlDataReader reader = command.ExecuteReader();
 
@@ -61,29 +55,23 @@ namespace Nicebike.ViewModels
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "DELETE FROM dbNicebike.orderdetails WHERE Bike = @id";
+            sql = "DELETE FROM dbNicebike.orderdetails WHERE Bike = @id";
             using MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@id", IdBike);
-
             command.ExecuteNonQuery();
 
             sql = "DELETE FROM dbNicebike.bike WHERE IdBike = @id";
             using MySqlCommand command2 = new MySqlCommand(sql, connection);
             command2.Parameters.AddWithValue("@id", IdBike);
-
             command2.ExecuteNonQuery();
-
-
-
-
-
+            connection.Close();
         }
         public void SendBike(string[] colorList, string[] sizeList, List<BikeModel> bikeModels, Picker color, string type, Picker size, string reference, Picker bikeModel, string status, int IdOrder)
         {
             using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
-            string sql = "INSERT INTO dbNicebike.bike (Colour, Type, Size, Ref, Technician, BikeModel, Status) VALUES (@Colour, @Type, @Size, @Ref, @Technician, @BikeModel, @Status)";
+            sql = "INSERT INTO dbNicebike.bike (Colour, Type, Size, Ref, Technician, BikeModel, Status) VALUES (@Colour, @Type, @Size, @Ref, @Technician, @BikeModel, @Status)";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Colour", colorList[color.SelectedIndex]);
             command.Parameters.AddWithValue("@Type", type);
@@ -111,7 +99,6 @@ namespace Nicebike.ViewModels
             command3.Parameters.AddWithValue("@IdOrder", IdOrder);
             command3.Parameters.AddWithValue("@IdBike", IdBike);
             command3.ExecuteNonQuery();
-
 
             BikecountPlus++;
             if (BikecountPlus == 6)
@@ -141,10 +128,7 @@ namespace Nicebike.ViewModels
                 command5.Parameters.AddWithValue("@IdOrder", IdOrder);
 
                 command5.ExecuteNonQuery();
-
             }
         }
     }
 }
-
-

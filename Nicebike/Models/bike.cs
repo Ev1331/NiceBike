@@ -11,11 +11,8 @@
         public int bikeModelId { get; set; }
         public string status { get; set; }
         public string bikeModelName { get; set; }
-
         public int bikePrice { get; set; }
-
         public string dateProduction { get; set; }
-
         public Bike(int id, string color, string type, string size, string reference, int technician, int bikeModelId, string status, string bikeModelName, int bikePrice, string dateProduction)
         {
             this.id = id;
